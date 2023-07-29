@@ -45,11 +45,6 @@ export type IAuthResoverResponse = {
   user?: Maybe<User>;
 };
 
-export type IChangePassword = {
-  newPassword: Scalars['String'];
-  oldPassword: Scalars['String'];
-};
-
 export type ICreateDepartment = {
   _id?: InputMaybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
@@ -105,7 +100,6 @@ export type IStatusResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   authResolver: IAuthResoverResponse;
-  changePassword: IStatusResponse;
   createOrUpdateDepartment: IStatusResponse;
   createOrUpdateDepartmentQuestions: IStatusResponse;
   createOrUpdateTickets: IStatusResponse;
@@ -119,11 +113,6 @@ export type Mutation = {
 
 export type MutationAuthResolverArgs = {
   options: IAuthInput;
-};
-
-
-export type MutationChangePasswordArgs = {
-  options: IChangePassword;
 };
 
 
@@ -235,6 +224,18 @@ export type AuthResolverMutationVariables = Exact<{
 
 export type AuthResolverMutation = { __typename?: 'Mutation', authResolver: { __typename?: 'IAuthResoverResponse', success: boolean, msg: string, jwt: string, email: string, name: string, user?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null } };
 
+export type GetDepartmentQuestionsByIdQueryVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type GetDepartmentQuestionsByIdQuery = { __typename?: 'Query', getDepartmentQuestionsById: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean, department?: { __typename?: 'Department', _id: string, isActive: boolean, name: string } | null } };
+
+export type GetAllDepartmentQuestionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllDepartmentQuestionsQuery = { __typename?: 'Query', getAllDepartmentQuestions: Array<{ __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean, department?: { __typename?: 'Department', _id: string, isActive: boolean, name: string } | null }> };
+
 
 export const AuthResolverDocument = gql`
     mutation AuthResolver($options: IAuthInput!) {
@@ -285,3 +286,86 @@ export function useAuthResolverMutation(baseOptions?: Apollo.MutationHookOptions
 export type AuthResolverMutationHookResult = ReturnType<typeof useAuthResolverMutation>;
 export type AuthResolverMutationResult = Apollo.MutationResult<AuthResolverMutation>;
 export type AuthResolverMutationOptions = Apollo.BaseMutationOptions<AuthResolverMutation, AuthResolverMutationVariables>;
+export const GetDepartmentQuestionsByIdDocument = gql`
+    query GetDepartmentQuestionsById($options: IGetByID!) {
+  getDepartmentQuestionsById(options: $options) {
+    _id
+    name
+    department {
+      _id
+      isActive
+      name
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetDepartmentQuestionsByIdQuery__
+ *
+ * To run a query within a React component, call `useGetDepartmentQuestionsByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDepartmentQuestionsByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDepartmentQuestionsByIdQuery({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useGetDepartmentQuestionsByIdQuery(baseOptions: Apollo.QueryHookOptions<GetDepartmentQuestionsByIdQuery, GetDepartmentQuestionsByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDepartmentQuestionsByIdQuery, GetDepartmentQuestionsByIdQueryVariables>(GetDepartmentQuestionsByIdDocument, options);
+      }
+export function useGetDepartmentQuestionsByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDepartmentQuestionsByIdQuery, GetDepartmentQuestionsByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDepartmentQuestionsByIdQuery, GetDepartmentQuestionsByIdQueryVariables>(GetDepartmentQuestionsByIdDocument, options);
+        }
+export type GetDepartmentQuestionsByIdQueryHookResult = ReturnType<typeof useGetDepartmentQuestionsByIdQuery>;
+export type GetDepartmentQuestionsByIdLazyQueryHookResult = ReturnType<typeof useGetDepartmentQuestionsByIdLazyQuery>;
+export type GetDepartmentQuestionsByIdQueryResult = Apollo.QueryResult<GetDepartmentQuestionsByIdQuery, GetDepartmentQuestionsByIdQueryVariables>;
+export const GetAllDepartmentQuestionsDocument = gql`
+    query GetAllDepartmentQuestions {
+  getAllDepartmentQuestions {
+    _id
+    name
+    department {
+      _id
+      isActive
+      name
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllDepartmentQuestionsQuery__
+ *
+ * To run a query within a React component, call `useGetAllDepartmentQuestionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllDepartmentQuestionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllDepartmentQuestionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllDepartmentQuestionsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllDepartmentQuestionsQuery, GetAllDepartmentQuestionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllDepartmentQuestionsQuery, GetAllDepartmentQuestionsQueryVariables>(GetAllDepartmentQuestionsDocument, options);
+      }
+export function useGetAllDepartmentQuestionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllDepartmentQuestionsQuery, GetAllDepartmentQuestionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllDepartmentQuestionsQuery, GetAllDepartmentQuestionsQueryVariables>(GetAllDepartmentQuestionsDocument, options);
+        }
+export type GetAllDepartmentQuestionsQueryHookResult = ReturnType<typeof useGetAllDepartmentQuestionsQuery>;
+export type GetAllDepartmentQuestionsLazyQueryHookResult = ReturnType<typeof useGetAllDepartmentQuestionsLazyQuery>;
+export type GetAllDepartmentQuestionsQueryResult = Apollo.QueryResult<GetAllDepartmentQuestionsQuery, GetAllDepartmentQuestionsQueryVariables>;
