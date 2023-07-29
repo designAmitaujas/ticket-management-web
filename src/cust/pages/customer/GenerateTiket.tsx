@@ -20,6 +20,7 @@ import {
   useGetAllTicketsQuery,
   useGetTicketsByIdLazyQuery,
 } from "../../../generated/graphql";
+import { useAppStore } from "../../../store";
 import CustomTable, { TableProps } from "../../component/CustomTable";
 import {
   CustomButton,
@@ -168,6 +169,10 @@ const Add = () => {
   const { data: department } = useGetAllDepartmentQuery();
   const { data: departmentQuestion } = useGetAllDepartmentQuestionsQuery();
 
+  const {
+    custObje: { _id },
+  } = useAppStore();
+
   const handleSubmit = async (
     val: ICreateTickets,
     actions: FormikHelpers<ICreateTickets>
@@ -175,7 +180,7 @@ const Add = () => {
     actions.setSubmitting(true);
 
     const response = await createLangauge({
-      variables: { options: { ...val } },
+      variables: { options: { ...val, assignedCustomer: _id } },
     });
 
     if (response.data?.createOrUpdateTickets.success === true) {
@@ -243,6 +248,10 @@ const Update = () => {
   const { data: department } = useGetAllDepartmentQuery();
   const { data: departmentQuestion } = useGetAllDepartmentQuestionsQuery();
 
+  const {
+    custObje: { _id },
+  } = useAppStore();
+
   const [getById] = useGetTicketsByIdLazyQuery({
     onCompleted: (res) => {
       if (res.getTicketsById) {
@@ -278,7 +287,7 @@ const Update = () => {
     actions.setSubmitting(true);
 
     const response = await updateLanguage({
-      variables: { options: { ...val } },
+      variables: { options: { ...val, assignedCustomer: _id } },
     });
 
     if (response.data?.createOrUpdateTickets.success === true) {
@@ -341,6 +350,10 @@ const Index = () => {
   const { push } = useHistory();
   const [deleteLangauage] = useDeleteTicketsMutation();
 
+  const {
+    custObje: { _id },
+  } = useAppStore();
+
   const handleEdit = (id: string) => () => {
     push(`?action=update&id=${id}`);
   };
@@ -348,6 +361,10 @@ const Index = () => {
   const handleDelete = (id: string) => async () => {
     await deleteLangauage({ variables: { options: { id: id } } });
     await refetch();
+  };
+
+  const handleViewDescription = (id: string) => () => {
+    push(`/admin/ticket/${id}`);
   };
 
   const columns = useMemo<TableProps["columns"]>(
@@ -358,7 +375,7 @@ const Index = () => {
       },
       {
         Header: "Name",
-        accessor: "name",
+        accessor: "question",
       },
       {
         Header: "status",
@@ -377,6 +394,14 @@ const Index = () => {
         Cell: (e: Cell<ICreateTickets>) => {
           return (
             <span style={{ display: "flex", gap: "1rem" }}>
+              <Button
+                onClick={handleViewDescription(e.value)}
+                size="sm"
+                className="rounded-pill"
+              >
+                <FetherIcon size="20" icon="alert-circle" />
+              </Button>
+
               <Button
                 onClick={handleEdit(e.value)}
                 size="sm"
@@ -404,10 +429,13 @@ const Index = () => {
     <LayoutProvider title={PAGE_TITLE} isAddButton={true}>
       {data && _.isArray(data?.getAllTickets) && (
         <CustomTable
-          data={data.getAllTickets.map((x, i) => ({
-            ...x,
-            no: i + 1,
-          }))}
+          data={data.getAllTickets
+            .filter((item) => item.assignedCustomer?._id === _id)
+            .filter((item) => item.isActive === true)
+            .map((x, i) => ({
+              ...x,
+              no: i + 1,
+            }))}
           columns={columns}
           pageSize={5}
           isSortable={true}

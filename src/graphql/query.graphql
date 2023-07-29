@@ -192,3 +192,29 @@ query GetTicketsById($options: IGetByID!) {
     isActive
   }
 }
+
+query GetTicketBackAndForthByTiketId($options: IGetByID!) {
+  getTicketBackAndForthByTiketId(options: $options) {
+    _id
+    ticket {
+      _id
+      question
+      description
+      file
+      isResolved
+      isActive
+    }
+    questionReply
+    file
+    isRunningOnCustomer
+    isRunningOnMiddleMan
+    isRunnningOnCompany
+    isNextOnCustomer
+    isNextOnMiddleMan
+    isNexonCompany
+    isLastResolved
+    isLastReopened
+    isEdited
+    isActive
+  }
+}
