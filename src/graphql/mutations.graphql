@@ -19,3 +19,19 @@ mutation AuthResolver($options: IAuthInput!) {
     }
   }
 }
+
+mutation CreateOrUpdateUser($options: ICreateUser!) {
+  createOrUpdateUser(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
+mutation DeleteUser($options: IGetByID!) {
+  deleteUser(options: $options) {
+    success
+    msg
+    data
+  }
+}

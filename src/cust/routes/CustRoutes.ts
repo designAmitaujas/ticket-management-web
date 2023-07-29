@@ -3,6 +3,8 @@ import { Route, RouteProps } from "react-router-dom";
 
 const Login = React.lazy(() => import("../../pages/auth/Login"));
 const dashboard = React.lazy(() => import("../pages/dashboard"));
+const AppUser = React.lazy(() => import("../../cust/pages/admin/AppUser"));
+
 export interface RoutesProps {
   path: RouteProps["path"];
   name?: string;
@@ -30,6 +32,13 @@ const CustAuthRoutes: RoutesProps[] = [
     path: "/admin",
     name: "dashboard",
     component: dashboard,
+    route: Route,
+    exact: true,
+  },
+  {
+    path: "/admin/user-management",
+    name: "user-management",
+    component: AppUser,
     route: Route,
     exact: true,
   },

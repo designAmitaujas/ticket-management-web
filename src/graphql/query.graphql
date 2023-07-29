@@ -23,3 +23,43 @@ query GetAllDepartmentQuestions {
     isActive
   }
 }
+
+query GetAllUser {
+  getAllUser {
+    _id
+    name
+    email
+    hash
+    isCustomer
+    isMiddleMan
+    isCompany
+    assignedDepartment {
+      _id
+      name
+      isActive
+    }
+    isAdmin
+    isSuperAdmin
+    isActive
+  }
+}
+
+query GetUserById($options: IGetByID!) {
+  getUserById(options: $options) {
+    _id
+    name
+    email
+    hash
+    isCustomer
+    isMiddleMan
+    isCompany
+    assignedDepartment {
+      _id
+      name
+      isActive
+    }
+    isAdmin
+    isSuperAdmin
+    isActive
+  }
+}
