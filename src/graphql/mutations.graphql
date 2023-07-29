@@ -1,3 +1,34 @@
+mutation CreateOrUpdateDepartment($options: ICreateDepartment!) {
+  createOrUpdateDepartment(options: $options) {
+    success
+    msg
+    data
+  }
+}
+mutation DeleteDepartment($options: IGetByID!) {
+  deleteDepartment(options: $options) {
+    success
+    msg
+    data
+  }
+}
+mutation DeleteDepartmentQuestions($options: IGetByID!) {
+  deleteDepartmentQuestions(options: $options) {
+    success
+    msg
+    data
+  }
+}
+mutation CreateOrUpdateDepartmentQuestions(
+  $options: ICreateDepartmentQuestions!
+) {
+  createOrUpdateDepartmentQuestions(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
 mutation AuthResolver($options: IAuthInput!) {
   authResolver(options: $options) {
     success

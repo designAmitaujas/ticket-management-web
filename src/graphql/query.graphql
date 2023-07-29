@@ -1,3 +1,18 @@
+query GetDepartmentById($options: IGetByID!) {
+  getDepartmentById(options: $options) {
+    _id
+    name
+    isActive
+  }
+}
+query GetAllDepartment {
+  getAllDepartment {
+    _id
+    name
+    isActive
+  }
+}
+
 query GetDepartmentQuestionsById($options: IGetByID!) {
   getDepartmentQuestionsById(options: $options) {
     _id
