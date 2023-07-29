@@ -10,9 +10,21 @@ const menuArr: MenuItemTypes[] = [
   },
   {
     key: "ds-setup",
-    label: "Ticket",
-    url: "/admin/ticket",
+    label: "Department",
+    url: "/admin/department",
     parentKey: "dashboards",
+  },
+  {
+    key: "ds-setup",
+    label: "Department Question",
+    url: "/admin/department-question",
+    parentKey: "dashboards",
+  },
+  {
+    key: "ds-user-management",
+    label: "User Management",
+    url: "/admin/user-management",
+    parentKey: "user-management",
   },
 ];
 
