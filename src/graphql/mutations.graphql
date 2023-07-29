@@ -1,0 +1,21 @@
+mutation AuthResolver($options: IAuthInput!) {
+  authResolver(options: $options) {
+    success
+    msg
+    jwt
+    email
+    name
+    user {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+  }
+}
