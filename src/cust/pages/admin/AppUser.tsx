@@ -110,7 +110,7 @@ const RenderForm: FC<{
             err={errors.email}
             isInvalid={!!touched.email && !!errors.email}
             label={"email"}
-            name="name"
+            name="email"
             placeholder="Enter Your email"
             value={values.email}
           />
