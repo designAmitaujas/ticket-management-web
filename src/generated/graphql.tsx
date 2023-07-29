@@ -45,6 +45,11 @@ export type IAuthResoverResponse = {
   user?: Maybe<User>;
 };
 
+export type IChangePassword = {
+  newPassword: Scalars['String'];
+  oldPassword: Scalars['String'];
+};
+
 export type ICreateDepartment = {
   _id?: InputMaybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
@@ -100,6 +105,7 @@ export type IStatusResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   authResolver: IAuthResoverResponse;
+  changePassword: IStatusResponse;
   createOrUpdateDepartment: IStatusResponse;
   createOrUpdateDepartmentQuestions: IStatusResponse;
   createOrUpdateTickets: IStatusResponse;
@@ -113,6 +119,11 @@ export type Mutation = {
 
 export type MutationAuthResolverArgs = {
   options: IAuthInput;
+};
+
+
+export type MutationChangePasswordArgs = {
+  options: IChangePassword;
 };
 
 

@@ -10,6 +10,7 @@ query GetDepartmentQuestionsById($options: IGetByID!) {
     isActive
   }
 }
+
 query GetAllDepartmentQuestions {
   getAllDepartmentQuestions {
     _id
