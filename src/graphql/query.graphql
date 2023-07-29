@@ -307,32 +307,6 @@ query GetTicketsById($options: IGetByID!) {
   }
 }
 
-query GetTicketBackAndForthByTiketId($options: IGetByID!) {
-  getTicketBackAndForthByTiketId(options: $options) {
-    _id
-    ticket {
-      _id
-      question
-      description
-      file
-      isResolved
-      isActive
-    }
-    questionReply
-    file
-    isRunningOnCustomer
-    isRunningOnMiddleMan
-    isRunnningOnCompany
-    isNextOnCustomer
-    isNextOnMiddleMan
-    isNexonCompany
-    isLastResolved
-    isLastReopened
-    isEdited
-    isActive
-  }
-}
-
 query GetMyTicketByUser {
   getMyTicketByUser {
     _id
@@ -501,5 +475,79 @@ query GetMyTicketByCompany {
       isActive
     }
     isActive
+  }
+}
+
+query GetTicketBackAndForthByTiketId($options: IGetByID!) {
+  getTicketBackAndForthByTiketId(options: $options) {
+    ticket {
+      _id
+      department {
+        _id
+        name
+        isActive
+      }
+      departmentQuestion {
+        _id
+        name
+        isActive
+      }
+      question
+      description
+      file
+      isResolved
+      assignedCustomer {
+        _id
+        name
+        email
+        hash
+        isCustomer
+        isMiddleMan
+        isCompany
+        isAdmin
+        isSuperAdmin
+        isActive
+      }
+      assignedMiddleMan {
+        _id
+        name
+        email
+        hash
+        isCustomer
+        isMiddleMan
+        isCompany
+        isAdmin
+        isSuperAdmin
+        isActive
+      }
+      assignedCompany {
+        _id
+        name
+        email
+        hash
+        isCustomer
+        isMiddleMan
+        isCompany
+        isAdmin
+        isSuperAdmin
+        isActive
+      }
+      isActive
+    }
+    ticketBackAndForth {
+      _id
+      questionReply
+      file
+      isRunningOnCustomer
+      isRunningOnMiddleMan
+      isRunnningOnCompany
+      isNextOnCustomer
+      isNextOnMiddleMan
+      isNexonCompany
+      isLastResolved
+      isLastReopened
+      isEdited
+      isActive
+    }
   }
 }
