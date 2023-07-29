@@ -78,3 +78,117 @@ query GetUserById($options: IGetByID!) {
     isActive
   }
 }
+
+query GetAllTickets {
+  getAllTickets {
+    _id
+    department {
+      _id
+      name
+      isActive
+    }
+    departmentQuestion {
+      _id
+      name
+      isActive
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+
+query GetTicketsById($options: IGetByID!) {
+  getTicketsById(options: $options) {
+    _id
+    department {
+      _id
+      name
+      isActive
+    }
+    departmentQuestion {
+      _id
+      name
+      isActive
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}

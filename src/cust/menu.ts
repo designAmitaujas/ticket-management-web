@@ -36,6 +36,12 @@ const customerArr: MenuItemTypes[] = [
     url: "/admin",
     parentKey: "dashboards",
   },
+  {
+    key: "ds-form",
+    label: "Generate Ticket",
+    url: "/admin/generate-ticket",
+    parentKey: "generate-ticket",
+  },
 ];
 
 // default middleman

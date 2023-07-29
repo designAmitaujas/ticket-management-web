@@ -66,3 +66,19 @@ mutation DeleteUser($options: IGetByID!) {
     data
   }
 }
+
+mutation DeleteTickets($options: IGetByID!) {
+  deleteTickets(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
+mutation CreateOrUpdateTickets($options: ICreateTickets!) {
+  createOrUpdateTickets(options: $options) {
+    success
+    msg
+    data
+  }
+}
