@@ -17,7 +17,7 @@ import {
   useDeleteTicketsMutation,
   useGetAllDepartmentQuery,
   useGetAllDepartmentQuestionsQuery,
-  useGetAllTicketsQuery,
+  useGetMyTicketByUserQuery,
   useGetTicketsByIdLazyQuery,
 } from "../../../generated/graphql";
 import { useAppStore } from "../../../store";
@@ -346,7 +346,7 @@ const Update = () => {
 };
 
 const Index = () => {
-  const { data, refetch } = useGetAllTicketsQuery();
+  const { data, refetch } = useGetMyTicketByUserQuery();
   const { push } = useHistory();
   const [deleteLangauage] = useDeleteTicketsMutation();
 
@@ -427,9 +427,9 @@ const Index = () => {
 
   return (
     <LayoutProvider title={PAGE_TITLE} isAddButton={true}>
-      {data && _.isArray(data?.getAllTickets) && (
+      {data && _.isArray(data?.getMyTicketByUser) && (
         <CustomTable
-          data={data.getAllTickets
+          data={data.getMyTicketByUser
             .filter((item) => item.assignedCustomer?._id === _id)
             .filter((item) => item.isActive === true)
             .map((x, i) => ({
