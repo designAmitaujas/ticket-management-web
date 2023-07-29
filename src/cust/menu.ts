@@ -8,6 +8,12 @@ const menuArr: MenuItemTypes[] = [
     url: "/admin",
     parentKey: "dashboards",
   },
+  {
+    key: "ds-setup",
+    label: "Ticket",
+    url: "/admin/ticket",
+    parentKey: "dashboards",
+  },
 ];
 
 // default customer
