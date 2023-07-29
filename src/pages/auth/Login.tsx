@@ -97,11 +97,13 @@ const Login = () => {
           },
         });
 
-        if (isAdmin) {
-          push("/admin");
-        } else {
-          push("/user");
-        }
+        push("/admin");
+
+        // if (isAdmin) {
+        //   push("/admin");
+        // } else {
+        //   push("/user");
+        // }
       }
 
       if (response.data?.authResolver.success === false) {

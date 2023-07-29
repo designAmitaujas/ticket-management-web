@@ -45,6 +45,11 @@ export type IAuthResoverResponse = {
   user?: Maybe<User>;
 };
 
+export type IChangePassword = {
+  newPassword: Scalars['String'];
+  oldPassword: Scalars['String'];
+};
+
 export type ICreateDepartment = {
   _id?: InputMaybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
@@ -100,6 +105,7 @@ export type IStatusResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   authResolver: IAuthResoverResponse;
+  changePassword: IStatusResponse;
   createOrUpdateDepartment: IStatusResponse;
   createOrUpdateDepartmentQuestions: IStatusResponse;
   createOrUpdateTickets: IStatusResponse;
@@ -113,6 +119,11 @@ export type Mutation = {
 
 export type MutationAuthResolverArgs = {
   options: IAuthInput;
+};
+
+
+export type MutationChangePasswordArgs = {
+  options: IChangePassword;
 };
 
 
@@ -266,6 +277,20 @@ export type DeleteUserMutationVariables = Exact<{
 
 export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
+export type DeleteTicketsMutationVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type DeleteTicketsMutation = { __typename?: 'Mutation', deleteTickets: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type CreateOrUpdateTicketsMutationVariables = Exact<{
+  options: ICreateTickets;
+}>;
+
+
+export type CreateOrUpdateTicketsMutation = { __typename?: 'Mutation', createOrUpdateTickets: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
 export type GetDepartmentByIdQueryVariables = Exact<{
   options: IGetById;
 }>;
@@ -301,6 +326,18 @@ export type GetUserByIdQueryVariables = Exact<{
 
 
 export type GetUserByIdQuery = { __typename?: 'Query', getUserById: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, assignedDepartment?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null } };
+
+export type GetAllTicketsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllTicketsQuery = { __typename?: 'Query', getAllTickets: Array<{ __typename?: 'Tickets', _id: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }> };
+
+export type GetTicketsByIdQueryVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type GetTicketsByIdQuery = { __typename?: 'Query', getTicketsById: { __typename?: 'Tickets', _id: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null } };
 
 
 export const CreateOrUpdateDepartmentDocument = gql`
@@ -562,6 +599,76 @@ export function useDeleteUserMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
 export type DeleteUserMutationResult = Apollo.MutationResult<DeleteUserMutation>;
 export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
+export const DeleteTicketsDocument = gql`
+    mutation DeleteTickets($options: IGetByID!) {
+  deleteTickets(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type DeleteTicketsMutationFn = Apollo.MutationFunction<DeleteTicketsMutation, DeleteTicketsMutationVariables>;
+
+/**
+ * __useDeleteTicketsMutation__
+ *
+ * To run a mutation, you first call `useDeleteTicketsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTicketsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTicketsMutation, { data, loading, error }] = useDeleteTicketsMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useDeleteTicketsMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTicketsMutation, DeleteTicketsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteTicketsMutation, DeleteTicketsMutationVariables>(DeleteTicketsDocument, options);
+      }
+export type DeleteTicketsMutationHookResult = ReturnType<typeof useDeleteTicketsMutation>;
+export type DeleteTicketsMutationResult = Apollo.MutationResult<DeleteTicketsMutation>;
+export type DeleteTicketsMutationOptions = Apollo.BaseMutationOptions<DeleteTicketsMutation, DeleteTicketsMutationVariables>;
+export const CreateOrUpdateTicketsDocument = gql`
+    mutation CreateOrUpdateTickets($options: ICreateTickets!) {
+  createOrUpdateTickets(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type CreateOrUpdateTicketsMutationFn = Apollo.MutationFunction<CreateOrUpdateTicketsMutation, CreateOrUpdateTicketsMutationVariables>;
+
+/**
+ * __useCreateOrUpdateTicketsMutation__
+ *
+ * To run a mutation, you first call `useCreateOrUpdateTicketsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOrUpdateTicketsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOrUpdateTicketsMutation, { data, loading, error }] = useCreateOrUpdateTicketsMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useCreateOrUpdateTicketsMutation(baseOptions?: Apollo.MutationHookOptions<CreateOrUpdateTicketsMutation, CreateOrUpdateTicketsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOrUpdateTicketsMutation, CreateOrUpdateTicketsMutationVariables>(CreateOrUpdateTicketsDocument, options);
+      }
+export type CreateOrUpdateTicketsMutationHookResult = ReturnType<typeof useCreateOrUpdateTicketsMutation>;
+export type CreateOrUpdateTicketsMutationResult = Apollo.MutationResult<CreateOrUpdateTicketsMutation>;
+export type CreateOrUpdateTicketsMutationOptions = Apollo.BaseMutationOptions<CreateOrUpdateTicketsMutation, CreateOrUpdateTicketsMutationVariables>;
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($options: IGetByID!) {
   getDepartmentById(options: $options) {
@@ -815,3 +922,174 @@ export function useGetUserByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetUserByIdQueryHookResult = ReturnType<typeof useGetUserByIdQuery>;
 export type GetUserByIdLazyQueryHookResult = ReturnType<typeof useGetUserByIdLazyQuery>;
 export type GetUserByIdQueryResult = Apollo.QueryResult<GetUserByIdQuery, GetUserByIdQueryVariables>;
+export const GetAllTicketsDocument = gql`
+    query GetAllTickets {
+  getAllTickets {
+    _id
+    department {
+      _id
+      name
+      isActive
+    }
+    departmentQuestion {
+      _id
+      name
+      isActive
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllTicketsQuery__
+ *
+ * To run a query within a React component, call `useGetAllTicketsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllTicketsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllTicketsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllTicketsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllTicketsQuery, GetAllTicketsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllTicketsQuery, GetAllTicketsQueryVariables>(GetAllTicketsDocument, options);
+      }
+export function useGetAllTicketsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllTicketsQuery, GetAllTicketsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllTicketsQuery, GetAllTicketsQueryVariables>(GetAllTicketsDocument, options);
+        }
+export type GetAllTicketsQueryHookResult = ReturnType<typeof useGetAllTicketsQuery>;
+export type GetAllTicketsLazyQueryHookResult = ReturnType<typeof useGetAllTicketsLazyQuery>;
+export type GetAllTicketsQueryResult = Apollo.QueryResult<GetAllTicketsQuery, GetAllTicketsQueryVariables>;
+export const GetTicketsByIdDocument = gql`
+    query GetTicketsById($options: IGetByID!) {
+  getTicketsById(options: $options) {
+    _id
+    department {
+      _id
+      name
+      isActive
+    }
+    departmentQuestion {
+      _id
+      name
+      isActive
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetTicketsByIdQuery__
+ *
+ * To run a query within a React component, call `useGetTicketsByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTicketsByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTicketsByIdQuery({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useGetTicketsByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTicketsByIdQuery, GetTicketsByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTicketsByIdQuery, GetTicketsByIdQueryVariables>(GetTicketsByIdDocument, options);
+      }
+export function useGetTicketsByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTicketsByIdQuery, GetTicketsByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTicketsByIdQuery, GetTicketsByIdQueryVariables>(GetTicketsByIdDocument, options);
+        }
+export type GetTicketsByIdQueryHookResult = ReturnType<typeof useGetTicketsByIdQuery>;
+export type GetTicketsByIdLazyQueryHookResult = ReturnType<typeof useGetTicketsByIdLazyQuery>;
+export type GetTicketsByIdQueryResult = Apollo.QueryResult<GetTicketsByIdQuery, GetTicketsByIdQueryVariables>;

@@ -245,9 +245,9 @@ const AppMenu = ({ menuItems }: AppMenuProps) => {
     if (topnavMenuItems && topnavMenuItems.length > 0) activeMenu();
   }, [activeMenu, topnavMenuItems]);
 
-  if (isAdmin === false) {
-    return <></>;
-  }
+  // if (isAdmin === false) {
+  //   return <></>;
+  // }
 
   return (
     <>

@@ -47,26 +47,27 @@ const Routes = (props: RoutesProps) => {
 
     if (isAuth === true) {
       if (location.pathname === "/") {
-        if (isAdmin === true) {
-          push("/admin");
-        }
+        push("/admin");
+        // if (isAdmin === true) {
+        //   push("/admin");
+        // }
 
-        if (isAdmin === false) {
-          push("/user");
-        }
+        // if (isAdmin === false) {
+        //   push("/user");
+        // }
       }
     }
   }, [isAuth, location, isAdmin]);
 
-  useEffect(() => {
-    if (isAuth === true) {
-      if (location.pathname.includes("/admin")) {
-        if (isAdmin === false) {
-          push("/user");
-        }
-      }
-    }
-  }, [location, isAdmin, isAuth]);
+  // useEffect(() => {
+  //   if (isAuth === true) {
+  //     // if (location.pathname.includes("/admin")) {
+  //     //   // if (isAdmin === false) {
+  //     //   //   push("/user");
+  //     //   // }
+  //     // }
+  //   }
+  // }, [location, isAdmin, isAuth]);
 
   return (
     <Switch>
@@ -92,7 +93,7 @@ const Routes = (props: RoutesProps) => {
         </Route>
       ) : (
         <>
-          {isAdmin === true ? (
+          {isAuth === true ? (
             <>
               <Route path={CustAuthRoutes.map((r: any) => r["path"])}>
                 <Layout {...props}>

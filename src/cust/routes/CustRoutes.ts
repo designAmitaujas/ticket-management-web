@@ -10,6 +10,9 @@ const DepartmentQuestion = React.lazy(
   () => import("../../cust/pages/admin/DepartmentQuestion")
 );
 const AppUser = React.lazy(() => import("../../cust/pages/admin/AppUser"));
+const GenerateTiket = React.lazy(
+  () => import("../../cust/pages/customer/GenerateTiket")
+);
 
 export interface RoutesProps {
   path: RouteProps["path"];
@@ -59,6 +62,13 @@ const CustAuthRoutes: RoutesProps[] = [
     path: "/admin/user-management",
     name: "user-management",
     component: AppUser,
+    route: Route,
+    exact: true,
+  },
+  {
+    path: "/admin/generate-ticket",
+    name: "user-management",
+    component: GenerateTiket,
     route: Route,
     exact: true,
   },
