@@ -254,7 +254,7 @@ const Update = () => {
           isCompany: res.getUserById.isCompany,
           isCustomer: res.getUserById.isCustomer,
           isMiddleMan: res.getUserById.isMiddleMan,
-          isSuperAdmin: res.getUserById.isMiddleMan,
+          isSuperAdmin: res.getUserById.isSuperAdmin,
         });
       }
     },
