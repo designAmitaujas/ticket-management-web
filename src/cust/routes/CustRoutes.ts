@@ -10,6 +10,14 @@ const DepartmentQuestion = React.lazy(
   () => import("../../cust/pages/admin/DepartmentQuestion")
 );
 const AppUser = React.lazy(() => import("../../cust/pages/admin/AppUser"));
+const GetAllTicket = React.lazy(
+  () => import("../../cust/pages/company/GetAllTicket")
+);
+
+const GetAllTicketsMiddle = React.lazy(
+  () => import("../../cust/pages/middleman/GetAllTicketsMiddle")
+);
+
 const GenerateTiket = React.lazy(
   () => import("../../cust/pages/customer/GenerateTiket")
 );
@@ -79,6 +87,20 @@ const CustAuthRoutes: RoutesProps[] = [
     path: "/admin/ticket/:id",
     name: "ticket-description",
     component: ViewTicket,
+    route: Route,
+    exact: true,
+  },
+  {
+    path: "/admin/getall-tickets",
+    name: "All-Tickets",
+    component: GetAllTicket,
+    route: Route,
+    exact: true,
+  },
+  {
+    path: "/admin/get-tickets",
+    name: "All-Tickets",
+    component: GetAllTicketsMiddle,
     route: Route,
     exact: true,
   },

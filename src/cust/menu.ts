@@ -52,6 +52,12 @@ const middlemanArr3: MenuItemTypes[] = [
     url: "/admin",
     parentKey: "dashboards",
   },
+  {
+    key: "ds-getall",
+    label: "All-Tickets",
+    url: "/admin/get-tickets",
+    parentKey: "dashboards",
+  },
 ];
 
 // default company
@@ -60,6 +66,12 @@ const companyArr3: MenuItemTypes[] = [
     key: "ds-setup",
     label: "Dashboard",
     url: "/admin",
+    parentKey: "dashboards",
+  },
+  {
+    key: "ds-getall",
+    label: "All-Tickets",
+    url: "/admin/getall-tickets",
     parentKey: "dashboards",
   },
 ];

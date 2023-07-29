@@ -7,11 +7,9 @@ import { useHistory } from "react-router-dom";
 import { Cell } from "react-table";
 import {
   ICreateTickets,
-  useAcceptTiketByCompanyMutation,
-  useDeleteTicketsMutation,
-  useGetAllAcceptAcceptByCompanyQuery,
+  useAcceptTiketByMiddleManMutation,
+  useGetAllAcceptAcceptByMiddleManQuery,
 } from "../../../generated/graphql";
-import { useAppStore } from "../../../store";
 import CustomTable, { TableProps } from "../../component/CustomTable";
 import LayoutProvider from "../../component/LayoutProvider";
 
@@ -23,7 +21,7 @@ const RenderModal: FC<{ id: string; refetch: () => void }> = ({
 }) => {
   const [show, setShow] = useState(false);
 
-  const [accept] = useAcceptTiketByCompanyMutation();
+  const [accept] = useAcceptTiketByMiddleManMutation();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -31,11 +29,11 @@ const RenderModal: FC<{ id: string; refetch: () => void }> = ({
   const handleAccept = async () => {
     const response = await accept({ variables: { options: { id } } });
 
-    if (response.data?.acceptTiketByCompany.success === true) {
+    if (response.data?.acceptTiketByMiddleMan.success === true) {
       refetch();
     } else {
       cogoToast.error(
-        response.data?.acceptTiketByCompany.msg ||
+        response.data?.acceptTiketByMiddleMan.msg ||
           "Something went wrong on server"
       );
     }
@@ -69,25 +67,10 @@ const RenderModal: FC<{ id: string; refetch: () => void }> = ({
   );
 };
 
-const GetAllTicket = () => {
-  const { data, refetch } = useGetAllAcceptAcceptByCompanyQuery();
+const GetAllTicketsMiddle = () => {
+  const { data, refetch } = useGetAllAcceptAcceptByMiddleManQuery();
   const { push } = useHistory();
-  const [deleteLangauage] = useDeleteTicketsMutation();
-
-  const {
-    custObje: { _id },
-  } = useAppStore();
-
-  const handleEdit = (id: string) => () => {
-    push(`?action=update&id=${id}`);
-  };
-
-  const handleDelete = (id: string) => async () => {
-    await deleteLangauage({ variables: { options: { id: id } } });
-    await refetch();
-  };
-
-  const handleViewDescription = (id: string) => () => {};
+  const [item] = useAcceptTiketByMiddleManMutation();
 
   const columns = useMemo<TableProps["columns"]>(
     () => [
@@ -104,34 +87,7 @@ const GetAllTicket = () => {
         Header: "actions",
         accessor: "_id",
         Cell: (e: Cell<ICreateTickets>) => {
-          return (
-            <RenderModal id={e.value} refetch={refetch} />
-            // <span style={{ display: "flex", gap: "1rem" }}>
-            //   <Button
-            //     onClick={handleViewDescription(e.value)}
-            //     size="sm"
-            //     className="rounded-pill"
-            //   >
-            //     <FetherIcon size="20" icon="alert-circle" />
-            //   </Button>
-
-            //   <Button
-            //     onClick={handleEdit(e.value)}
-            //     size="sm"
-            //     className="rounded-pill"
-            //   >
-            //     <FetherIcon size="20" icon="edit" />
-            //   </Button>
-            //   <Button
-            //     onClick={handleDelete(e.value)}
-            //     size="sm"
-            //     className="rounded-pill"
-            //     variant="danger"
-            //   >
-            //     <FetherIcon size="20" icon="x-circle" />
-            //   </Button>
-            // </span>
-          );
+          return <RenderModal id={e.value} refetch={refetch} />;
         },
       },
     ],
@@ -140,10 +96,9 @@ const GetAllTicket = () => {
 
   return (
     <LayoutProvider title={PAGE_TITLE} isAddButton={true}>
-      {data && _.isArray(data?.getAllAcceptAcceptByCompany) && (
+      {data && _.isArray(data?.getAllAcceptAcceptByMiddleMan) && (
         <CustomTable
-          data={data.getAllAcceptAcceptByCompany
-
+          data={data.getAllAcceptAcceptByMiddleMan
             .filter((item) => item.isActive === true)
             .map((x, i) => ({
               ...x,
@@ -160,4 +115,4 @@ const GetAllTicket = () => {
   );
 };
 
-export default GetAllTicket;
+export default GetAllTicketsMiddle;
