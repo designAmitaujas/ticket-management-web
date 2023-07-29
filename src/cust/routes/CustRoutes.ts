@@ -16,6 +16,12 @@ const GenerateTiket = React.lazy(
 const ViewTicket = React.lazy(
   () => import("../../cust/pages/customer/ViewTicket")
 );
+const MyAcceptedCopanyTicket = React.lazy(
+  () => import("../../cust/pages/company/MyAcceptedCopanyTicket")
+);
+const MyAcceptedMiddleMan = React.lazy(
+  () => import("../../cust/pages/middleman/MyAcceptedMiddleMan")
+);
 
 export interface RoutesProps {
   path: RouteProps["path"];
@@ -79,6 +85,21 @@ const CustAuthRoutes: RoutesProps[] = [
     path: "/admin/ticket/:id",
     name: "ticket-description",
     component: ViewTicket,
+    route: Route,
+    exact: true,
+  },
+
+  {
+    path: "/admin/company-accepted-tickets",
+    name: "company-accepted-ticket",
+    component: MyAcceptedCopanyTicket,
+    route: Route,
+    exact: true,
+  },
+  {
+    path: "/admin/middleman-accepted-tickets",
+    name: "middleman-accepted-ticket",
+    component: MyAcceptedMiddleMan,
     route: Route,
     exact: true,
   },
