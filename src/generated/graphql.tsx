@@ -36,6 +36,20 @@ export type DepartmentQuestions = {
   name: Scalars['String'];
 };
 
+export enum Direction {
+  Company = 'COMPANY',
+  Middle = 'MIDDLE',
+  Null = 'NULL',
+  User = 'USER'
+}
+
+export type IAddTicketBackAndForth = {
+  file: Scalars['String'];
+  nextChooice: Direction;
+  questionReply: Scalars['String'];
+  ticketId: Scalars['String'];
+};
+
 export type IAuthInput = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -127,6 +141,7 @@ export type IStatusResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  AddTicketBackAndForth: IStatusResponse;
   acceptTiketByCompany: IStatusResponse;
   acceptTiketByMiddleMan: IStatusResponse;
   authResolver: IAuthResoverResponse;
@@ -141,6 +156,12 @@ export type Mutation = {
   deleteTicketBackAndForth: IStatusResponse;
   deleteTickets: IStatusResponse;
   deleteUser: IStatusResponse;
+  getTickerClosedById: IStatusResponse;
+};
+
+
+export type MutationAddTicketBackAndForthArgs = {
+  options: IAddTicketBackAndForth;
 };
 
 
@@ -210,6 +231,11 @@ export type MutationDeleteTicketsArgs = {
 
 
 export type MutationDeleteUserArgs = {
+  options: IGetById;
+};
+
+
+export type MutationGetTickerClosedByIdArgs = {
   options: IGetById;
 };
 
@@ -387,6 +413,20 @@ export type CreateOrUpdateTicketsMutationVariables = Exact<{
 
 
 export type CreateOrUpdateTicketsMutation = { __typename?: 'Mutation', createOrUpdateTickets: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type AddTicketBackAndForthMutationVariables = Exact<{
+  options: IAddTicketBackAndForth;
+}>;
+
+
+export type AddTicketBackAndForthMutation = { __typename?: 'Mutation', AddTicketBackAndForth: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type GetTickerClosedByIdMutationVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type GetTickerClosedByIdMutation = { __typename?: 'Mutation', getTickerClosedById: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
 export type GetDepartmentByIdQueryVariables = Exact<{
   options: IGetById;
@@ -868,6 +908,76 @@ export function useCreateOrUpdateTicketsMutation(baseOptions?: Apollo.MutationHo
 export type CreateOrUpdateTicketsMutationHookResult = ReturnType<typeof useCreateOrUpdateTicketsMutation>;
 export type CreateOrUpdateTicketsMutationResult = Apollo.MutationResult<CreateOrUpdateTicketsMutation>;
 export type CreateOrUpdateTicketsMutationOptions = Apollo.BaseMutationOptions<CreateOrUpdateTicketsMutation, CreateOrUpdateTicketsMutationVariables>;
+export const AddTicketBackAndForthDocument = gql`
+    mutation AddTicketBackAndForth($options: IAddTicketBackAndForth!) {
+  AddTicketBackAndForth(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type AddTicketBackAndForthMutationFn = Apollo.MutationFunction<AddTicketBackAndForthMutation, AddTicketBackAndForthMutationVariables>;
+
+/**
+ * __useAddTicketBackAndForthMutation__
+ *
+ * To run a mutation, you first call `useAddTicketBackAndForthMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddTicketBackAndForthMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addTicketBackAndForthMutation, { data, loading, error }] = useAddTicketBackAndForthMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useAddTicketBackAndForthMutation(baseOptions?: Apollo.MutationHookOptions<AddTicketBackAndForthMutation, AddTicketBackAndForthMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddTicketBackAndForthMutation, AddTicketBackAndForthMutationVariables>(AddTicketBackAndForthDocument, options);
+      }
+export type AddTicketBackAndForthMutationHookResult = ReturnType<typeof useAddTicketBackAndForthMutation>;
+export type AddTicketBackAndForthMutationResult = Apollo.MutationResult<AddTicketBackAndForthMutation>;
+export type AddTicketBackAndForthMutationOptions = Apollo.BaseMutationOptions<AddTicketBackAndForthMutation, AddTicketBackAndForthMutationVariables>;
+export const GetTickerClosedByIdDocument = gql`
+    mutation GetTickerClosedById($options: IGetByID!) {
+  getTickerClosedById(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type GetTickerClosedByIdMutationFn = Apollo.MutationFunction<GetTickerClosedByIdMutation, GetTickerClosedByIdMutationVariables>;
+
+/**
+ * __useGetTickerClosedByIdMutation__
+ *
+ * To run a mutation, you first call `useGetTickerClosedByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGetTickerClosedByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [getTickerClosedByIdMutation, { data, loading, error }] = useGetTickerClosedByIdMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useGetTickerClosedByIdMutation(baseOptions?: Apollo.MutationHookOptions<GetTickerClosedByIdMutation, GetTickerClosedByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GetTickerClosedByIdMutation, GetTickerClosedByIdMutationVariables>(GetTickerClosedByIdDocument, options);
+      }
+export type GetTickerClosedByIdMutationHookResult = ReturnType<typeof useGetTickerClosedByIdMutation>;
+export type GetTickerClosedByIdMutationResult = Apollo.MutationResult<GetTickerClosedByIdMutation>;
+export type GetTickerClosedByIdMutationOptions = Apollo.BaseMutationOptions<GetTickerClosedByIdMutation, GetTickerClosedByIdMutationVariables>;
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($options: IGetByID!) {
   getDepartmentById(options: $options) {

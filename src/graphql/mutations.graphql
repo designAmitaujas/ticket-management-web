@@ -96,3 +96,19 @@ mutation CreateOrUpdateTickets($options: ICreateTickets!) {
     data
   }
 }
+
+mutation AddTicketBackAndForth($options: IAddTicketBackAndForth!) {
+  AddTicketBackAndForth(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
+mutation GetTickerClosedById($options: IGetByID!) {
+  getTickerClosedById(options: $options) {
+    success
+    msg
+    data
+  }
+}
