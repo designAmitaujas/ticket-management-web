@@ -121,6 +121,8 @@ export type IStatusResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  acceptTiketByCompany: IStatusResponse;
+  acceptTiketByMiddleMan: IStatusResponse;
   authResolver: IAuthResoverResponse;
   changePassword: IStatusResponse;
   createOrUpdateDepartment: IStatusResponse;
@@ -133,6 +135,16 @@ export type Mutation = {
   deleteTicketBackAndForth: IStatusResponse;
   deleteTickets: IStatusResponse;
   deleteUser: IStatusResponse;
+};
+
+
+export type MutationAcceptTiketByCompanyArgs = {
+  options: IGetById;
+};
+
+
+export type MutationAcceptTiketByMiddleManArgs = {
+  options: IGetById;
 };
 
 
@@ -197,6 +209,8 @@ export type MutationDeleteUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getAllAcceptAcceptByCompany: Array<Tickets>;
+  getAllAcceptAcceptByMiddleMan: Array<Tickets>;
   getAllDepartment: Array<Department>;
   getAllDepartmentQuestions: Array<DepartmentQuestions>;
   getAllTicketBackAndForth: Array<TicketBackAndForth>;
@@ -204,6 +218,9 @@ export type Query = {
   getAllUser: Array<User>;
   getDepartmentById: Department;
   getDepartmentQuestionsById: DepartmentQuestions;
+  getMyTicketByCompany: Array<Tickets>;
+  getMyTicketByMiddleMan: Array<Tickets>;
+  getMyTicketByUser: Array<Tickets>;
   getTicketBackAndForthById: TicketBackAndForth;
   getTicketBackAndForthByTiketId: Array<TicketBackAndForth>;
   getTicketsById: Tickets;
@@ -405,6 +422,21 @@ export type GetTicketBackAndForthByTiketIdQueryVariables = Exact<{
 
 
 export type GetTicketBackAndForthByTiketIdQuery = { __typename?: 'Query', getTicketBackAndForthByTiketId: Array<{ __typename?: 'TicketBackAndForth', _id: string, questionReply: string, file: string, isRunningOnCustomer: boolean, isRunningOnMiddleMan: boolean, isRunnningOnCompany: boolean, isNextOnCustomer: boolean, isNextOnMiddleMan: boolean, isNexonCompany: boolean, isLastResolved: boolean, isLastReopened: boolean, isEdited: boolean, isActive: boolean, ticket?: { __typename?: 'Tickets', _id: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean } | null }> };
+
+export type GetMyTicketByUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyTicketByUserQuery = { __typename?: 'Query', getMyTicketByUser: Array<{ __typename?: 'Tickets', _id: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }> };
+
+export type GetMyTicketByMiddleManQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyTicketByMiddleManQuery = { __typename?: 'Query', getMyTicketByMiddleMan: Array<{ __typename?: 'Tickets', _id: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }> };
+
+export type GetMyTicketByCompanyQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyTicketByCompanyQuery = { __typename?: 'Query', getMyTicketByCompany: Array<{ __typename?: 'Tickets', _id: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }> };
 
 
 export const CreateOrUpdateDepartmentDocument = gql`
@@ -1215,3 +1247,258 @@ export function useGetTicketBackAndForthByTiketIdLazyQuery(baseOptions?: Apollo.
 export type GetTicketBackAndForthByTiketIdQueryHookResult = ReturnType<typeof useGetTicketBackAndForthByTiketIdQuery>;
 export type GetTicketBackAndForthByTiketIdLazyQueryHookResult = ReturnType<typeof useGetTicketBackAndForthByTiketIdLazyQuery>;
 export type GetTicketBackAndForthByTiketIdQueryResult = Apollo.QueryResult<GetTicketBackAndForthByTiketIdQuery, GetTicketBackAndForthByTiketIdQueryVariables>;
+export const GetMyTicketByUserDocument = gql`
+    query GetMyTicketByUser {
+  getMyTicketByUser {
+    _id
+    department {
+      _id
+      name
+      isActive
+    }
+    departmentQuestion {
+      _id
+      name
+      isActive
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetMyTicketByUserQuery__
+ *
+ * To run a query within a React component, call `useGetMyTicketByUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyTicketByUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMyTicketByUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMyTicketByUserQuery(baseOptions?: Apollo.QueryHookOptions<GetMyTicketByUserQuery, GetMyTicketByUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMyTicketByUserQuery, GetMyTicketByUserQueryVariables>(GetMyTicketByUserDocument, options);
+      }
+export function useGetMyTicketByUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMyTicketByUserQuery, GetMyTicketByUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMyTicketByUserQuery, GetMyTicketByUserQueryVariables>(GetMyTicketByUserDocument, options);
+        }
+export type GetMyTicketByUserQueryHookResult = ReturnType<typeof useGetMyTicketByUserQuery>;
+export type GetMyTicketByUserLazyQueryHookResult = ReturnType<typeof useGetMyTicketByUserLazyQuery>;
+export type GetMyTicketByUserQueryResult = Apollo.QueryResult<GetMyTicketByUserQuery, GetMyTicketByUserQueryVariables>;
+export const GetMyTicketByMiddleManDocument = gql`
+    query GetMyTicketByMiddleMan {
+  getMyTicketByMiddleMan {
+    _id
+    department {
+      _id
+      name
+      isActive
+    }
+    departmentQuestion {
+      _id
+      name
+      isActive
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetMyTicketByMiddleManQuery__
+ *
+ * To run a query within a React component, call `useGetMyTicketByMiddleManQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyTicketByMiddleManQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMyTicketByMiddleManQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMyTicketByMiddleManQuery(baseOptions?: Apollo.QueryHookOptions<GetMyTicketByMiddleManQuery, GetMyTicketByMiddleManQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMyTicketByMiddleManQuery, GetMyTicketByMiddleManQueryVariables>(GetMyTicketByMiddleManDocument, options);
+      }
+export function useGetMyTicketByMiddleManLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMyTicketByMiddleManQuery, GetMyTicketByMiddleManQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMyTicketByMiddleManQuery, GetMyTicketByMiddleManQueryVariables>(GetMyTicketByMiddleManDocument, options);
+        }
+export type GetMyTicketByMiddleManQueryHookResult = ReturnType<typeof useGetMyTicketByMiddleManQuery>;
+export type GetMyTicketByMiddleManLazyQueryHookResult = ReturnType<typeof useGetMyTicketByMiddleManLazyQuery>;
+export type GetMyTicketByMiddleManQueryResult = Apollo.QueryResult<GetMyTicketByMiddleManQuery, GetMyTicketByMiddleManQueryVariables>;
+export const GetMyTicketByCompanyDocument = gql`
+    query GetMyTicketByCompany {
+  getMyTicketByCompany {
+    _id
+    department {
+      _id
+      name
+      isActive
+    }
+    departmentQuestion {
+      _id
+      name
+      isActive
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetMyTicketByCompanyQuery__
+ *
+ * To run a query within a React component, call `useGetMyTicketByCompanyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyTicketByCompanyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMyTicketByCompanyQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMyTicketByCompanyQuery(baseOptions?: Apollo.QueryHookOptions<GetMyTicketByCompanyQuery, GetMyTicketByCompanyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMyTicketByCompanyQuery, GetMyTicketByCompanyQueryVariables>(GetMyTicketByCompanyDocument, options);
+      }
+export function useGetMyTicketByCompanyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMyTicketByCompanyQuery, GetMyTicketByCompanyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMyTicketByCompanyQuery, GetMyTicketByCompanyQueryVariables>(GetMyTicketByCompanyDocument, options);
+        }
+export type GetMyTicketByCompanyQueryHookResult = ReturnType<typeof useGetMyTicketByCompanyQuery>;
+export type GetMyTicketByCompanyLazyQueryHookResult = ReturnType<typeof useGetMyTicketByCompanyLazyQuery>;
+export type GetMyTicketByCompanyQueryResult = Apollo.QueryResult<GetMyTicketByCompanyQuery, GetMyTicketByCompanyQueryVariables>;
