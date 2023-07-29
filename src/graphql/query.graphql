@@ -13,6 +13,120 @@ query GetAllDepartment {
   }
 }
 
+query GetAllAcceptAcceptByMiddleMan {
+  getAllAcceptAcceptByMiddleMan {
+    _id
+    department {
+      _id
+      isActive
+      name
+    }
+    departmentQuestion {
+      _id
+      isActive
+      name
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+
+query GetAllAcceptAcceptByCompany {
+  getAllAcceptAcceptByCompany {
+    _id
+    department {
+      _id
+      isActive
+      name
+    }
+    departmentQuestion {
+      _id
+      isActive
+      name
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+
 query GetDepartmentQuestionsById($options: IGetByID!) {
   getDepartmentQuestionsById(options: $options) {
     _id
