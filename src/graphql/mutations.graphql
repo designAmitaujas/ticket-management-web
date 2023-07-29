@@ -19,6 +19,20 @@ mutation DeleteDepartmentQuestions($options: IGetByID!) {
     data
   }
 }
+mutation AcceptTiketByMiddleMan($options: IGetByID!) {
+  acceptTiketByMiddleMan(options: $options) {
+    success
+    msg
+    data
+  }
+}
+mutation AcceptTiketByCompany($options: IGetByID!) {
+  acceptTiketByCompany(options: $options) {
+    success
+    msg
+    data
+  }
+}
 mutation CreateOrUpdateDepartmentQuestions(
   $options: ICreateDepartmentQuestions!
 ) {

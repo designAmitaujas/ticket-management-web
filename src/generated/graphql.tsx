@@ -121,6 +121,8 @@ export type IStatusResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  acceptTiketByCompany: IStatusResponse;
+  acceptTiketByMiddleMan: IStatusResponse;
   authResolver: IAuthResoverResponse;
   changePassword: IStatusResponse;
   createOrUpdateDepartment: IStatusResponse;
@@ -133,6 +135,16 @@ export type Mutation = {
   deleteTicketBackAndForth: IStatusResponse;
   deleteTickets: IStatusResponse;
   deleteUser: IStatusResponse;
+};
+
+
+export type MutationAcceptTiketByCompanyArgs = {
+  options: IGetById;
+};
+
+
+export type MutationAcceptTiketByMiddleManArgs = {
+  options: IGetById;
 };
 
 
@@ -197,6 +209,8 @@ export type MutationDeleteUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getAllAcceptAcceptByCompany: Array<Tickets>;
+  getAllAcceptAcceptByMiddleMan: Array<Tickets>;
   getAllDepartment: Array<Department>;
   getAllDepartmentQuestions: Array<DepartmentQuestions>;
   getAllTicketBackAndForth: Array<TicketBackAndForth>;
@@ -204,6 +218,9 @@ export type Query = {
   getAllUser: Array<User>;
   getDepartmentById: Department;
   getDepartmentQuestionsById: DepartmentQuestions;
+  getMyTicketByCompany: Array<Tickets>;
+  getMyTicketByMiddleMan: Array<Tickets>;
+  getMyTicketByUser: Array<Tickets>;
   getTicketBackAndForthById: TicketBackAndForth;
   getTicketBackAndForthByTiketId: Array<TicketBackAndForth>;
   getTicketsById: Tickets;
@@ -309,6 +326,20 @@ export type DeleteDepartmentQuestionsMutationVariables = Exact<{
 
 export type DeleteDepartmentQuestionsMutation = { __typename?: 'Mutation', deleteDepartmentQuestions: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
+export type AcceptTiketByMiddleManMutationVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type AcceptTiketByMiddleManMutation = { __typename?: 'Mutation', acceptTiketByMiddleMan: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type AcceptTiketByCompanyMutationVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type AcceptTiketByCompanyMutation = { __typename?: 'Mutation', acceptTiketByCompany: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
 export type CreateOrUpdateDepartmentQuestionsMutationVariables = Exact<{
   options: ICreateDepartmentQuestions;
 }>;
@@ -362,6 +393,16 @@ export type GetAllDepartmentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllDepartmentQuery = { __typename?: 'Query', getAllDepartment: Array<{ __typename?: 'Department', _id: string, name: string, isActive: boolean }> };
+
+export type GetAllAcceptAcceptByMiddleManQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllAcceptAcceptByMiddleManQuery = { __typename?: 'Query', getAllAcceptAcceptByMiddleMan: Array<{ __typename?: 'Tickets', _id: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, isActive: boolean, name: string } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, isActive: boolean, name: string } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }> };
+
+export type GetAllAcceptAcceptByCompanyQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllAcceptAcceptByCompanyQuery = { __typename?: 'Query', getAllAcceptAcceptByCompany: Array<{ __typename?: 'Tickets', _id: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, isActive: boolean, name: string } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, isActive: boolean, name: string } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }> };
 
 export type GetDepartmentQuestionsByIdQueryVariables = Exact<{
   options: IGetById;
@@ -512,6 +553,76 @@ export function useDeleteDepartmentQuestionsMutation(baseOptions?: Apollo.Mutati
 export type DeleteDepartmentQuestionsMutationHookResult = ReturnType<typeof useDeleteDepartmentQuestionsMutation>;
 export type DeleteDepartmentQuestionsMutationResult = Apollo.MutationResult<DeleteDepartmentQuestionsMutation>;
 export type DeleteDepartmentQuestionsMutationOptions = Apollo.BaseMutationOptions<DeleteDepartmentQuestionsMutation, DeleteDepartmentQuestionsMutationVariables>;
+export const AcceptTiketByMiddleManDocument = gql`
+    mutation AcceptTiketByMiddleMan($options: IGetByID!) {
+  acceptTiketByMiddleMan(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type AcceptTiketByMiddleManMutationFn = Apollo.MutationFunction<AcceptTiketByMiddleManMutation, AcceptTiketByMiddleManMutationVariables>;
+
+/**
+ * __useAcceptTiketByMiddleManMutation__
+ *
+ * To run a mutation, you first call `useAcceptTiketByMiddleManMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAcceptTiketByMiddleManMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [acceptTiketByMiddleManMutation, { data, loading, error }] = useAcceptTiketByMiddleManMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useAcceptTiketByMiddleManMutation(baseOptions?: Apollo.MutationHookOptions<AcceptTiketByMiddleManMutation, AcceptTiketByMiddleManMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AcceptTiketByMiddleManMutation, AcceptTiketByMiddleManMutationVariables>(AcceptTiketByMiddleManDocument, options);
+      }
+export type AcceptTiketByMiddleManMutationHookResult = ReturnType<typeof useAcceptTiketByMiddleManMutation>;
+export type AcceptTiketByMiddleManMutationResult = Apollo.MutationResult<AcceptTiketByMiddleManMutation>;
+export type AcceptTiketByMiddleManMutationOptions = Apollo.BaseMutationOptions<AcceptTiketByMiddleManMutation, AcceptTiketByMiddleManMutationVariables>;
+export const AcceptTiketByCompanyDocument = gql`
+    mutation AcceptTiketByCompany($options: IGetByID!) {
+  acceptTiketByCompany(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type AcceptTiketByCompanyMutationFn = Apollo.MutationFunction<AcceptTiketByCompanyMutation, AcceptTiketByCompanyMutationVariables>;
+
+/**
+ * __useAcceptTiketByCompanyMutation__
+ *
+ * To run a mutation, you first call `useAcceptTiketByCompanyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAcceptTiketByCompanyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [acceptTiketByCompanyMutation, { data, loading, error }] = useAcceptTiketByCompanyMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useAcceptTiketByCompanyMutation(baseOptions?: Apollo.MutationHookOptions<AcceptTiketByCompanyMutation, AcceptTiketByCompanyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AcceptTiketByCompanyMutation, AcceptTiketByCompanyMutationVariables>(AcceptTiketByCompanyDocument, options);
+      }
+export type AcceptTiketByCompanyMutationHookResult = ReturnType<typeof useAcceptTiketByCompanyMutation>;
+export type AcceptTiketByCompanyMutationResult = Apollo.MutationResult<AcceptTiketByCompanyMutation>;
+export type AcceptTiketByCompanyMutationOptions = Apollo.BaseMutationOptions<AcceptTiketByCompanyMutation, AcceptTiketByCompanyMutationVariables>;
 export const CreateOrUpdateDepartmentQuestionsDocument = gql`
     mutation CreateOrUpdateDepartmentQuestions($options: ICreateDepartmentQuestions!) {
   createOrUpdateDepartmentQuestions(options: $options) {
@@ -809,6 +920,176 @@ export function useGetAllDepartmentLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetAllDepartmentQueryHookResult = ReturnType<typeof useGetAllDepartmentQuery>;
 export type GetAllDepartmentLazyQueryHookResult = ReturnType<typeof useGetAllDepartmentLazyQuery>;
 export type GetAllDepartmentQueryResult = Apollo.QueryResult<GetAllDepartmentQuery, GetAllDepartmentQueryVariables>;
+export const GetAllAcceptAcceptByMiddleManDocument = gql`
+    query GetAllAcceptAcceptByMiddleMan {
+  getAllAcceptAcceptByMiddleMan {
+    _id
+    department {
+      _id
+      isActive
+      name
+    }
+    departmentQuestion {
+      _id
+      isActive
+      name
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllAcceptAcceptByMiddleManQuery__
+ *
+ * To run a query within a React component, call `useGetAllAcceptAcceptByMiddleManQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllAcceptAcceptByMiddleManQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllAcceptAcceptByMiddleManQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllAcceptAcceptByMiddleManQuery(baseOptions?: Apollo.QueryHookOptions<GetAllAcceptAcceptByMiddleManQuery, GetAllAcceptAcceptByMiddleManQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllAcceptAcceptByMiddleManQuery, GetAllAcceptAcceptByMiddleManQueryVariables>(GetAllAcceptAcceptByMiddleManDocument, options);
+      }
+export function useGetAllAcceptAcceptByMiddleManLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllAcceptAcceptByMiddleManQuery, GetAllAcceptAcceptByMiddleManQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllAcceptAcceptByMiddleManQuery, GetAllAcceptAcceptByMiddleManQueryVariables>(GetAllAcceptAcceptByMiddleManDocument, options);
+        }
+export type GetAllAcceptAcceptByMiddleManQueryHookResult = ReturnType<typeof useGetAllAcceptAcceptByMiddleManQuery>;
+export type GetAllAcceptAcceptByMiddleManLazyQueryHookResult = ReturnType<typeof useGetAllAcceptAcceptByMiddleManLazyQuery>;
+export type GetAllAcceptAcceptByMiddleManQueryResult = Apollo.QueryResult<GetAllAcceptAcceptByMiddleManQuery, GetAllAcceptAcceptByMiddleManQueryVariables>;
+export const GetAllAcceptAcceptByCompanyDocument = gql`
+    query GetAllAcceptAcceptByCompany {
+  getAllAcceptAcceptByCompany {
+    _id
+    department {
+      _id
+      isActive
+      name
+    }
+    departmentQuestion {
+      _id
+      isActive
+      name
+    }
+    question
+    description
+    file
+    isResolved
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllAcceptAcceptByCompanyQuery__
+ *
+ * To run a query within a React component, call `useGetAllAcceptAcceptByCompanyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllAcceptAcceptByCompanyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllAcceptAcceptByCompanyQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllAcceptAcceptByCompanyQuery(baseOptions?: Apollo.QueryHookOptions<GetAllAcceptAcceptByCompanyQuery, GetAllAcceptAcceptByCompanyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllAcceptAcceptByCompanyQuery, GetAllAcceptAcceptByCompanyQueryVariables>(GetAllAcceptAcceptByCompanyDocument, options);
+      }
+export function useGetAllAcceptAcceptByCompanyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllAcceptAcceptByCompanyQuery, GetAllAcceptAcceptByCompanyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllAcceptAcceptByCompanyQuery, GetAllAcceptAcceptByCompanyQueryVariables>(GetAllAcceptAcceptByCompanyDocument, options);
+        }
+export type GetAllAcceptAcceptByCompanyQueryHookResult = ReturnType<typeof useGetAllAcceptAcceptByCompanyQuery>;
+export type GetAllAcceptAcceptByCompanyLazyQueryHookResult = ReturnType<typeof useGetAllAcceptAcceptByCompanyLazyQuery>;
+export type GetAllAcceptAcceptByCompanyQueryResult = Apollo.QueryResult<GetAllAcceptAcceptByCompanyQuery, GetAllAcceptAcceptByCompanyQueryVariables>;
 export const GetDepartmentQuestionsByIdDocument = gql`
     query GetDepartmentQuestionsById($options: IGetByID!) {
   getDepartmentQuestionsById(options: $options) {
