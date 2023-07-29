@@ -1,9 +1,10 @@
 import cogoToast from "cogo-toast";
+import FetherIcon from "feather-icons-react";
 import { Formik, FormikErrors, FormikHelpers, FormikTouched } from "formik";
 import _ from "lodash";
 import queryString from "query-string";
 import { FC, memo, useEffect, useMemo, useState } from "react";
-import { Badge, Form, Row } from "react-bootstrap";
+import { Badge, Button, Form, Row } from "react-bootstrap";
 import isEqual from "react-fast-compare";
 import { useHistory, useLocation } from "react-router-dom";
 import { Cell } from "react-table";
@@ -387,39 +388,39 @@ const Index = () => {
           );
         },
       },
-      //   {
-      //     Header: "actions",
-      //     accessor: "_id",
-      //     Cell: (e: Cell<ICreateTickets>) => {
-      //       return (
-      //         <span style={{ display: "flex", gap: "1rem" }}>
-      //           <Button
-      //             onClick={handleViewDescription(e.value)}
-      //             size="sm"
-      //             className="rounded-pill"
-      //           >
-      //             <FetherIcon size="20" icon="alert-circle" />
-      //           </Button>
+      {
+        Header: "actions",
+        accessor: "_id",
+        Cell: (e: Cell<ICreateTickets>) => {
+          return (
+            <span style={{ display: "flex", gap: "1rem" }}>
+              <Button
+                onClick={handleViewDescription(e.value)}
+                size="sm"
+                className="rounded-pill"
+              >
+                <FetherIcon size="20" icon="alert-circle" />
+              </Button>
 
-      //           <Button
-      //             onClick={handleEdit(e.value)}
-      //             size="sm"
-      //             className="rounded-pill"
-      //           >
-      //             <FetherIcon size="20" icon="edit" />
-      //           </Button>
-      //           <Button
-      //             onClick={handleDelete(e.value)}
-      //             size="sm"
-      //             className="rounded-pill"
-      //             variant="danger"
-      //           >
-      //             <FetherIcon size="20" icon="x-circle" />
-      //           </Button>
-      //         </span>
-      //       );
-      //     },
-      //   },
+              {/* <Button
+                  onClick={handleEdit(e.value)}
+                  size="sm"
+                  className="rounded-pill"
+                >
+                  <FetherIcon size="20" icon="edit" />
+                </Button>
+                <Button
+                  onClick={handleDelete(e.value)}
+                  size="sm"
+                  className="rounded-pill"
+                  variant="danger"
+                >
+                  <FetherIcon size="20" icon="x-circle" />
+                </Button> */}
+            </span>
+          );
+        },
+      },
     ],
     []
   );
