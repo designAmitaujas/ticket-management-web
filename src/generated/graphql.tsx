@@ -252,17 +252,32 @@ export type AuthResolverMutationVariables = Exact<{
 
 export type AuthResolverMutation = { __typename?: 'Mutation', authResolver: { __typename?: 'IAuthResoverResponse', success: boolean, msg: string, jwt: string, email: string, name: string, user?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null } };
 
+<<<<<<< HEAD
 export type GetDepartmentByIdQueryVariables = Exact<{
+=======
+export type CreateOrUpdateUserMutationVariables = Exact<{
+  options: ICreateUser;
+}>;
+
+
+export type CreateOrUpdateUserMutation = { __typename?: 'Mutation', createOrUpdateUser: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type DeleteUserMutationVariables = Exact<{
+>>>>>>> a67077f285d5d72b2107f3baa0a7aef9d13d2253
   options: IGetById;
 }>;
 
 
+<<<<<<< HEAD
 export type GetDepartmentByIdQuery = { __typename?: 'Query', getDepartmentById: { __typename?: 'Department', _id: string, name: string, isActive: boolean } };
 
 export type GetAllDepartmentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllDepartmentQuery = { __typename?: 'Query', getAllDepartment: Array<{ __typename?: 'Department', _id: string, name: string, isActive: boolean }> };
+=======
+export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+>>>>>>> a67077f285d5d72b2107f3baa0a7aef9d13d2253
 
 export type GetDepartmentQuestionsByIdQueryVariables = Exact<{
   options: IGetById;
@@ -275,6 +290,23 @@ export type GetAllDepartmentQuestionsQueryVariables = Exact<{ [key: string]: nev
 
 
 export type GetAllDepartmentQuestionsQuery = { __typename?: 'Query', getAllDepartmentQuestions: Array<{ __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean, department?: { __typename?: 'Department', _id: string, isActive: boolean, name: string } | null }> };
+
+export type GetAllUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllUserQuery = { __typename?: 'Query', getAllUser: Array<{ __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, assignedDepartment?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null }> };
+
+export type GetUserByIdQueryVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type GetUserByIdQuery = { __typename?: 'Query', getUserById: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, assignedDepartment?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null } };
+
+export type GetAllDepartmentQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllDepartmentQuery = { __typename?: 'Query', getAllDepartment: Array<{ __typename?: 'Department', _id: string, name: string, isActive: boolean }> };
 
 
 export const CreateOrUpdateDepartmentDocument = gql`
@@ -466,6 +498,7 @@ export function useAuthResolverMutation(baseOptions?: Apollo.MutationHookOptions
 export type AuthResolverMutationHookResult = ReturnType<typeof useAuthResolverMutation>;
 export type AuthResolverMutationResult = Apollo.MutationResult<AuthResolverMutation>;
 export type AuthResolverMutationOptions = Apollo.BaseMutationOptions<AuthResolverMutation, AuthResolverMutationVariables>;
+<<<<<<< HEAD
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($options: IGetByID!) {
   getDepartmentById(options: $options) {
@@ -487,11 +520,37 @@ export const GetDepartmentByIdDocument = gql`
  *
  * @example
  * const { data, loading, error } = useGetDepartmentByIdQuery({
+=======
+export const CreateOrUpdateUserDocument = gql`
+    mutation CreateOrUpdateUser($options: ICreateUser!) {
+  createOrUpdateUser(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type CreateOrUpdateUserMutationFn = Apollo.MutationFunction<CreateOrUpdateUserMutation, CreateOrUpdateUserMutationVariables>;
+
+/**
+ * __useCreateOrUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateOrUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOrUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOrUpdateUserMutation, { data, loading, error }] = useCreateOrUpdateUserMutation({
+>>>>>>> a67077f285d5d72b2107f3baa0a7aef9d13d2253
  *   variables: {
  *      options: // value for 'options'
  *   },
  * });
  */
+<<<<<<< HEAD
 export function useGetDepartmentByIdQuery(baseOptions: Apollo.QueryHookOptions<GetDepartmentByIdQuery, GetDepartmentByIdQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetDepartmentByIdQuery, GetDepartmentByIdQueryVariables>(GetDepartmentByIdDocument, options);
@@ -539,6 +598,50 @@ export function useGetAllDepartmentLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetAllDepartmentQueryHookResult = ReturnType<typeof useGetAllDepartmentQuery>;
 export type GetAllDepartmentLazyQueryHookResult = ReturnType<typeof useGetAllDepartmentLazyQuery>;
 export type GetAllDepartmentQueryResult = Apollo.QueryResult<GetAllDepartmentQuery, GetAllDepartmentQueryVariables>;
+=======
+export function useCreateOrUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateOrUpdateUserMutation, CreateOrUpdateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOrUpdateUserMutation, CreateOrUpdateUserMutationVariables>(CreateOrUpdateUserDocument, options);
+      }
+export type CreateOrUpdateUserMutationHookResult = ReturnType<typeof useCreateOrUpdateUserMutation>;
+export type CreateOrUpdateUserMutationResult = Apollo.MutationResult<CreateOrUpdateUserMutation>;
+export type CreateOrUpdateUserMutationOptions = Apollo.BaseMutationOptions<CreateOrUpdateUserMutation, CreateOrUpdateUserMutationVariables>;
+export const DeleteUserDocument = gql`
+    mutation DeleteUser($options: IGetByID!) {
+  deleteUser(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type DeleteUserMutationFn = Apollo.MutationFunction<DeleteUserMutation, DeleteUserMutationVariables>;
+
+/**
+ * __useDeleteUserMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserMutation, { data, loading, error }] = useDeleteUserMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useDeleteUserMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserMutation, DeleteUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument, options);
+      }
+export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
+export type DeleteUserMutationResult = Apollo.MutationResult<DeleteUserMutation>;
+export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
+>>>>>>> a67077f285d5d72b2107f3baa0a7aef9d13d2253
 export const GetDepartmentQuestionsByIdDocument = gql`
     query GetDepartmentQuestionsById($options: IGetByID!) {
   getDepartmentQuestionsById(options: $options) {
@@ -622,3 +725,136 @@ export function useGetAllDepartmentQuestionsLazyQuery(baseOptions?: Apollo.LazyQ
 export type GetAllDepartmentQuestionsQueryHookResult = ReturnType<typeof useGetAllDepartmentQuestionsQuery>;
 export type GetAllDepartmentQuestionsLazyQueryHookResult = ReturnType<typeof useGetAllDepartmentQuestionsLazyQuery>;
 export type GetAllDepartmentQuestionsQueryResult = Apollo.QueryResult<GetAllDepartmentQuestionsQuery, GetAllDepartmentQuestionsQueryVariables>;
+export const GetAllUserDocument = gql`
+    query GetAllUser {
+  getAllUser {
+    _id
+    name
+    email
+    hash
+    isCustomer
+    isMiddleMan
+    isCompany
+    assignedDepartment {
+      _id
+      name
+      isActive
+    }
+    isAdmin
+    isSuperAdmin
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllUserQuery__
+ *
+ * To run a query within a React component, call `useGetAllUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllUserQuery(baseOptions?: Apollo.QueryHookOptions<GetAllUserQuery, GetAllUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllUserQuery, GetAllUserQueryVariables>(GetAllUserDocument, options);
+      }
+export function useGetAllUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllUserQuery, GetAllUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllUserQuery, GetAllUserQueryVariables>(GetAllUserDocument, options);
+        }
+export type GetAllUserQueryHookResult = ReturnType<typeof useGetAllUserQuery>;
+export type GetAllUserLazyQueryHookResult = ReturnType<typeof useGetAllUserLazyQuery>;
+export type GetAllUserQueryResult = Apollo.QueryResult<GetAllUserQuery, GetAllUserQueryVariables>;
+export const GetUserByIdDocument = gql`
+    query GetUserById($options: IGetByID!) {
+  getUserById(options: $options) {
+    _id
+    name
+    email
+    hash
+    isCustomer
+    isMiddleMan
+    isCompany
+    assignedDepartment {
+      _id
+      name
+      isActive
+    }
+    isAdmin
+    isSuperAdmin
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetUserByIdQuery__
+ *
+ * To run a query within a React component, call `useGetUserByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserByIdQuery({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useGetUserByIdQuery(baseOptions: Apollo.QueryHookOptions<GetUserByIdQuery, GetUserByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserByIdQuery, GetUserByIdQueryVariables>(GetUserByIdDocument, options);
+      }
+export function useGetUserByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserByIdQuery, GetUserByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserByIdQuery, GetUserByIdQueryVariables>(GetUserByIdDocument, options);
+        }
+export type GetUserByIdQueryHookResult = ReturnType<typeof useGetUserByIdQuery>;
+export type GetUserByIdLazyQueryHookResult = ReturnType<typeof useGetUserByIdLazyQuery>;
+export type GetUserByIdQueryResult = Apollo.QueryResult<GetUserByIdQuery, GetUserByIdQueryVariables>;
+export const GetAllDepartmentDocument = gql`
+    query GetAllDepartment {
+  getAllDepartment {
+    _id
+    name
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllDepartmentQuery__
+ *
+ * To run a query within a React component, call `useGetAllDepartmentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllDepartmentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllDepartmentQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllDepartmentQuery(baseOptions?: Apollo.QueryHookOptions<GetAllDepartmentQuery, GetAllDepartmentQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllDepartmentQuery, GetAllDepartmentQueryVariables>(GetAllDepartmentDocument, options);
+      }
+export function useGetAllDepartmentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllDepartmentQuery, GetAllDepartmentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllDepartmentQuery, GetAllDepartmentQueryVariables>(GetAllDepartmentDocument, options);
+        }
+export type GetAllDepartmentQueryHookResult = ReturnType<typeof useGetAllDepartmentQuery>;
+export type GetAllDepartmentLazyQueryHookResult = ReturnType<typeof useGetAllDepartmentLazyQuery>;
+export type GetAllDepartmentQueryResult = Apollo.QueryResult<GetAllDepartmentQuery, GetAllDepartmentQueryVariables>;

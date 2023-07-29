@@ -20,6 +20,12 @@ const menuArr: MenuItemTypes[] = [
     url: "/admin/department-question",
     parentKey: "dashboards",
   },
+  {
+    key: "ds-user-management",
+    label: "User Management",
+    url: "/admin/user-management",
+    parentKey: "user-management",
+  },
 ];
 
 // default customer
