@@ -51,6 +51,7 @@ const RenderModal: FC<{
     action.setSubmitting(true);
     await manageSubmimt(val);
     action.setSubmitting(false);
+    toggle();
   };
 
   return (

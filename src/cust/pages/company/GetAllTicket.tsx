@@ -78,16 +78,16 @@ const GetAllTicket = () => {
     custObje: { _id },
   } = useAppStore();
 
-  const handleEdit = (id: string) => () => {
-    push(`?action=update&id=${id}`);
-  };
+  // const handleEdit = (id: string) => () => {
+  //   push(`?action=update&id=${id}`);
+  // };
 
-  const handleDelete = (id: string) => async () => {
-    await deleteLangauage({ variables: { options: { id: id } } });
-    await refetch();
-  };
+  // const handleDelete = (id: string) => async () => {
+  //   await deleteLangauage({ variables: { options: { id: id } } });
+  //   await refetch();
+  // };
 
-  const handleViewDescription = (id: string) => () => {};
+  // const handleViewDescription = (id: string) => () => {};
 
   const columns = useMemo<TableProps["columns"]>(
     () => [

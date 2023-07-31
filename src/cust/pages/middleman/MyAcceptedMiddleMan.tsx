@@ -358,14 +358,14 @@ const Index = () => {
     custObje: { _id },
   } = useAppStore();
 
-  const handleEdit = (id: string) => () => {
-    push(`?action=update&id=${id}`);
-  };
+  // const handleEdit = (id: string) => () => {
+  //   push(`?action=update&id=${id}`);
+  // };
 
-  const handleDelete = (id: string) => async () => {
-    await deleteLangauage({ variables: { options: { id: id } } });
-    await refetch();
-  };
+  // const handleDelete = (id: string) => async () => {
+  //   await deleteLangauage({ variables: { options: { id: id } } });
+  //   await refetch();
+  // };
 
   const handleViewDescription = (id: string) => () => {
     push(`/admin/ticket/${id}`);
@@ -383,12 +383,12 @@ const Index = () => {
       },
       {
         Header: "status",
-        accessor: "isActive",
+        accessor: "isResolved",
         Cell: (e: Cell<ICreateTickets>) => {
-          return e.value === true ? (
-            <Badge bg="primary">active</Badge>
+          return e.value === false ? (
+            <Badge bg="primary">open</Badge>
           ) : (
-            <Badge bg="danger">disable</Badge>
+            <Badge bg="danger">closed</Badge>
           );
         },
       },
