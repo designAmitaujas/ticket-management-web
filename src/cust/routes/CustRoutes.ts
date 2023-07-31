@@ -13,15 +13,12 @@ const AppUser = React.lazy(() => import("../../cust/pages/admin/AppUser"));
 const ChangePassword = React.lazy(
   () => import("../../cust/pages/ChangePassword")
 );
-
 const GetAllTicket = React.lazy(
   () => import("../../cust/pages/company/GetAllTicket")
 );
-
 const GetAllTicketsMiddle = React.lazy(
   () => import("../../cust/pages/middleman/GetAllTicketsMiddle")
 );
-
 const GenerateTiket = React.lazy(
   () => import("../../cust/pages/customer/GenerateTiket")
 );
@@ -34,6 +31,10 @@ const MyAcceptedCopanyTicket = React.lazy(
 const MyAcceptedMiddleMan = React.lazy(
   () => import("../../cust/pages/middleman/MyAcceptedMiddleMan")
 );
+const Credentials = React.lazy(
+  () => import("../../cust/pages/Emails/Credentials")
+);
+const Template = React.lazy(() => import("../../cust/pages/Emails/Template"));
 
 export interface RoutesProps {
   path: RouteProps["path"];
@@ -132,6 +133,20 @@ const CustAuthRoutes: RoutesProps[] = [
     path: "/admin/middleman-accepted-tickets",
     name: "middleman-accepted-ticket",
     component: MyAcceptedMiddleMan,
+    route: Route,
+    exact: true,
+  },
+  {
+    path: "/admin/email-credential",
+    name: "email-credential",
+    component: Credentials,
+    route: Route,
+    exact: true,
+  },
+  {
+    path: "/admin/email-templates",
+    name: "email-templates",
+    component: Template,
     route: Route,
     exact: true,
   },
