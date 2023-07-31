@@ -10,6 +10,10 @@ const DepartmentQuestion = React.lazy(
   () => import("../../cust/pages/admin/DepartmentQuestion")
 );
 const AppUser = React.lazy(() => import("../../cust/pages/admin/AppUser"));
+const ChangePassword = React.lazy(
+  () => import("../../cust/pages/ChangePassword")
+);
+
 const GetAllTicket = React.lazy(
   () => import("../../cust/pages/company/GetAllTicket")
 );
@@ -48,6 +52,13 @@ const CustPublicRoutes: RoutesProps[] = [
     path: "/",
     name: "login",
     component: Login,
+    route: Route,
+    exact: true,
+  },
+  {
+    path: "/admin/change-password",
+    name: "ChangePassword",
+    component: ChangePassword,
     route: Route,
     exact: true,
   },

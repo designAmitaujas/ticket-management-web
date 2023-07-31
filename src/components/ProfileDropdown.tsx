@@ -35,6 +35,9 @@ const ProfileDropdown = (props: ProfileDropdownProps) => {
     removeAuth();
     push("/");
   };
+  const handleChangepass = () => {
+    push("/admin/change-password");
+  };
 
   return (
     <Dropdown show={dropdownOpen} onToggle={toggleDropdown}>
@@ -90,6 +93,16 @@ const ProfileDropdown = (props: ProfileDropdownProps) => {
           >
             <FeatherIcon icon={"log-out"} className="icon-dual icon-xs me-1" />
             <span>Logout</span>
+          </Link>
+
+          <Link
+            to={"#"}
+            className="dropdown-item notify-item"
+            key={"id" + "-profile-menu"}
+            onClick={handleChangepass}
+          >
+            <FeatherIcon icon={"lock"} className="icon-dual icon-xs me-1" />
+            <span>Change Password</span>
           </Link>
         </div>
       </Dropdown.Menu>
