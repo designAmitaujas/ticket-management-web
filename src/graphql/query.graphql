@@ -557,3 +557,11 @@ query GetTicketBackAndForthByTiketId($options: IGetByID!) {
     }
   }
 }
+
+query GetTicketCount {
+  getTicketCount {
+    totalTiketCount
+    totalRunningCount
+    totalClosedCount
+  }
+}

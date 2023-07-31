@@ -95,7 +95,7 @@ const ProfileDropdown = (props: ProfileDropdownProps) => {
             <span>Logout</span>
           </Link>
 
-          <Link
+          {/* <Link
             to={"#"}
             className="dropdown-item notify-item"
             key={"id" + "-profile-menu"}
@@ -103,7 +103,7 @@ const ProfileDropdown = (props: ProfileDropdownProps) => {
           >
             <FeatherIcon icon={"lock"} className="icon-dual icon-xs me-1" />
             <span>Change Password</span>
-          </Link>
+          </Link> */}
         </div>
       </Dropdown.Menu>
     </Dropdown>

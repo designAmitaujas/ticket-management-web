@@ -70,6 +70,13 @@ export type IChangePassword = {
   oldPassword: Scalars['String'];
 };
 
+export type ICountResponse = {
+  __typename?: 'ICountResponse';
+  totalClosedCount: Scalars['Float'];
+  totalRunningCount: Scalars['Float'];
+  totalTiketCount: Scalars['Float'];
+};
+
 export type ICreateDepartment = {
   _id?: InputMaybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
@@ -256,6 +263,7 @@ export type Query = {
   getMyTicketByUser: Array<Tickets>;
   getTicketBackAndForthById: TicketBackAndForth;
   getTicketBackAndForthByTiketId: CutomTicketResponse;
+  getTicketCount: ICountResponse;
   getTicketsById: Tickets;
   getUserById: User;
 };
@@ -510,6 +518,11 @@ export type GetTicketBackAndForthByTiketIdQueryVariables = Exact<{
 
 
 export type GetTicketBackAndForthByTiketIdQuery = { __typename?: 'Query', getTicketBackAndForthByTiketId: { __typename?: 'CutomTicketResponse', ticket: { __typename?: 'Tickets', _id: string, mobile: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }, ticketBackAndForth: Array<{ __typename?: 'TicketBackAndForth', _id: string, questionReply: string, file: string, isRunningOnCustomer: boolean, isRunningOnMiddleMan: boolean, isRunnningOnCompany: boolean, isNextOnCustomer: boolean, isNextOnMiddleMan: boolean, isNexonCompany: boolean, isLastResolved: boolean, isLastReopened: boolean, isEdited: boolean, isActive: boolean, createdBy?: { __typename?: 'User', name: string, email: string } | null }> } };
+
+export type GetTicketCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTicketCountQuery = { __typename?: 'Query', getTicketCount: { __typename?: 'ICountResponse', totalTiketCount: number, totalRunningCount: number, totalClosedCount: number } };
 
 
 export const CreateOrUpdateDepartmentDocument = gql`
@@ -1939,3 +1952,39 @@ export function useGetTicketBackAndForthByTiketIdLazyQuery(baseOptions?: Apollo.
 export type GetTicketBackAndForthByTiketIdQueryHookResult = ReturnType<typeof useGetTicketBackAndForthByTiketIdQuery>;
 export type GetTicketBackAndForthByTiketIdLazyQueryHookResult = ReturnType<typeof useGetTicketBackAndForthByTiketIdLazyQuery>;
 export type GetTicketBackAndForthByTiketIdQueryResult = Apollo.QueryResult<GetTicketBackAndForthByTiketIdQuery, GetTicketBackAndForthByTiketIdQueryVariables>;
+export const GetTicketCountDocument = gql`
+    query GetTicketCount {
+  getTicketCount {
+    totalTiketCount
+    totalRunningCount
+    totalClosedCount
+  }
+}
+    `;
+
+/**
+ * __useGetTicketCountQuery__
+ *
+ * To run a query within a React component, call `useGetTicketCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTicketCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTicketCountQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTicketCountQuery(baseOptions?: Apollo.QueryHookOptions<GetTicketCountQuery, GetTicketCountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTicketCountQuery, GetTicketCountQueryVariables>(GetTicketCountDocument, options);
+      }
+export function useGetTicketCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTicketCountQuery, GetTicketCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTicketCountQuery, GetTicketCountQueryVariables>(GetTicketCountDocument, options);
+        }
+export type GetTicketCountQueryHookResult = ReturnType<typeof useGetTicketCountQuery>;
+export type GetTicketCountLazyQueryHookResult = ReturnType<typeof useGetTicketCountLazyQuery>;
+export type GetTicketCountQueryResult = Apollo.QueryResult<GetTicketCountQuery, GetTicketCountQueryVariables>;
