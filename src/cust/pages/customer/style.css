@@ -1,0 +1,36 @@
+.worldContainer {
+  /* background: lightblue;
+  width: 400px;
+  margin: 10px auto; */
+  margin-left: 2rem;
+  border-radius: 300px 300px 400px 5px;
+  padding: 20px;
+  box-shadow: 1px 2px 4px grey;
+}
+
+/* h1,
+h2,
+h3 {
+  text-align: center;
+}
+
+h1 {
+  font-size: 44px;
+  font-family: Garamond, Times New Roman, serif;
+}
+h2 {
+  font-size: 20px;
+  margin: -26px 0 0 -20px;
+  font-family: Garamond, serif;
+}
+
+#shadow {
+  font-size: 12px;
+  position: relative;
+  top: 80px;
+  left: -220px;
+  text-shadow: 1px 8px 7px black;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  letter-spacing: 0.15em;
+} */

@@ -553,6 +553,9 @@ query GetTicketBackAndForthByTiketId($options: IGetByID!) {
       createdBy {
         name
         email
+        isCustomer
+        isMiddleMan
+        isCompany
       }
     }
   }

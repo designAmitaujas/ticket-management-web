@@ -20,6 +20,7 @@ import {
   CustomInput,
 } from "../../component/Form";
 import LayoutProvider from "../../component/LayoutProvider";
+import "./style.css";
 
 const parsedUrl = new URL(process.env.REACT_APP_API_URL!);
 
@@ -127,6 +128,8 @@ const ViewTicket = () => {
     Direction.Null
   );
 
+  const [isNextApprovalAvailable, setIsNextApprovalAvailable] = useState(false);
+
   const [closeRunningMutation] = useGetTickerClosedByIdMutation();
 
   const [isClosed, setIsClosed] = useState(false);
@@ -156,6 +159,9 @@ const ViewTicket = () => {
           0
         ) {
           setCurrentRunning(Direction.Middle);
+          setIsNextApprovalAvailable(true);
+        } else {
+          setIsNextApprovalAvailable(false);
         }
 
         if (
@@ -167,8 +173,6 @@ const ViewTicket = () => {
               data.data.getTicketBackAndForthByTiketId.ticketBackAndForth
                 .length - 1
             ];
-
-          console.log(lastElement);
 
           if (lastElement.isRunningOnMiddleMan === true) {
             setCurrentRunning(Direction.Middle);
@@ -205,6 +209,7 @@ const ViewTicket = () => {
               : Direction.Middle,
           questionReply: arg0.questionReply,
           ticketId: id!,
+          canCompanyAccept: isNextApprovalAvailable,
         },
       },
     });
@@ -227,6 +232,11 @@ const ViewTicket = () => {
   };
 
   const buttonChoiceCompany = () => {
+    // if (allData?.ticket.assignedCompany === null) {
+    //   cogoToast.error("Tridot is not assigend");
+    //   return;
+    // }else{}
+
     setButtonClickChoice(Direction.Company);
     toggle();
   };
@@ -281,13 +291,21 @@ const ViewTicket = () => {
       {allData?.ticketBackAndForth.map((item) => {
         return (
           <>
-            <Card style={{ width: "18rem" }}>
-              <Card.Body>
-                <Card.Text>
+            <Card className="worldContainer">
+              <Card.Body style={{ padding: "0.5rem 3rem" }}>
+                <Card.Text style={{ fontSize: "1rem", fontWeight: "bold" }}>
                   <i className="bi bi-person-circle"></i>
-                  {"   "} {item.createdBy?.name}
+                  {"   "} {item.createdBy?.name} -{" "}
+                  {item.createdBy?.isCustomer === true
+                    ? "Customer"
+                    : item.createdBy?.isMiddleMan === true
+                    ? "Contetra"
+                    : "Tridot"}
                 </Card.Text>
-                <Card.Text>{item.questionReply}</Card.Text>
+                <Card.Text>
+                  {" "}
+                  <b>Reply:-</b> {item.questionReply}
+                </Card.Text>
                 <Card.Subtitle className="mb-2 text-muted">
                   {item.file ? (
                     <>

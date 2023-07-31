@@ -397,12 +397,12 @@ const Index = () => {
       },
       {
         Header: "status",
-        accessor: "isActive",
+        accessor: "isResolved",
         Cell: (e: Cell<ICreateTickets>) => {
-          return e.value === true ? (
-            <Badge bg="primary">active</Badge>
+          return e.value === false ? (
+            <Badge bg="primary">Open</Badge>
           ) : (
-            <Badge bg="danger">disable</Badge>
+            <Badge bg="danger">Closed</Badge>
           );
         },
       },
