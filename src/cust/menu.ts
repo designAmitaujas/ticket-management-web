@@ -21,17 +21,24 @@ const menuArr: MenuItemTypes[] = [
     parentKey: "dashboards",
   },
   {
-    key: "ds-user-management",
-    label: "Email Credential",
-    url: "/admin/email-credential",
-    parentKey: "user-management",
+    key: "ds-setup",
+    label: "User Management",
+    url: "/admin/user-management",
+    parentKey: "dashboards",
   },
-  {
-    key: "ds-user-management",
-    label: "Email Templates",
-    url: "/admin/email-templates",
-    parentKey: "user-management",
-  },
+
+  // {
+  //   key: "ds-user-management",
+  //   label: "Email Credential",
+  //   url: "/admin/email-credential",
+  //   parentKey: "user-management",
+  // },
+  // {
+  //   key: "ds-user-management",
+  //   label: "Email Templates",
+  //   url: "/admin/email-templates",
+  //   parentKey: "user-management",
+  // },
 ];
 
 // default customer
