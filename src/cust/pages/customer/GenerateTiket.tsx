@@ -9,6 +9,7 @@ import isEqual from "react-fast-compare";
 import { useHistory, useLocation } from "react-router-dom";
 import { Cell } from "react-table";
 import * as Yup from "yup";
+import "yup-phone-lite";
 import {
   GetAllDepartmentQuery,
   GetAllDepartmentQuestionsQuery,
@@ -44,6 +45,7 @@ const initialValues: ICreateTickets = {
   file: "",
   isResolved: false,
   question: "",
+  mobile: "",
 };
 
 const validationSchema = Yup.object().shape({
@@ -57,6 +59,7 @@ const validationSchema = Yup.object().shape({
   file: Yup.string(),
   question: Yup.string().required(),
   isResolved: Yup.boolean().oneOf([true, false]),
+  mobile: Yup.string().required(),
 });
 
 const RenderForm: FC<{
@@ -84,39 +87,6 @@ const RenderForm: FC<{
     return (
       <Form onSubmit={handleSubmit} onChange={handleChange}>
         <Row>
-          <CustomInput
-            err={errors.question}
-            isInvalid={!!touched.question && !!errors.question}
-            label={"question"}
-            name="question"
-            placeholder="Enter Your question"
-            value={values.question}
-          />
-
-          <CustomFileInput
-            err={errors.file}
-            isInvalid={!!touched.file && !!errors.file}
-            label="file"
-            name="file"
-            placeholder="Enter file"
-            value={values.file}
-            setFieldValue={setFieldValue}
-            isImage={false}
-            isPdf={false}
-          />
-
-          <CustomInput
-            err={errors.description}
-            isInvalid={!!touched.description && !!errors.description}
-            label={"description"}
-            name="description"
-            placeholder="Enter description"
-            value={values.description}
-            isTextArea={true}
-            md="12"
-            lg="12"
-          />
-
           <CustomSelect
             options={department
               .filter((item) => item.isActive === true)
@@ -142,6 +112,53 @@ const RenderForm: FC<{
             name="departmentQuestion"
             placeholder="Enter department Question"
             value={values.departmentQuestion}
+          />
+
+          <CustomInput
+            err={errors.question}
+            isInvalid={!!touched.question && !!errors.question}
+            label={"question"}
+            name="question"
+            placeholder="Enter Your question"
+            value={values.question}
+            md="12"
+            lg="12"
+          />
+
+          <CustomInput
+            err={errors.description}
+            isInvalid={!!touched.description && !!errors.description}
+            label={"description"}
+            name="description"
+            placeholder="Enter description"
+            value={values.description}
+            isTextArea={true}
+            md="12"
+            lg="12"
+          />
+
+          <CustomInput
+            err={errors.mobile}
+            isInvalid={!!touched.mobile && !!errors.mobile}
+            label={"mobile"}
+            name="mobile"
+            placeholder="Enter mobile"
+            value={values.mobile}
+            // isTextArea={true}
+            // md="12"
+            // lg="12"
+          />
+
+          <CustomFileInput
+            err={errors.file}
+            isInvalid={!!touched.file && !!errors.file}
+            label="file"
+            name="file"
+            placeholder="Enter file"
+            value={values.file}
+            setFieldValue={setFieldValue}
+            isImage={false}
+            isPdf={false}
           />
 
           {/* <CustomCheckBox
@@ -267,6 +284,7 @@ const Update = () => {
           file: res.getTicketsById.file,
           isResolved: res.getTicketsById.isResolved,
           question: res.getTicketsById.question,
+          mobile: res.getTicketsById.mobile,
         });
       }
     },

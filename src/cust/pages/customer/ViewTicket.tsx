@@ -266,12 +266,15 @@ const ViewTicket = () => {
                 <a
                   href={`${parsedUrl.origin}/upload/${allData?.ticket.file}`}
                   target="_blank"
-                ></a>
+                >
+                  {"   "} view file
+                </a>
               </span>
             ) : (
               <>No File Provided</>
             )}
           </h6>
+          <h6>Mobile : {allData?.ticket.mobile}</h6>
         </Card.Header>
       </Card>
 
@@ -280,10 +283,33 @@ const ViewTicket = () => {
           <>
             <Card style={{ width: "18rem" }}>
               <Card.Body>
-                <Card.Subtitle className="mb-2 text-muted">
-                  {item.file}
-                </Card.Subtitle>
+                <Card.Text>
+                  <i className="bi bi-person-circle"></i>
+                  {"   "} {item.createdBy?.name}
+                </Card.Text>
                 <Card.Text>{item.questionReply}</Card.Text>
+                <Card.Subtitle className="mb-2 text-muted">
+                  {item.file ? (
+                    <>
+                      <span
+                        className={css`
+                          &:hover {
+                            cursor: pointer;
+                          }
+                        `}
+                      >
+                        <a
+                          href={`${parsedUrl.origin}/upload/${item.file}`}
+                          target="_blank"
+                        >
+                          {"   "} view file
+                        </a>
+                      </span>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </Card.Subtitle>
               </Card.Body>
             </Card>
           </>

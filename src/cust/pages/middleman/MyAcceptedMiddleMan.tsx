@@ -9,6 +9,7 @@ import isEqual from "react-fast-compare";
 import { useHistory, useLocation } from "react-router-dom";
 import { Cell } from "react-table";
 import * as Yup from "yup";
+import "yup-phone-lite";
 import {
   GetAllDepartmentQuery,
   GetAllDepartmentQuestionsQuery,
@@ -44,6 +45,7 @@ const initialValues: ICreateTickets = {
   file: "",
   isResolved: false,
   question: "",
+  mobile: "",
 };
 
 const validationSchema = Yup.object().shape({
@@ -57,6 +59,7 @@ const validationSchema = Yup.object().shape({
   file: Yup.string(),
   question: Yup.string().required(),
   isResolved: Yup.boolean().oneOf([true, false]),
+  mobile: Yup.string(),
 });
 
 const RenderForm: FC<{
@@ -267,6 +270,7 @@ const Update = () => {
           file: res.getTicketsById.file,
           isResolved: res.getTicketsById.isResolved,
           question: res.getTicketsById.question,
+          mobile: res.getTicketsById.mobile,
         });
       }
     },

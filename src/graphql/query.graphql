@@ -303,6 +303,7 @@ query GetTicketsById($options: IGetByID!) {
       isSuperAdmin
       isActive
     }
+    mobile
     isActive
   }
 }
@@ -482,6 +483,7 @@ query GetTicketBackAndForthByTiketId($options: IGetByID!) {
   getTicketBackAndForthByTiketId(options: $options) {
     ticket {
       _id
+      mobile
       department {
         _id
         name
@@ -548,6 +550,10 @@ query GetTicketBackAndForthByTiketId($options: IGetByID!) {
       isLastReopened
       isEdited
       isActive
+      createdBy {
+        name
+        email
+      }
     }
   }
 }
