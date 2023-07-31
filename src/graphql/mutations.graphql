@@ -112,3 +112,35 @@ mutation GetTickerClosedById($options: IGetByID!) {
     data
   }
 }
+
+mutation CreateOrUpdateEmailCredential($options: ICreateEmailCredential!) {
+  createOrUpdateEmailCredential(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
+mutation DeleteEmailCredential($options: IGetByID!) {
+  deleteEmailCredential(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
+mutation CreateOrUpdateEmailTemplate($options: ICreateEmailTemplate!) {
+  createOrUpdateEmailTemplate(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
+mutation DeleteEmailTemplate($options: IGetByID!) {
+  deleteEmailTemplate(options: $options) {
+    success
+    msg
+    data
+  }
+}

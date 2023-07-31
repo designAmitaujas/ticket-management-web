@@ -22,8 +22,14 @@ const menuArr: MenuItemTypes[] = [
   },
   {
     key: "ds-user-management",
-    label: "User Management",
-    url: "/admin/user-management",
+    label: "Email Credential",
+    url: "/admin/email-credential",
+    parentKey: "user-management",
+  },
+  {
+    key: "ds-user-management",
+    label: "Email Templates",
+    url: "/admin/email-templates",
     parentKey: "user-management",
   },
 ];

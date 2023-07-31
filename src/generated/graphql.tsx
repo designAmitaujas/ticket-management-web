@@ -43,6 +43,28 @@ export enum Direction {
   User = 'USER'
 }
 
+export type EmailCredential = {
+  __typename?: 'EmailCredential';
+  _id: Scalars['String'];
+  authPassword: Scalars['String'];
+  authUser: Scalars['String'];
+  host: Scalars['String'];
+  isActive: Scalars['Boolean'];
+  name: Scalars['String'];
+  port: Scalars['Float'];
+  secure: Scalars['Boolean'];
+};
+
+export type EmailTemplate = {
+  __typename?: 'EmailTemplate';
+  _id: Scalars['String'];
+  customId: Scalars['String'];
+  emailCredentials?: Maybe<EmailCredential>;
+  html: Scalars['String'];
+  isActive: Scalars['Boolean'];
+  name: Scalars['String'];
+};
+
 export type IAddTicketBackAndForth = {
   canCompanyAccept: Scalars['Boolean'];
   file: Scalars['String'];
@@ -87,6 +109,26 @@ export type ICreateDepartment = {
 export type ICreateDepartmentQuestions = {
   _id?: InputMaybe<Scalars['String']>;
   department: Scalars['String'];
+  isActive: Scalars['Boolean'];
+  name: Scalars['String'];
+};
+
+export type ICreateEmailCredential = {
+  _id?: InputMaybe<Scalars['String']>;
+  authPassword: Scalars['String'];
+  authUser: Scalars['String'];
+  host: Scalars['String'];
+  isActive: Scalars['Boolean'];
+  name: Scalars['String'];
+  port: Scalars['Int'];
+  secure: Scalars['Boolean'];
+};
+
+export type ICreateEmailTemplate = {
+  _id?: InputMaybe<Scalars['String']>;
+  customId: Scalars['String'];
+  emailCredentials: Scalars['String'];
+  html: Scalars['String'];
   isActive: Scalars['Boolean'];
   name: Scalars['String'];
 };
@@ -157,11 +199,15 @@ export type Mutation = {
   changePassword: IStatusResponse;
   createOrUpdateDepartment: IStatusResponse;
   createOrUpdateDepartmentQuestions: IStatusResponse;
+  createOrUpdateEmailCredential: IStatusResponse;
+  createOrUpdateEmailTemplate: IStatusResponse;
   createOrUpdateLawCategory: IStatusResponse;
   createOrUpdateTickets: IStatusResponse;
   createOrUpdateUser: IStatusResponse;
   deleteDepartment: IStatusResponse;
   deleteDepartmentQuestions: IStatusResponse;
+  deleteEmailCredential: IStatusResponse;
+  deleteEmailTemplate: IStatusResponse;
   deleteTicketBackAndForth: IStatusResponse;
   deleteTickets: IStatusResponse;
   deleteUser: IStatusResponse;
@@ -204,6 +250,16 @@ export type MutationCreateOrUpdateDepartmentQuestionsArgs = {
 };
 
 
+export type MutationCreateOrUpdateEmailCredentialArgs = {
+  options: ICreateEmailCredential;
+};
+
+
+export type MutationCreateOrUpdateEmailTemplateArgs = {
+  options: ICreateEmailTemplate;
+};
+
+
 export type MutationCreateOrUpdateLawCategoryArgs = {
   options: ICreateTicketBackAndForth;
 };
@@ -225,6 +281,16 @@ export type MutationDeleteDepartmentArgs = {
 
 
 export type MutationDeleteDepartmentQuestionsArgs = {
+  options: IGetById;
+};
+
+
+export type MutationDeleteEmailCredentialArgs = {
+  options: IGetById;
+};
+
+
+export type MutationDeleteEmailTemplateArgs = {
   options: IGetById;
 };
 
@@ -254,11 +320,15 @@ export type Query = {
   getAllAcceptAcceptByMiddleMan: Array<Tickets>;
   getAllDepartment: Array<Department>;
   getAllDepartmentQuestions: Array<DepartmentQuestions>;
+  getAllEmailCredentials: Array<EmailCredential>;
+  getAllEmailTemplate: Array<EmailTemplate>;
   getAllTicketBackAndForth: Array<TicketBackAndForth>;
   getAllTickets: Array<Tickets>;
   getAllUser: Array<User>;
   getDepartmentById: Department;
   getDepartmentQuestionsById: DepartmentQuestions;
+  getEmailCredentialsById: EmailCredential;
+  getEmailTemplateById: EmailTemplate;
   getMyTicketByCompany: Array<Tickets>;
   getMyTicketByMiddleMan: Array<Tickets>;
   getMyTicketByUser: Array<Tickets>;
@@ -276,6 +346,16 @@ export type QueryGetDepartmentByIdArgs = {
 
 
 export type QueryGetDepartmentQuestionsByIdArgs = {
+  options: IGetById;
+};
+
+
+export type QueryGetEmailCredentialsByIdArgs = {
+  options: IGetById;
+};
+
+
+export type QueryGetEmailTemplateByIdArgs = {
   options: IGetById;
 };
 
@@ -441,6 +521,34 @@ export type GetTickerClosedByIdMutationVariables = Exact<{
 
 export type GetTickerClosedByIdMutation = { __typename?: 'Mutation', getTickerClosedById: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
+export type CreateOrUpdateEmailCredentialMutationVariables = Exact<{
+  options: ICreateEmailCredential;
+}>;
+
+
+export type CreateOrUpdateEmailCredentialMutation = { __typename?: 'Mutation', createOrUpdateEmailCredential: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type DeleteEmailCredentialMutationVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type DeleteEmailCredentialMutation = { __typename?: 'Mutation', deleteEmailCredential: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type CreateOrUpdateEmailTemplateMutationVariables = Exact<{
+  options: ICreateEmailTemplate;
+}>;
+
+
+export type CreateOrUpdateEmailTemplateMutation = { __typename?: 'Mutation', createOrUpdateEmailTemplate: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type DeleteEmailTemplateMutationVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type DeleteEmailTemplateMutation = { __typename?: 'Mutation', deleteEmailTemplate: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
 export type GetDepartmentByIdQueryVariables = Exact<{
   options: IGetById;
 }>;
@@ -525,6 +633,30 @@ export type GetTicketCountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetTicketCountQuery = { __typename?: 'Query', getTicketCount: { __typename?: 'ICountResponse', totalTiketCount: number, totalRunningCount: number, totalClosedCount: number } };
+
+export type GetAllEmailCredentialsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllEmailCredentialsQuery = { __typename?: 'Query', getAllEmailCredentials: Array<{ __typename?: 'EmailCredential', _id: string, name: string, host: string, port: number, secure: boolean, authUser: string, authPassword: string, isActive: boolean }> };
+
+export type GetEmailCredentialsByIdQueryVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type GetEmailCredentialsByIdQuery = { __typename?: 'Query', getEmailCredentialsById: { __typename?: 'EmailCredential', _id: string, name: string, host: string, port: number, secure: boolean, authUser: string, authPassword: string, isActive: boolean } };
+
+export type GetEmailTemplateByIdQueryVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type GetEmailTemplateByIdQuery = { __typename?: 'Query', getEmailTemplateById: { __typename?: 'EmailTemplate', _id: string, name: string, html: string, customId: string, isActive: boolean, emailCredentials?: { __typename?: 'EmailCredential', _id: string, name: string, host: string, port: number, secure: boolean, authUser: string, authPassword: string, isActive: boolean } | null } };
+
+export type GetAllEmailTemplateQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllEmailTemplateQuery = { __typename?: 'Query', getAllEmailTemplate: Array<{ __typename?: 'EmailTemplate', _id: string, name: string, html: string, customId: string, isActive: boolean, emailCredentials?: { __typename?: 'EmailCredential', _id: string, name: string, host: string, port: number, secure: boolean, authUser: string, authPassword: string, isActive: boolean } | null }> };
 
 
 export const CreateOrUpdateDepartmentDocument = gql`
@@ -996,6 +1128,146 @@ export function useGetTickerClosedByIdMutation(baseOptions?: Apollo.MutationHook
 export type GetTickerClosedByIdMutationHookResult = ReturnType<typeof useGetTickerClosedByIdMutation>;
 export type GetTickerClosedByIdMutationResult = Apollo.MutationResult<GetTickerClosedByIdMutation>;
 export type GetTickerClosedByIdMutationOptions = Apollo.BaseMutationOptions<GetTickerClosedByIdMutation, GetTickerClosedByIdMutationVariables>;
+export const CreateOrUpdateEmailCredentialDocument = gql`
+    mutation CreateOrUpdateEmailCredential($options: ICreateEmailCredential!) {
+  createOrUpdateEmailCredential(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type CreateOrUpdateEmailCredentialMutationFn = Apollo.MutationFunction<CreateOrUpdateEmailCredentialMutation, CreateOrUpdateEmailCredentialMutationVariables>;
+
+/**
+ * __useCreateOrUpdateEmailCredentialMutation__
+ *
+ * To run a mutation, you first call `useCreateOrUpdateEmailCredentialMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOrUpdateEmailCredentialMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOrUpdateEmailCredentialMutation, { data, loading, error }] = useCreateOrUpdateEmailCredentialMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useCreateOrUpdateEmailCredentialMutation(baseOptions?: Apollo.MutationHookOptions<CreateOrUpdateEmailCredentialMutation, CreateOrUpdateEmailCredentialMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOrUpdateEmailCredentialMutation, CreateOrUpdateEmailCredentialMutationVariables>(CreateOrUpdateEmailCredentialDocument, options);
+      }
+export type CreateOrUpdateEmailCredentialMutationHookResult = ReturnType<typeof useCreateOrUpdateEmailCredentialMutation>;
+export type CreateOrUpdateEmailCredentialMutationResult = Apollo.MutationResult<CreateOrUpdateEmailCredentialMutation>;
+export type CreateOrUpdateEmailCredentialMutationOptions = Apollo.BaseMutationOptions<CreateOrUpdateEmailCredentialMutation, CreateOrUpdateEmailCredentialMutationVariables>;
+export const DeleteEmailCredentialDocument = gql`
+    mutation DeleteEmailCredential($options: IGetByID!) {
+  deleteEmailCredential(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type DeleteEmailCredentialMutationFn = Apollo.MutationFunction<DeleteEmailCredentialMutation, DeleteEmailCredentialMutationVariables>;
+
+/**
+ * __useDeleteEmailCredentialMutation__
+ *
+ * To run a mutation, you first call `useDeleteEmailCredentialMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteEmailCredentialMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteEmailCredentialMutation, { data, loading, error }] = useDeleteEmailCredentialMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useDeleteEmailCredentialMutation(baseOptions?: Apollo.MutationHookOptions<DeleteEmailCredentialMutation, DeleteEmailCredentialMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteEmailCredentialMutation, DeleteEmailCredentialMutationVariables>(DeleteEmailCredentialDocument, options);
+      }
+export type DeleteEmailCredentialMutationHookResult = ReturnType<typeof useDeleteEmailCredentialMutation>;
+export type DeleteEmailCredentialMutationResult = Apollo.MutationResult<DeleteEmailCredentialMutation>;
+export type DeleteEmailCredentialMutationOptions = Apollo.BaseMutationOptions<DeleteEmailCredentialMutation, DeleteEmailCredentialMutationVariables>;
+export const CreateOrUpdateEmailTemplateDocument = gql`
+    mutation CreateOrUpdateEmailTemplate($options: ICreateEmailTemplate!) {
+  createOrUpdateEmailTemplate(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type CreateOrUpdateEmailTemplateMutationFn = Apollo.MutationFunction<CreateOrUpdateEmailTemplateMutation, CreateOrUpdateEmailTemplateMutationVariables>;
+
+/**
+ * __useCreateOrUpdateEmailTemplateMutation__
+ *
+ * To run a mutation, you first call `useCreateOrUpdateEmailTemplateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOrUpdateEmailTemplateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOrUpdateEmailTemplateMutation, { data, loading, error }] = useCreateOrUpdateEmailTemplateMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useCreateOrUpdateEmailTemplateMutation(baseOptions?: Apollo.MutationHookOptions<CreateOrUpdateEmailTemplateMutation, CreateOrUpdateEmailTemplateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOrUpdateEmailTemplateMutation, CreateOrUpdateEmailTemplateMutationVariables>(CreateOrUpdateEmailTemplateDocument, options);
+      }
+export type CreateOrUpdateEmailTemplateMutationHookResult = ReturnType<typeof useCreateOrUpdateEmailTemplateMutation>;
+export type CreateOrUpdateEmailTemplateMutationResult = Apollo.MutationResult<CreateOrUpdateEmailTemplateMutation>;
+export type CreateOrUpdateEmailTemplateMutationOptions = Apollo.BaseMutationOptions<CreateOrUpdateEmailTemplateMutation, CreateOrUpdateEmailTemplateMutationVariables>;
+export const DeleteEmailTemplateDocument = gql`
+    mutation DeleteEmailTemplate($options: IGetByID!) {
+  deleteEmailTemplate(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type DeleteEmailTemplateMutationFn = Apollo.MutationFunction<DeleteEmailTemplateMutation, DeleteEmailTemplateMutationVariables>;
+
+/**
+ * __useDeleteEmailTemplateMutation__
+ *
+ * To run a mutation, you first call `useDeleteEmailTemplateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteEmailTemplateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteEmailTemplateMutation, { data, loading, error }] = useDeleteEmailTemplateMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useDeleteEmailTemplateMutation(baseOptions?: Apollo.MutationHookOptions<DeleteEmailTemplateMutation, DeleteEmailTemplateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteEmailTemplateMutation, DeleteEmailTemplateMutationVariables>(DeleteEmailTemplateDocument, options);
+      }
+export type DeleteEmailTemplateMutationHookResult = ReturnType<typeof useDeleteEmailTemplateMutation>;
+export type DeleteEmailTemplateMutationResult = Apollo.MutationResult<DeleteEmailTemplateMutation>;
+export type DeleteEmailTemplateMutationOptions = Apollo.BaseMutationOptions<DeleteEmailTemplateMutation, DeleteEmailTemplateMutationVariables>;
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($options: IGetByID!) {
   getDepartmentById(options: $options) {
@@ -1993,3 +2265,183 @@ export function useGetTicketCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetTicketCountQueryHookResult = ReturnType<typeof useGetTicketCountQuery>;
 export type GetTicketCountLazyQueryHookResult = ReturnType<typeof useGetTicketCountLazyQuery>;
 export type GetTicketCountQueryResult = Apollo.QueryResult<GetTicketCountQuery, GetTicketCountQueryVariables>;
+export const GetAllEmailCredentialsDocument = gql`
+    query GetAllEmailCredentials {
+  getAllEmailCredentials {
+    _id
+    name
+    host
+    port
+    secure
+    authUser
+    authPassword
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllEmailCredentialsQuery__
+ *
+ * To run a query within a React component, call `useGetAllEmailCredentialsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllEmailCredentialsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllEmailCredentialsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllEmailCredentialsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllEmailCredentialsQuery, GetAllEmailCredentialsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllEmailCredentialsQuery, GetAllEmailCredentialsQueryVariables>(GetAllEmailCredentialsDocument, options);
+      }
+export function useGetAllEmailCredentialsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllEmailCredentialsQuery, GetAllEmailCredentialsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllEmailCredentialsQuery, GetAllEmailCredentialsQueryVariables>(GetAllEmailCredentialsDocument, options);
+        }
+export type GetAllEmailCredentialsQueryHookResult = ReturnType<typeof useGetAllEmailCredentialsQuery>;
+export type GetAllEmailCredentialsLazyQueryHookResult = ReturnType<typeof useGetAllEmailCredentialsLazyQuery>;
+export type GetAllEmailCredentialsQueryResult = Apollo.QueryResult<GetAllEmailCredentialsQuery, GetAllEmailCredentialsQueryVariables>;
+export const GetEmailCredentialsByIdDocument = gql`
+    query GetEmailCredentialsById($options: IGetByID!) {
+  getEmailCredentialsById(options: $options) {
+    _id
+    name
+    host
+    port
+    secure
+    authUser
+    authPassword
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetEmailCredentialsByIdQuery__
+ *
+ * To run a query within a React component, call `useGetEmailCredentialsByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEmailCredentialsByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEmailCredentialsByIdQuery({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useGetEmailCredentialsByIdQuery(baseOptions: Apollo.QueryHookOptions<GetEmailCredentialsByIdQuery, GetEmailCredentialsByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEmailCredentialsByIdQuery, GetEmailCredentialsByIdQueryVariables>(GetEmailCredentialsByIdDocument, options);
+      }
+export function useGetEmailCredentialsByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEmailCredentialsByIdQuery, GetEmailCredentialsByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEmailCredentialsByIdQuery, GetEmailCredentialsByIdQueryVariables>(GetEmailCredentialsByIdDocument, options);
+        }
+export type GetEmailCredentialsByIdQueryHookResult = ReturnType<typeof useGetEmailCredentialsByIdQuery>;
+export type GetEmailCredentialsByIdLazyQueryHookResult = ReturnType<typeof useGetEmailCredentialsByIdLazyQuery>;
+export type GetEmailCredentialsByIdQueryResult = Apollo.QueryResult<GetEmailCredentialsByIdQuery, GetEmailCredentialsByIdQueryVariables>;
+export const GetEmailTemplateByIdDocument = gql`
+    query GetEmailTemplateById($options: IGetByID!) {
+  getEmailTemplateById(options: $options) {
+    _id
+    name
+    html
+    customId
+    emailCredentials {
+      _id
+      name
+      host
+      port
+      secure
+      authUser
+      authPassword
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetEmailTemplateByIdQuery__
+ *
+ * To run a query within a React component, call `useGetEmailTemplateByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEmailTemplateByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEmailTemplateByIdQuery({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useGetEmailTemplateByIdQuery(baseOptions: Apollo.QueryHookOptions<GetEmailTemplateByIdQuery, GetEmailTemplateByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEmailTemplateByIdQuery, GetEmailTemplateByIdQueryVariables>(GetEmailTemplateByIdDocument, options);
+      }
+export function useGetEmailTemplateByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEmailTemplateByIdQuery, GetEmailTemplateByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEmailTemplateByIdQuery, GetEmailTemplateByIdQueryVariables>(GetEmailTemplateByIdDocument, options);
+        }
+export type GetEmailTemplateByIdQueryHookResult = ReturnType<typeof useGetEmailTemplateByIdQuery>;
+export type GetEmailTemplateByIdLazyQueryHookResult = ReturnType<typeof useGetEmailTemplateByIdLazyQuery>;
+export type GetEmailTemplateByIdQueryResult = Apollo.QueryResult<GetEmailTemplateByIdQuery, GetEmailTemplateByIdQueryVariables>;
+export const GetAllEmailTemplateDocument = gql`
+    query GetAllEmailTemplate {
+  getAllEmailTemplate {
+    _id
+    name
+    html
+    customId
+    emailCredentials {
+      _id
+      name
+      host
+      port
+      secure
+      authUser
+      authPassword
+      isActive
+    }
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllEmailTemplateQuery__
+ *
+ * To run a query within a React component, call `useGetAllEmailTemplateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllEmailTemplateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllEmailTemplateQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllEmailTemplateQuery(baseOptions?: Apollo.QueryHookOptions<GetAllEmailTemplateQuery, GetAllEmailTemplateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllEmailTemplateQuery, GetAllEmailTemplateQueryVariables>(GetAllEmailTemplateDocument, options);
+      }
+export function useGetAllEmailTemplateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllEmailTemplateQuery, GetAllEmailTemplateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllEmailTemplateQuery, GetAllEmailTemplateQueryVariables>(GetAllEmailTemplateDocument, options);
+        }
+export type GetAllEmailTemplateQueryHookResult = ReturnType<typeof useGetAllEmailTemplateQuery>;
+export type GetAllEmailTemplateLazyQueryHookResult = ReturnType<typeof useGetAllEmailTemplateLazyQuery>;
+export type GetAllEmailTemplateQueryResult = Apollo.QueryResult<GetAllEmailTemplateQuery, GetAllEmailTemplateQueryVariables>;

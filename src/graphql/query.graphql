@@ -568,3 +568,69 @@ query GetTicketCount {
     totalClosedCount
   }
 }
+
+query GetAllEmailCredentials {
+  getAllEmailCredentials {
+    _id
+    name
+    host
+    port
+    secure
+    authUser
+    authPassword
+    isActive
+  }
+}
+
+query GetEmailCredentialsById($options: IGetByID!) {
+  getEmailCredentialsById(options: $options) {
+    _id
+    name
+    host
+    port
+    secure
+    authUser
+    authPassword
+    isActive
+  }
+}
+
+query GetEmailTemplateById($options: IGetByID!) {
+  getEmailTemplateById(options: $options) {
+    _id
+    name
+    html
+    customId
+    emailCredentials {
+      _id
+      name
+      host
+      port
+      secure
+      authUser
+      authPassword
+      isActive
+    }
+    isActive
+  }
+}
+
+query GetAllEmailTemplate {
+  getAllEmailTemplate {
+    _id
+    name
+    html
+    customId
+    emailCredentials {
+      _id
+      name
+      host
+      port
+      secure
+      authUser
+      authPassword
+      isActive
+    }
+    isActive
+  }
+}
