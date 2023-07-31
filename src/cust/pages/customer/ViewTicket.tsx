@@ -289,7 +289,7 @@ const ViewTicket = () => {
         </Card.Header>
       </Card>
 
-      {allData?.ticketBackAndForth.map((item) => {
+      {allData?.ticketBackAndForth.reverse().map((item) => {
         return (
           <>
             <Card className="worldContainer">

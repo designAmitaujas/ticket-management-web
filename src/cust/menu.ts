@@ -21,11 +21,12 @@ const menuArr: MenuItemTypes[] = [
     parentKey: "dashboards",
   },
   {
-    key: "ds-user-management",
+    key: "ds-setup",
     label: "User Management",
     url: "/admin/user-management",
-    parentKey: "user-management",
+    parentKey: "dashboards",
   },
+
   {
     key: "ds-user-management",
     label: "Email Credential",
