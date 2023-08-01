@@ -636,7 +636,6 @@ export type DeleteClosedReasonMutationVariables = Exact<{
 
 
 export type DeleteClosedReasonMutation = { __typename?: 'Mutation', deleteClosedReason: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
-<<<<<<< HEAD
 
 export type GetTickerClosedByMiddleManMutationVariables = Exact<{
   options: ICloseInput;
@@ -644,8 +643,6 @@ export type GetTickerClosedByMiddleManMutationVariables = Exact<{
 
 
 export type GetTickerClosedByMiddleManMutation = { __typename?: 'Mutation', getTickerClosedByMiddleMan: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
-=======
->>>>>>> dc16b1ae54191227484ebca28c062b9d88173d3c
 
 export type GetDepartmentByIdQueryVariables = Exact<{
   options: IGetById;
@@ -1523,7 +1520,6 @@ export function useDeleteClosedReasonMutation(baseOptions?: Apollo.MutationHookO
 export type DeleteClosedReasonMutationHookResult = ReturnType<typeof useDeleteClosedReasonMutation>;
 export type DeleteClosedReasonMutationResult = Apollo.MutationResult<DeleteClosedReasonMutation>;
 export type DeleteClosedReasonMutationOptions = Apollo.BaseMutationOptions<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>;
-<<<<<<< HEAD
 export const GetTickerClosedByMiddleManDocument = gql`
     mutation GetTickerClosedByMiddleMan($options: ICloseInput!) {
   getTickerClosedByMiddleMan(options: $options) {
@@ -1559,8 +1555,6 @@ export function useGetTickerClosedByMiddleManMutation(baseOptions?: Apollo.Mutat
 export type GetTickerClosedByMiddleManMutationHookResult = ReturnType<typeof useGetTickerClosedByMiddleManMutation>;
 export type GetTickerClosedByMiddleManMutationResult = Apollo.MutationResult<GetTickerClosedByMiddleManMutation>;
 export type GetTickerClosedByMiddleManMutationOptions = Apollo.BaseMutationOptions<GetTickerClosedByMiddleManMutation, GetTickerClosedByMiddleManMutationVariables>;
-=======
->>>>>>> dc16b1ae54191227484ebca28c062b9d88173d3c
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($options: IGetByID!) {
   getDepartmentById(options: $options) {
