@@ -126,7 +126,7 @@ const RenderForm: FC<{
 
           <CustomCheckBox
             isInvalid={!!touched.isCustomer && !!errors.isCustomer}
-            label="isCustomer"
+            label="Customer"
             name="isCustomer"
             setFieldValue={setFieldValue}
             value={values.isCustomer}
@@ -134,7 +134,7 @@ const RenderForm: FC<{
 
           <CustomCheckBox
             isInvalid={!!touched.isMiddleMan && !!errors.isMiddleMan}
-            label="isMiddleMan"
+            label="Contetra Team"
             name="isMiddleMan"
             setFieldValue={setFieldValue}
             value={values.isMiddleMan}
@@ -142,7 +142,7 @@ const RenderForm: FC<{
 
           <CustomCheckBox
             isInvalid={!!touched.isCompany && !!errors.isCompany}
-            label="is Company"
+            label="Tridot Company"
             name="isCompany"
             setFieldValue={setFieldValue}
             value={values.isCompany}
