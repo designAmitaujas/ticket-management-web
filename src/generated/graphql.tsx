@@ -507,6 +507,13 @@ export type CreateOrUpdateTicketsMutationVariables = Exact<{
 
 export type CreateOrUpdateTicketsMutation = { __typename?: 'Mutation', createOrUpdateTickets: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
+export type ChangePasswordMutationVariables = Exact<{
+  options: IChangePassword;
+}>;
+
+
+export type ChangePasswordMutation = { __typename?: 'Mutation', changePassword: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
 export type AddTicketBackAndForthMutationVariables = Exact<{
   options: IAddTicketBackAndForth;
 }>;
@@ -1058,6 +1065,41 @@ export function useCreateOrUpdateTicketsMutation(baseOptions?: Apollo.MutationHo
 export type CreateOrUpdateTicketsMutationHookResult = ReturnType<typeof useCreateOrUpdateTicketsMutation>;
 export type CreateOrUpdateTicketsMutationResult = Apollo.MutationResult<CreateOrUpdateTicketsMutation>;
 export type CreateOrUpdateTicketsMutationOptions = Apollo.BaseMutationOptions<CreateOrUpdateTicketsMutation, CreateOrUpdateTicketsMutationVariables>;
+export const ChangePasswordDocument = gql`
+    mutation ChangePassword($options: IChangePassword!) {
+  changePassword(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type ChangePasswordMutationFn = Apollo.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>;
+
+/**
+ * __useChangePasswordMutation__
+ *
+ * To run a mutation, you first call `useChangePasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useChangePasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [changePasswordMutation, { data, loading, error }] = useChangePasswordMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptions<ChangePasswordMutation, ChangePasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument, options);
+      }
+export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
+export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
+export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
 export const AddTicketBackAndForthDocument = gql`
     mutation AddTicketBackAndForth($options: IAddTicketBackAndForth!) {
   AddTicketBackAndForth(options: $options) {

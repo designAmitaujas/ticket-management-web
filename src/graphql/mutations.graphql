@@ -96,6 +96,13 @@ mutation CreateOrUpdateTickets($options: ICreateTickets!) {
     data
   }
 }
+mutation ChangePassword($options: IChangePassword!) {
+  changePassword(options: $options) {
+    success
+    msg
+    data
+  }
+}
 
 mutation AddTicketBackAndForth($options: IAddTicketBackAndForth!) {
   AddTicketBackAndForth(options: $options) {

@@ -11,7 +11,7 @@ const DepartmentQuestion = React.lazy(
 );
 const AppUser = React.lazy(() => import("../../cust/pages/admin/AppUser"));
 const ChangePassword = React.lazy(
-  () => import("../../cust/pages/ChangePassword")
+  () => import("../../pages/auth/ChangePassword")
 );
 const GetAllTicket = React.lazy(
   () => import("../../cust/pages/company/GetAllTicket")
