@@ -36,7 +36,7 @@ import {
   default as logoDark,
   default as logoLight,
   default as logoSm,
-} from "../cust/assets/amitaujas.png";
+} from "../cust/assets/Contetra-logo.png";
 
 export interface NotificationItem {
   id: number;
