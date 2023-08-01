@@ -638,5 +638,5 @@ export {
   CustomFileInput,
   CustomInput,
   CustomMultiSelect,
-  CustomSelect,
+  CustomSelect
 };

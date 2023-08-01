@@ -144,3 +144,19 @@ mutation DeleteEmailTemplate($options: IGetByID!) {
     data
   }
 }
+
+mutation DeleteClosedReason($options: IGetByID!) {
+  deleteClosedReason(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
+mutation CreateOrUpdateClosedReason($options: ICreateClosedReason!) {
+  createOrUpdateClosedReason(options: $options) {
+    success
+    msg
+    data
+  }
+}

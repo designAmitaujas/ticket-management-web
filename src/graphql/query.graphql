@@ -634,3 +634,19 @@ query GetAllEmailTemplate {
     isActive
   }
 }
+
+query GetAllClosedReason {
+  getAllClosedReason {
+    _id
+    name
+    isActive
+  }
+}
+
+query GetClosedReasonById($options: IGetByID!) {
+  getClosedReasonById(options: $options) {
+    _id
+    name
+    isActive
+  }
+}

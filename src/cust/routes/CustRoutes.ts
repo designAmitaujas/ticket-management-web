@@ -35,6 +35,9 @@ const Credentials = React.lazy(
   () => import("../../cust/pages/Emails/Credentials")
 );
 const Template = React.lazy(() => import("../../cust/pages/Emails/Template"));
+const ClosedReason = React.lazy(
+  () => import("../../cust/pages/admin/ClosedReason")
+);
 
 export interface RoutesProps {
   path: RouteProps["path"];
@@ -147,6 +150,14 @@ const CustAuthRoutes: RoutesProps[] = [
     path: "/admin/email-templates",
     name: "email-templates",
     component: Template,
+    route: Route,
+    exact: true,
+  },
+
+  {
+    path: "/admin/closed-reason",
+    name: "closed-reason",
+    component: ClosedReason,
     route: Route,
     exact: true,
   },
