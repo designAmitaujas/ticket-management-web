@@ -159,3 +159,19 @@ mutation TransferTicket($options: ICreateTransfetHistory!) {
     data
   }
 }
+
+mutation CreateOrUpdateClosedReason($options: ICreateClosedReason!) {
+  createOrUpdateClosedReason(options: $options) {
+    success
+    msg
+    data
+  }
+}
+
+mutation DeleteClosedReason($options: IGetByID!) {
+  deleteClosedReason(options: $options) {
+    success
+    msg
+    data
+  }
+}

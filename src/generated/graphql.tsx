@@ -13,6 +13,14 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
+};
+
+export type ClosedReason = {
+  __typename?: 'ClosedReason';
+  _id: Scalars['String'];
+  isActive: Scalars['Boolean'];
+  name: Scalars['String'];
 };
 
 export type ClosedReason = {
@@ -428,6 +436,7 @@ export type QueryGetUserByIdArgs = {
 export type TicketBackAndForth = {
   __typename?: 'TicketBackAndForth';
   _id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   createdBy?: Maybe<User>;
   file: Scalars['String'];
   isActive: Scalars['Boolean'];
@@ -603,12 +612,28 @@ export type DeleteEmailTemplateMutationVariables = Exact<{
 
 export type DeleteEmailTemplateMutation = { __typename?: 'Mutation', deleteEmailTemplate: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
+<<<<<<< HEAD
 export type TransferTicketMutationVariables = Exact<{
   options: ICreateTransfetHistory;
 }>;
 
 
 export type TransferTicketMutation = { __typename?: 'Mutation', transferTicket: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+=======
+export type DeleteClosedReasonMutationVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type DeleteClosedReasonMutation = { __typename?: 'Mutation', deleteClosedReason: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
+export type CreateOrUpdateClosedReasonMutationVariables = Exact<{
+  options: ICreateClosedReason;
+}>;
+
+
+export type CreateOrUpdateClosedReasonMutation = { __typename?: 'Mutation', createOrUpdateClosedReason: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+>>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
 
 export type GetDepartmentByIdQueryVariables = Exact<{
   options: IGetById;
@@ -688,7 +713,7 @@ export type GetTicketBackAndForthByTiketIdQueryVariables = Exact<{
 }>;
 
 
-export type GetTicketBackAndForthByTiketIdQuery = { __typename?: 'Query', getTicketBackAndForthByTiketId: { __typename?: 'CutomTicketResponse', ticket: { __typename?: 'Tickets', _id: string, mobile: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }, ticketBackAndForth: Array<{ __typename?: 'TicketBackAndForth', _id: string, questionReply: string, file: string, isRunningOnCustomer: boolean, isRunningOnMiddleMan: boolean, isRunnningOnCompany: boolean, isNextOnCustomer: boolean, isNextOnMiddleMan: boolean, isNexonCompany: boolean, isLastResolved: boolean, isLastReopened: boolean, isEdited: boolean, isActive: boolean, createdBy?: { __typename?: 'User', name: string, email: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean } | null }> } };
+export type GetTicketBackAndForthByTiketIdQuery = { __typename?: 'Query', getTicketBackAndForthByTiketId: { __typename?: 'CutomTicketResponse', ticket: { __typename?: 'Tickets', _id: string, mobile: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }, ticketBackAndForth: Array<{ __typename?: 'TicketBackAndForth', _id: string, questionReply: string, file: string, isRunningOnCustomer: boolean, isRunningOnMiddleMan: boolean, isRunnningOnCompany: boolean, isNextOnCustomer: boolean, isNextOnMiddleMan: boolean, isNexonCompany: boolean, isLastResolved: boolean, isLastReopened: boolean, isEdited: boolean, isActive: boolean, createdAt: any, createdBy?: { __typename?: 'User', name: string, email: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean } | null }> } };
 
 export type GetAllTransferUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -723,6 +748,18 @@ export type GetAllEmailTemplateQueryVariables = Exact<{ [key: string]: never; }>
 
 
 export type GetAllEmailTemplateQuery = { __typename?: 'Query', getAllEmailTemplate: Array<{ __typename?: 'EmailTemplate', _id: string, name: string, html: string, customId: string, isActive: boolean, emailCredentials?: { __typename?: 'EmailCredential', _id: string, name: string, host: string, port: number, secure: boolean, authUser: string, authPassword: string, isActive: boolean } | null }> };
+
+export type GetAllClosedReasonQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllClosedReasonQuery = { __typename?: 'Query', getAllClosedReason: Array<{ __typename?: 'ClosedReason', _id: string, name: string, isActive: boolean }> };
+
+export type GetClosedReasonByIdQueryVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type GetClosedReasonByIdQuery = { __typename?: 'Query', getClosedReasonById: { __typename?: 'ClosedReason', _id: string, name: string, isActive: boolean } };
 
 
 export const CreateOrUpdateDepartmentDocument = gql`
@@ -1369,15 +1406,22 @@ export function useDeleteEmailTemplateMutation(baseOptions?: Apollo.MutationHook
 export type DeleteEmailTemplateMutationHookResult = ReturnType<typeof useDeleteEmailTemplateMutation>;
 export type DeleteEmailTemplateMutationResult = Apollo.MutationResult<DeleteEmailTemplateMutation>;
 export type DeleteEmailTemplateMutationOptions = Apollo.BaseMutationOptions<DeleteEmailTemplateMutation, DeleteEmailTemplateMutationVariables>;
+<<<<<<< HEAD
 export const TransferTicketDocument = gql`
     mutation TransferTicket($options: ICreateTransfetHistory!) {
   transferTicket(options: $options) {
+=======
+export const DeleteClosedReasonDocument = gql`
+    mutation DeleteClosedReason($options: IGetByID!) {
+  deleteClosedReason(options: $options) {
+>>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
     success
     msg
     data
   }
 }
     `;
+<<<<<<< HEAD
 export type TransferTicketMutationFn = Apollo.MutationFunction<TransferTicketMutation, TransferTicketMutationVariables>;
 
 /**
@@ -1385,18 +1429,32 @@ export type TransferTicketMutationFn = Apollo.MutationFunction<TransferTicketMut
  *
  * To run a mutation, you first call `useTransferTicketMutation` within a React component and pass it any options that fit your needs.
  * When your component renders, `useTransferTicketMutation` returns a tuple that includes:
+=======
+export type DeleteClosedReasonMutationFn = Apollo.MutationFunction<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>;
+
+/**
+ * __useDeleteClosedReasonMutation__
+ *
+ * To run a mutation, you first call `useDeleteClosedReasonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteClosedReasonMutation` returns a tuple that includes:
+>>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
+<<<<<<< HEAD
  * const [transferTicketMutation, { data, loading, error }] = useTransferTicketMutation({
+=======
+ * const [deleteClosedReasonMutation, { data, loading, error }] = useDeleteClosedReasonMutation({
+>>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
  *   variables: {
  *      options: // value for 'options'
  *   },
  * });
  */
+<<<<<<< HEAD
 export function useTransferTicketMutation(baseOptions?: Apollo.MutationHookOptions<TransferTicketMutation, TransferTicketMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useMutation<TransferTicketMutation, TransferTicketMutationVariables>(TransferTicketDocument, options);
@@ -1404,6 +1462,50 @@ export function useTransferTicketMutation(baseOptions?: Apollo.MutationHookOptio
 export type TransferTicketMutationHookResult = ReturnType<typeof useTransferTicketMutation>;
 export type TransferTicketMutationResult = Apollo.MutationResult<TransferTicketMutation>;
 export type TransferTicketMutationOptions = Apollo.BaseMutationOptions<TransferTicketMutation, TransferTicketMutationVariables>;
+=======
+export function useDeleteClosedReasonMutation(baseOptions?: Apollo.MutationHookOptions<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>(DeleteClosedReasonDocument, options);
+      }
+export type DeleteClosedReasonMutationHookResult = ReturnType<typeof useDeleteClosedReasonMutation>;
+export type DeleteClosedReasonMutationResult = Apollo.MutationResult<DeleteClosedReasonMutation>;
+export type DeleteClosedReasonMutationOptions = Apollo.BaseMutationOptions<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>;
+export const CreateOrUpdateClosedReasonDocument = gql`
+    mutation CreateOrUpdateClosedReason($options: ICreateClosedReason!) {
+  createOrUpdateClosedReason(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type CreateOrUpdateClosedReasonMutationFn = Apollo.MutationFunction<CreateOrUpdateClosedReasonMutation, CreateOrUpdateClosedReasonMutationVariables>;
+
+/**
+ * __useCreateOrUpdateClosedReasonMutation__
+ *
+ * To run a mutation, you first call `useCreateOrUpdateClosedReasonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOrUpdateClosedReasonMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOrUpdateClosedReasonMutation, { data, loading, error }] = useCreateOrUpdateClosedReasonMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useCreateOrUpdateClosedReasonMutation(baseOptions?: Apollo.MutationHookOptions<CreateOrUpdateClosedReasonMutation, CreateOrUpdateClosedReasonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateOrUpdateClosedReasonMutation, CreateOrUpdateClosedReasonMutationVariables>(CreateOrUpdateClosedReasonDocument, options);
+      }
+export type CreateOrUpdateClosedReasonMutationHookResult = ReturnType<typeof useCreateOrUpdateClosedReasonMutation>;
+export type CreateOrUpdateClosedReasonMutationResult = Apollo.MutationResult<CreateOrUpdateClosedReasonMutation>;
+export type CreateOrUpdateClosedReasonMutationOptions = Apollo.BaseMutationOptions<CreateOrUpdateClosedReasonMutation, CreateOrUpdateClosedReasonMutationVariables>;
+>>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($options: IGetByID!) {
   getDepartmentById(options: $options) {
@@ -2326,6 +2428,7 @@ export const GetTicketBackAndForthByTiketIdDocument = gql`
       isLastReopened
       isEdited
       isActive
+      createdAt
       createdBy {
         name
         email
@@ -2629,3 +2732,76 @@ export function useGetAllEmailTemplateLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type GetAllEmailTemplateQueryHookResult = ReturnType<typeof useGetAllEmailTemplateQuery>;
 export type GetAllEmailTemplateLazyQueryHookResult = ReturnType<typeof useGetAllEmailTemplateLazyQuery>;
 export type GetAllEmailTemplateQueryResult = Apollo.QueryResult<GetAllEmailTemplateQuery, GetAllEmailTemplateQueryVariables>;
+export const GetAllClosedReasonDocument = gql`
+    query GetAllClosedReason {
+  getAllClosedReason {
+    _id
+    name
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllClosedReasonQuery__
+ *
+ * To run a query within a React component, call `useGetAllClosedReasonQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllClosedReasonQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllClosedReasonQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllClosedReasonQuery(baseOptions?: Apollo.QueryHookOptions<GetAllClosedReasonQuery, GetAllClosedReasonQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllClosedReasonQuery, GetAllClosedReasonQueryVariables>(GetAllClosedReasonDocument, options);
+      }
+export function useGetAllClosedReasonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllClosedReasonQuery, GetAllClosedReasonQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllClosedReasonQuery, GetAllClosedReasonQueryVariables>(GetAllClosedReasonDocument, options);
+        }
+export type GetAllClosedReasonQueryHookResult = ReturnType<typeof useGetAllClosedReasonQuery>;
+export type GetAllClosedReasonLazyQueryHookResult = ReturnType<typeof useGetAllClosedReasonLazyQuery>;
+export type GetAllClosedReasonQueryResult = Apollo.QueryResult<GetAllClosedReasonQuery, GetAllClosedReasonQueryVariables>;
+export const GetClosedReasonByIdDocument = gql`
+    query GetClosedReasonById($options: IGetByID!) {
+  getClosedReasonById(options: $options) {
+    _id
+    name
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetClosedReasonByIdQuery__
+ *
+ * To run a query within a React component, call `useGetClosedReasonByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetClosedReasonByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetClosedReasonByIdQuery({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useGetClosedReasonByIdQuery(baseOptions: Apollo.QueryHookOptions<GetClosedReasonByIdQuery, GetClosedReasonByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetClosedReasonByIdQuery, GetClosedReasonByIdQueryVariables>(GetClosedReasonByIdDocument, options);
+      }
+export function useGetClosedReasonByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetClosedReasonByIdQuery, GetClosedReasonByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetClosedReasonByIdQuery, GetClosedReasonByIdQueryVariables>(GetClosedReasonByIdDocument, options);
+        }
+export type GetClosedReasonByIdQueryHookResult = ReturnType<typeof useGetClosedReasonByIdQuery>;
+export type GetClosedReasonByIdLazyQueryHookResult = ReturnType<typeof useGetClosedReasonByIdLazyQuery>;
+export type GetClosedReasonByIdQueryResult = Apollo.QueryResult<GetClosedReasonByIdQuery, GetClosedReasonByIdQueryVariables>;

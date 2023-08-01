@@ -15,28 +15,34 @@ const menuArr: MenuItemTypes[] = [
     parentKey: "dashboards",
   },
   {
-    key: "ds-setup",
+    key: "ds-department-question",
     label: "Department Question",
     url: "/admin/department-question",
     parentKey: "dashboards",
   },
   {
-    key: "ds-setup",
+    key: "ds-user-management",
     label: "User Management",
     url: "/admin/user-management",
     parentKey: "dashboards",
   },
 
   {
-    key: "ds-user-management",
+    key: "ds-email-credential",
     label: "Email Credential",
     url: "/admin/email-credential",
     parentKey: "user-management",
   },
   {
-    key: "ds-user-management",
+    key: "ds-email-templates",
     label: "Email Templates",
     url: "/admin/email-templates",
+    parentKey: "user-management",
+  },
+  {
+    key: "ds-closed-reason",
+    label: "Closed Reason",
+    url: "/admin/closed-reason",
     parentKey: "user-management",
   },
 ];

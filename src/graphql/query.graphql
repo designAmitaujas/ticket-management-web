@@ -550,6 +550,7 @@ query GetTicketBackAndForthByTiketId($options: IGetByID!) {
       isLastReopened
       isEdited
       isActive
+      createdAt
       createdBy {
         name
         email
@@ -671,6 +672,21 @@ query GetAllTransferUser {
     }
     isAdmin
     isSuperAdmin
+    isActive
+  }
+}
+query GetAllClosedReason {
+  getAllClosedReason {
+    _id
+    name
+    isActive
+  }
+}
+
+query GetClosedReasonById($options: IGetByID!) {
+  getClosedReasonById(options: $options) {
+    _id
+    name
     isActive
   }
 }
