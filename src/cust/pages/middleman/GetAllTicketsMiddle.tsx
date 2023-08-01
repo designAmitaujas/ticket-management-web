@@ -3,7 +3,6 @@ import FetherIcon from "feather-icons-react";
 import _ from "lodash";
 import { FC, useMemo, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 import { Cell } from "react-table";
 import {
   ICreateTickets,
@@ -69,8 +68,6 @@ const RenderModal: FC<{ id: string; refetch: () => void }> = ({
 
 const GetAllTicketsMiddle = () => {
   const { data, refetch } = useGetAllAcceptAcceptByMiddleManQuery();
-  const { push } = useHistory();
-  const [item] = useAcceptTiketByMiddleManMutation();
 
   const columns = useMemo<TableProps["columns"]>(
     () => [

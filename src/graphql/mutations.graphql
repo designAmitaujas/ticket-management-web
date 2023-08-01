@@ -151,3 +151,11 @@ mutation DeleteEmailTemplate($options: IGetByID!) {
     data
   }
 }
+
+mutation TransferTicket($options: ICreateTransfetHistory!) {
+  transferTicket(options: $options) {
+    success
+    msg
+    data
+  }
+}

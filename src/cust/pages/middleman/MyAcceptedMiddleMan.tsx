@@ -4,7 +4,7 @@ import { Formik, FormikErrors, FormikHelpers, FormikTouched } from "formik";
 import _ from "lodash";
 import queryString from "query-string";
 import { FC, memo, useEffect, useMemo, useState } from "react";
-import { Badge, Button, Form, Row } from "react-bootstrap";
+import { Badge, Button, Form, Modal, Row } from "react-bootstrap";
 import isEqual from "react-fast-compare";
 import { useHistory, useLocation } from "react-router-dom";
 import { Cell } from "react-table";
@@ -14,12 +14,14 @@ import {
   GetAllDepartmentQuery,
   GetAllDepartmentQuestionsQuery,
   ICreateTickets,
+  ICreateTransfetHistory,
   useCreateOrUpdateTicketsMutation,
-  useDeleteTicketsMutation,
   useGetAllDepartmentQuery,
   useGetAllDepartmentQuestionsQuery,
+  useGetAllTransferUserQuery,
   useGetMyTicketByMiddleManQuery,
   useGetTicketsByIdLazyQuery,
+  useTransferTicketMutation,
 } from "../../../generated/graphql";
 import { useAppStore } from "../../../store";
 import CustomTable, { TableProps } from "../../component/CustomTable";
@@ -349,18 +351,152 @@ const Update = () => {
   );
 };
 
+const initialValuess: ICreateTransfetHistory = {
+  ticket: "",
+  transferdUser: "",
+  reason: "",
+};
+
+const validationSchemas = Yup.object().shape({
+  ticket: Yup.string(),
+  transferUser: Yup.string(),
+  reason: Yup.string().required(),
+});
+
+const RenderModal: FC<{ id: string; refetch: () => void }> = ({
+  id,
+  refetch,
+}) => {
+  const [show, setShow] = useState(false);
+  const {
+    custObje: { _id },
+  } = useAppStore();
+
+  const { data } = useGetAllTransferUserQuery();
+
+  const [accept] = useTransferTicketMutation();
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleAccept = async (
+    val: typeof initialValuess,
+    actions: FormikHelpers<typeof initialValuess>
+  ) => {
+    try {
+      actions.setSubmitting(true);
+      const response = await accept({
+        variables: {
+          options: {
+            ticket: id,
+            transferdUser: val.transferdUser,
+            reason: val.reason,
+          },
+        },
+      });
+
+      if (response.data?.transferTicket.success === true) {
+        refetch();
+      } else {
+        cogoToast.error(
+          response.data?.transferTicket.msg || "Something went wrong on server"
+        );
+      }
+      actions.setSubmitting(false);
+    } catch (err) {}
+
+    handleClose();
+  };
+
+  if (!data?.getAllTransferUser) {
+    return <></>;
+  }
+
+  return (
+    <>
+      <span style={{ display: "flex", gap: "1rem" }}>
+        <Button size="sm" className="rounded-pill" onClick={handleShow}>
+          <FetherIcon size="20" icon="edit" />
+        </Button>
+      </span>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Transfer Ticket to a new member</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Formik
+            initialValues={initialValuess}
+            validationSchema={validationSchemas}
+            onSubmit={handleAccept}
+          >
+            {({
+              errors,
+              touched,
+              values,
+              handleSubmit,
+              handleChange,
+
+              isSubmitting,
+            }) => {
+              return (
+                <Form onSubmit={handleSubmit} onChange={handleChange}>
+                  <CustomSelect
+                    options={data.getAllTransferUser
+                      .filter((item) => item._id !== _id)
+                      .map((item) => ({
+                        value: item._id,
+                        label: item.name + " " + item.email,
+                      }))}
+                    value={values.transferdUser}
+                    name="transferdUser"
+                    err={errors.transferdUser}
+                    label="Assign User"
+                    md="12"
+                    lg="12"
+                    isInvalid={
+                      !!touched.transferdUser && !!errors.transferdUser
+                    }
+                    placeholder="Please Select User"
+                  />
+                  <CustomInput
+                    err={errors.reason}
+                    isInvalid={!!touched.reason && !!errors.reason}
+                    label={"reason"}
+                    name="reason"
+                    placeholder="Enter reason"
+                    value={values.reason}
+                    lg="12"
+                    md="12"
+                  />
+                  <Modal.Footer>
+                    <CustomButton
+                      label="Transfer"
+                      isSubmitting={isSubmitting}
+                    />
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Form>
+              );
+            }}
+          </Formik>
+        </Modal.Body>
+      </Modal>
+    </>
+  );
+};
+
 const Index = () => {
   const { data, refetch } = useGetMyTicketByMiddleManQuery();
   const { push } = useHistory();
-  const [deleteLangauage] = useDeleteTicketsMutation();
 
   const {
     custObje: { _id },
   } = useAppStore();
 
-  // const handleEdit = (id: string) => () => {
-  //   push(`?action=update&id=${id}`);
-  // };
+  const handleEdit = (id: string) => () => {};
 
   // const handleDelete = (id: string) => async () => {
   //   await deleteLangauage({ variables: { options: { id: id } } });
@@ -406,14 +542,8 @@ const Index = () => {
                 <FetherIcon size="20" icon="alert-circle" />
               </Button>
 
+              <RenderModal id={e.value} refetch={refetch} />
               {/* <Button
-                  onClick={handleEdit(e.value)}
-                  size="sm"
-                  className="rounded-pill"
-                >
-                  <FetherIcon size="20" icon="edit" />
-                </Button>
-                <Button
                   onClick={handleDelete(e.value)}
                   size="sm"
                   className="rounded-pill"

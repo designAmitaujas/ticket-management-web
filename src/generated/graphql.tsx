@@ -15,6 +15,13 @@ export type Scalars = {
   Float: number;
 };
 
+export type ClosedReason = {
+  __typename?: 'ClosedReason';
+  _id: Scalars['String'];
+  isActive: Scalars['Boolean'];
+  name: Scalars['String'];
+};
+
 export type CutomTicketResponse = {
   __typename?: 'CutomTicketResponse';
   ticket: Tickets;
@@ -100,6 +107,12 @@ export type ICountResponse = {
   totalTiketCount: Scalars['Float'];
 };
 
+export type ICreateClosedReason = {
+  _id?: InputMaybe<Scalars['String']>;
+  isActive: Scalars['Boolean'];
+  name: Scalars['String'];
+};
+
 export type ICreateDepartment = {
   _id?: InputMaybe<Scalars['String']>;
   isActive: Scalars['Boolean'];
@@ -165,6 +178,13 @@ export type ICreateTickets = {
   question: Scalars['String'];
 };
 
+export type ICreateTransfetHistory = {
+  _id?: InputMaybe<Scalars['String']>;
+  reason: Scalars['String'];
+  ticket: Scalars['String'];
+  transferdUser: Scalars['String'];
+};
+
 export type ICreateUser = {
   _id?: InputMaybe<Scalars['String']>;
   assignedDepartment: Scalars['String'];
@@ -197,6 +217,7 @@ export type Mutation = {
   acceptTiketByMiddleMan: IStatusResponse;
   authResolver: IAuthResoverResponse;
   changePassword: IStatusResponse;
+  createOrUpdateClosedReason: IStatusResponse;
   createOrUpdateDepartment: IStatusResponse;
   createOrUpdateDepartmentQuestions: IStatusResponse;
   createOrUpdateEmailCredential: IStatusResponse;
@@ -204,6 +225,7 @@ export type Mutation = {
   createOrUpdateLawCategory: IStatusResponse;
   createOrUpdateTickets: IStatusResponse;
   createOrUpdateUser: IStatusResponse;
+  deleteClosedReason: IStatusResponse;
   deleteDepartment: IStatusResponse;
   deleteDepartmentQuestions: IStatusResponse;
   deleteEmailCredential: IStatusResponse;
@@ -212,6 +234,7 @@ export type Mutation = {
   deleteTickets: IStatusResponse;
   deleteUser: IStatusResponse;
   getTickerClosedById: IStatusResponse;
+  transferTicket: IStatusResponse;
 };
 
 
@@ -237,6 +260,11 @@ export type MutationAuthResolverArgs = {
 
 export type MutationChangePasswordArgs = {
   options: IChangePassword;
+};
+
+
+export type MutationCreateOrUpdateClosedReasonArgs = {
+  options: ICreateClosedReason;
 };
 
 
@@ -272,6 +300,11 @@ export type MutationCreateOrUpdateTicketsArgs = {
 
 export type MutationCreateOrUpdateUserArgs = {
   options: ICreateUser;
+};
+
+
+export type MutationDeleteClosedReasonArgs = {
+  options: IGetById;
 };
 
 
@@ -314,17 +347,25 @@ export type MutationGetTickerClosedByIdArgs = {
   options: IGetById;
 };
 
+
+export type MutationTransferTicketArgs = {
+  options: ICreateTransfetHistory;
+};
+
 export type Query = {
   __typename?: 'Query';
   getAllAcceptAcceptByCompany: Array<Tickets>;
   getAllAcceptAcceptByMiddleMan: Array<Tickets>;
+  getAllClosedReason: Array<ClosedReason>;
   getAllDepartment: Array<Department>;
   getAllDepartmentQuestions: Array<DepartmentQuestions>;
   getAllEmailCredentials: Array<EmailCredential>;
   getAllEmailTemplate: Array<EmailTemplate>;
   getAllTicketBackAndForth: Array<TicketBackAndForth>;
   getAllTickets: Array<Tickets>;
+  getAllTransferUser: Array<User>;
   getAllUser: Array<User>;
+  getClosedReasonById: ClosedReason;
   getDepartmentById: Department;
   getDepartmentQuestionsById: DepartmentQuestions;
   getEmailCredentialsById: EmailCredential;
@@ -337,6 +378,11 @@ export type Query = {
   getTicketCount: ICountResponse;
   getTicketsById: Tickets;
   getUserById: User;
+};
+
+
+export type QueryGetClosedReasonByIdArgs = {
+  options: IGetById;
 };
 
 
@@ -405,6 +451,7 @@ export type Tickets = {
   assignedCustomer?: Maybe<User>;
   assignedMiddleMan?: Maybe<User>;
   canCompanyAccept: Scalars['Boolean'];
+  closedReason?: Maybe<ClosedReason>;
   department?: Maybe<Department>;
   departmentQuestion?: Maybe<DepartmentQuestions>;
   description: Scalars['String'];
@@ -556,6 +603,13 @@ export type DeleteEmailTemplateMutationVariables = Exact<{
 
 export type DeleteEmailTemplateMutation = { __typename?: 'Mutation', deleteEmailTemplate: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
+export type TransferTicketMutationVariables = Exact<{
+  options: ICreateTransfetHistory;
+}>;
+
+
+export type TransferTicketMutation = { __typename?: 'Mutation', transferTicket: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
+
 export type GetDepartmentByIdQueryVariables = Exact<{
   options: IGetById;
 }>;
@@ -635,6 +689,11 @@ export type GetTicketBackAndForthByTiketIdQueryVariables = Exact<{
 
 
 export type GetTicketBackAndForthByTiketIdQuery = { __typename?: 'Query', getTicketBackAndForthByTiketId: { __typename?: 'CutomTicketResponse', ticket: { __typename?: 'Tickets', _id: string, mobile: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }, ticketBackAndForth: Array<{ __typename?: 'TicketBackAndForth', _id: string, questionReply: string, file: string, isRunningOnCustomer: boolean, isRunningOnMiddleMan: boolean, isRunnningOnCompany: boolean, isNextOnCustomer: boolean, isNextOnMiddleMan: boolean, isNexonCompany: boolean, isLastResolved: boolean, isLastReopened: boolean, isEdited: boolean, isActive: boolean, createdBy?: { __typename?: 'User', name: string, email: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean } | null }> } };
+
+export type GetAllTransferUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllTransferUserQuery = { __typename?: 'Query', getAllTransferUser: Array<{ __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, assignedDepartment?: { __typename?: 'Department', _id: string, isActive: boolean, name: string } | null }> };
 
 export type GetTicketCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1310,6 +1369,41 @@ export function useDeleteEmailTemplateMutation(baseOptions?: Apollo.MutationHook
 export type DeleteEmailTemplateMutationHookResult = ReturnType<typeof useDeleteEmailTemplateMutation>;
 export type DeleteEmailTemplateMutationResult = Apollo.MutationResult<DeleteEmailTemplateMutation>;
 export type DeleteEmailTemplateMutationOptions = Apollo.BaseMutationOptions<DeleteEmailTemplateMutation, DeleteEmailTemplateMutationVariables>;
+export const TransferTicketDocument = gql`
+    mutation TransferTicket($options: ICreateTransfetHistory!) {
+  transferTicket(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type TransferTicketMutationFn = Apollo.MutationFunction<TransferTicketMutation, TransferTicketMutationVariables>;
+
+/**
+ * __useTransferTicketMutation__
+ *
+ * To run a mutation, you first call `useTransferTicketMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTransferTicketMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [transferTicketMutation, { data, loading, error }] = useTransferTicketMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useTransferTicketMutation(baseOptions?: Apollo.MutationHookOptions<TransferTicketMutation, TransferTicketMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<TransferTicketMutation, TransferTicketMutationVariables>(TransferTicketDocument, options);
+      }
+export type TransferTicketMutationHookResult = ReturnType<typeof useTransferTicketMutation>;
+export type TransferTicketMutationResult = Apollo.MutationResult<TransferTicketMutation>;
+export type TransferTicketMutationOptions = Apollo.BaseMutationOptions<TransferTicketMutation, TransferTicketMutationVariables>;
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($options: IGetByID!) {
   getDepartmentById(options: $options) {
@@ -2271,6 +2365,54 @@ export function useGetTicketBackAndForthByTiketIdLazyQuery(baseOptions?: Apollo.
 export type GetTicketBackAndForthByTiketIdQueryHookResult = ReturnType<typeof useGetTicketBackAndForthByTiketIdQuery>;
 export type GetTicketBackAndForthByTiketIdLazyQueryHookResult = ReturnType<typeof useGetTicketBackAndForthByTiketIdLazyQuery>;
 export type GetTicketBackAndForthByTiketIdQueryResult = Apollo.QueryResult<GetTicketBackAndForthByTiketIdQuery, GetTicketBackAndForthByTiketIdQueryVariables>;
+export const GetAllTransferUserDocument = gql`
+    query GetAllTransferUser {
+  getAllTransferUser {
+    _id
+    name
+    email
+    hash
+    isCustomer
+    isMiddleMan
+    isCompany
+    assignedDepartment {
+      _id
+      isActive
+      name
+    }
+    isAdmin
+    isSuperAdmin
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllTransferUserQuery__
+ *
+ * To run a query within a React component, call `useGetAllTransferUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllTransferUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllTransferUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllTransferUserQuery(baseOptions?: Apollo.QueryHookOptions<GetAllTransferUserQuery, GetAllTransferUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllTransferUserQuery, GetAllTransferUserQueryVariables>(GetAllTransferUserDocument, options);
+      }
+export function useGetAllTransferUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllTransferUserQuery, GetAllTransferUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllTransferUserQuery, GetAllTransferUserQueryVariables>(GetAllTransferUserDocument, options);
+        }
+export type GetAllTransferUserQueryHookResult = ReturnType<typeof useGetAllTransferUserQuery>;
+export type GetAllTransferUserLazyQueryHookResult = ReturnType<typeof useGetAllTransferUserLazyQuery>;
+export type GetAllTransferUserQueryResult = Apollo.QueryResult<GetAllTransferUserQuery, GetAllTransferUserQueryVariables>;
 export const GetTicketCountDocument = gql`
     query GetTicketCount {
   getTicketCount {

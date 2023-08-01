@@ -561,6 +561,26 @@ query GetTicketBackAndForthByTiketId($options: IGetByID!) {
   }
 }
 
+query GetAllTransferUser {
+  getAllTransferUser {
+    _id
+    name
+    email
+    hash
+    isCustomer
+    isMiddleMan
+    isCompany
+    assignedDepartment {
+      _id
+      isActive
+      name
+    }
+    isAdmin
+    isSuperAdmin
+    isActive
+  }
+}
+
 query GetTicketCount {
   getTicketCount {
     totalTiketCount
@@ -631,6 +651,26 @@ query GetAllEmailTemplate {
       authPassword
       isActive
     }
+    isActive
+  }
+}
+
+query GetAllTransferUser {
+  getAllTransferUser {
+    _id
+    name
+    email
+    hash
+    isCustomer
+    isMiddleMan
+    isCompany
+    assignedDepartment {
+      _id
+      isActive
+      name
+    }
+    isAdmin
+    isSuperAdmin
     isActive
   }
 }
