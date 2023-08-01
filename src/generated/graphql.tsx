@@ -23,13 +23,6 @@ export type ClosedReason = {
   name: Scalars['String'];
 };
 
-export type ClosedReason = {
-  __typename?: 'ClosedReason';
-  _id: Scalars['String'];
-  isActive: Scalars['Boolean'];
-  name: Scalars['String'];
-};
-
 export type CutomTicketResponse = {
   __typename?: 'CutomTicketResponse';
   ticket: Tickets;
@@ -612,20 +605,12 @@ export type DeleteEmailTemplateMutationVariables = Exact<{
 
 export type DeleteEmailTemplateMutation = { __typename?: 'Mutation', deleteEmailTemplate: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
-<<<<<<< HEAD
 export type TransferTicketMutationVariables = Exact<{
   options: ICreateTransfetHistory;
 }>;
 
 
 export type TransferTicketMutation = { __typename?: 'Mutation', transferTicket: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
-=======
-export type DeleteClosedReasonMutationVariables = Exact<{
-  options: IGetById;
-}>;
-
-
-export type DeleteClosedReasonMutation = { __typename?: 'Mutation', deleteClosedReason: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
 export type CreateOrUpdateClosedReasonMutationVariables = Exact<{
   options: ICreateClosedReason;
@@ -633,7 +618,13 @@ export type CreateOrUpdateClosedReasonMutationVariables = Exact<{
 
 
 export type CreateOrUpdateClosedReasonMutation = { __typename?: 'Mutation', createOrUpdateClosedReason: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
->>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
+
+export type DeleteClosedReasonMutationVariables = Exact<{
+  options: IGetById;
+}>;
+
+
+export type DeleteClosedReasonMutation = { __typename?: 'Mutation', deleteClosedReason: { __typename?: 'IStatusResponse', success: boolean, msg: string, data: string } };
 
 export type GetDepartmentByIdQueryVariables = Exact<{
   options: IGetById;
@@ -1406,22 +1397,15 @@ export function useDeleteEmailTemplateMutation(baseOptions?: Apollo.MutationHook
 export type DeleteEmailTemplateMutationHookResult = ReturnType<typeof useDeleteEmailTemplateMutation>;
 export type DeleteEmailTemplateMutationResult = Apollo.MutationResult<DeleteEmailTemplateMutation>;
 export type DeleteEmailTemplateMutationOptions = Apollo.BaseMutationOptions<DeleteEmailTemplateMutation, DeleteEmailTemplateMutationVariables>;
-<<<<<<< HEAD
 export const TransferTicketDocument = gql`
     mutation TransferTicket($options: ICreateTransfetHistory!) {
   transferTicket(options: $options) {
-=======
-export const DeleteClosedReasonDocument = gql`
-    mutation DeleteClosedReason($options: IGetByID!) {
-  deleteClosedReason(options: $options) {
->>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
     success
     msg
     data
   }
 }
     `;
-<<<<<<< HEAD
 export type TransferTicketMutationFn = Apollo.MutationFunction<TransferTicketMutation, TransferTicketMutationVariables>;
 
 /**
@@ -1429,32 +1413,18 @@ export type TransferTicketMutationFn = Apollo.MutationFunction<TransferTicketMut
  *
  * To run a mutation, you first call `useTransferTicketMutation` within a React component and pass it any options that fit your needs.
  * When your component renders, `useTransferTicketMutation` returns a tuple that includes:
-=======
-export type DeleteClosedReasonMutationFn = Apollo.MutationFunction<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>;
-
-/**
- * __useDeleteClosedReasonMutation__
- *
- * To run a mutation, you first call `useDeleteClosedReasonMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteClosedReasonMutation` returns a tuple that includes:
->>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
-<<<<<<< HEAD
  * const [transferTicketMutation, { data, loading, error }] = useTransferTicketMutation({
-=======
- * const [deleteClosedReasonMutation, { data, loading, error }] = useDeleteClosedReasonMutation({
->>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
  *   variables: {
  *      options: // value for 'options'
  *   },
  * });
  */
-<<<<<<< HEAD
 export function useTransferTicketMutation(baseOptions?: Apollo.MutationHookOptions<TransferTicketMutation, TransferTicketMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useMutation<TransferTicketMutation, TransferTicketMutationVariables>(TransferTicketDocument, options);
@@ -1462,14 +1432,6 @@ export function useTransferTicketMutation(baseOptions?: Apollo.MutationHookOptio
 export type TransferTicketMutationHookResult = ReturnType<typeof useTransferTicketMutation>;
 export type TransferTicketMutationResult = Apollo.MutationResult<TransferTicketMutation>;
 export type TransferTicketMutationOptions = Apollo.BaseMutationOptions<TransferTicketMutation, TransferTicketMutationVariables>;
-=======
-export function useDeleteClosedReasonMutation(baseOptions?: Apollo.MutationHookOptions<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>(DeleteClosedReasonDocument, options);
-      }
-export type DeleteClosedReasonMutationHookResult = ReturnType<typeof useDeleteClosedReasonMutation>;
-export type DeleteClosedReasonMutationResult = Apollo.MutationResult<DeleteClosedReasonMutation>;
-export type DeleteClosedReasonMutationOptions = Apollo.BaseMutationOptions<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>;
 export const CreateOrUpdateClosedReasonDocument = gql`
     mutation CreateOrUpdateClosedReason($options: ICreateClosedReason!) {
   createOrUpdateClosedReason(options: $options) {
@@ -1505,7 +1467,41 @@ export function useCreateOrUpdateClosedReasonMutation(baseOptions?: Apollo.Mutat
 export type CreateOrUpdateClosedReasonMutationHookResult = ReturnType<typeof useCreateOrUpdateClosedReasonMutation>;
 export type CreateOrUpdateClosedReasonMutationResult = Apollo.MutationResult<CreateOrUpdateClosedReasonMutation>;
 export type CreateOrUpdateClosedReasonMutationOptions = Apollo.BaseMutationOptions<CreateOrUpdateClosedReasonMutation, CreateOrUpdateClosedReasonMutationVariables>;
->>>>>>> e9086fb3c17392d3bd2804d921c88d96b0e021c0
+export const DeleteClosedReasonDocument = gql`
+    mutation DeleteClosedReason($options: IGetByID!) {
+  deleteClosedReason(options: $options) {
+    success
+    msg
+    data
+  }
+}
+    `;
+export type DeleteClosedReasonMutationFn = Apollo.MutationFunction<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>;
+
+/**
+ * __useDeleteClosedReasonMutation__
+ *
+ * To run a mutation, you first call `useDeleteClosedReasonMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteClosedReasonMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteClosedReasonMutation, { data, loading, error }] = useDeleteClosedReasonMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useDeleteClosedReasonMutation(baseOptions?: Apollo.MutationHookOptions<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>(DeleteClosedReasonDocument, options);
+      }
+export type DeleteClosedReasonMutationHookResult = ReturnType<typeof useDeleteClosedReasonMutation>;
+export type DeleteClosedReasonMutationResult = Apollo.MutationResult<DeleteClosedReasonMutation>;
+export type DeleteClosedReasonMutationOptions = Apollo.BaseMutationOptions<DeleteClosedReasonMutation, DeleteClosedReasonMutationVariables>;
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($options: IGetByID!) {
   getDepartmentById(options: $options) {

@@ -22,7 +22,7 @@ import jwtDecode from "jwt-decode";
 import {
   default as logoDark,
   default as logoLight,
-} from "../../cust/assets/amitaujas.png";
+} from "../../cust/assets/Contetra-logo.png";
 import { CustomButton, CustomInput } from "../../cust/component/Form";
 import { useAuthResolverMutation } from "../../generated/graphql";
 import { useAppStore } from "../../store";
