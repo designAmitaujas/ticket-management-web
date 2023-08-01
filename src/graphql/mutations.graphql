@@ -175,3 +175,11 @@ mutation DeleteClosedReason($options: IGetByID!) {
     data
   }
 }
+
+mutation GetTickerClosedByMiddleMan($options: ICloseInput!) {
+  getTickerClosedByMiddleMan(options: $options) {
+    success
+    msg
+    data
+  }
+}

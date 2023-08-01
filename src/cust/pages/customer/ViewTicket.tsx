@@ -10,8 +10,11 @@ import * as Yup from "yup";
 import {
   Direction,
   GetTicketBackAndForthByTiketIdQuery,
+  ICloseInput,
   useAddTicketBackAndForthMutation,
+  useGetAllClosedReasonQuery,
   useGetTickerClosedByIdMutation,
+  useGetTickerClosedByMiddleManMutation,
   useGetTicketBackAndForthByTiketIdLazyQuery,
 } from "../../../generated/graphql";
 import { useAppStore } from "../../../store";
@@ -19,6 +22,7 @@ import {
   CustomButton,
   CustomFileInput,
   CustomInput,
+  CustomSelect,
 } from "../../component/Form";
 import LayoutProvider from "../../component/LayoutProvider";
 import "./style.css";
@@ -119,6 +123,84 @@ const RenderModal: FC<{
   );
 };
 
+const initalvalueV1: ICloseInput = {
+  reason: "",
+  ticket: "",
+};
+
+const validationSchemaV1 = Yup.object().shape({
+  reason: Yup.string().required(),
+  ticket: Yup.string(),
+});
+
+const RenderMiddleManCloseModal: FC<{
+  toggle: () => void;
+  show: boolean;
+  manageSubmimt: (arg0: ICloseInput) => Promise<void>;
+}> = ({ manageSubmimt, show, toggle }) => {
+  const { data } = useGetAllClosedReasonQuery();
+
+  const handleSubmit = async (
+    val: ICloseInput,
+    action: FormikHelpers<ICloseInput>
+  ) => {
+    action.setSubmitting(true);
+    await manageSubmimt(val);
+    action.setSubmitting(false);
+    toggle();
+  };
+
+  if (!data?.getAllClosedReason) {
+    return <></>;
+  }
+
+  return (
+    <Modal show={show} onHide={toggle}>
+      <Modal.Header closeButton>
+        <Modal.Title>Are You Want To Close This Ticket??</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Formik
+          initialValues={initalvalueV1}
+          validationSchema={validationSchemaV1}
+          onSubmit={handleSubmit}
+        >
+          {({
+            errors,
+            touched,
+            values,
+            handleSubmit,
+            handleChange,
+            setFieldValue,
+            isSubmitting,
+          }) => {
+            return (
+              <>
+                <Form onSubmit={handleSubmit} onChange={handleChange}>
+                  <Row>
+                    <CustomSelect
+                      options={data.getAllClosedReason
+                        .filter((item) => item.isActive === true)
+                        .map((item) => ({ value: item._id, label: item.name }))}
+                      err={errors.reason}
+                      isInvalid={!!touched.reason && !!errors.reason}
+                      label={"Ticket Close reason"}
+                      name="reason"
+                      placeholder="Enter reason"
+                      value={values.reason}
+                    />
+                    <CustomButton isSubmitting={isSubmitting} />
+                  </Row>
+                </Form>
+              </>
+            );
+          }}
+        </Formik>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
 const ViewTicket = () => {
   const { id } = useParams<{ id?: string }>();
   const [allData, setAllData] =
@@ -130,9 +212,13 @@ const ViewTicket = () => {
     Direction.Null
   );
 
+  const [isCustModalOpen, setIsCustModalOpen] = useState(false);
+
   const [isNextApprovalAvailable, setIsNextApprovalAvailable] = useState(false);
 
   const [closeRunningMutation] = useGetTickerClosedByIdMutation();
+
+  const [closedByMiddleMan] = useGetTickerClosedByMiddleManMutation();
 
   const [isClosed, setIsClosed] = useState(false);
 
@@ -243,6 +329,12 @@ const ViewTicket = () => {
     toggle();
   };
 
+  const toggleCustModal = () => setIsCustModalOpen((item) => !item);
+
+  const closeItByMiddle = async () => {
+    toggleCustModal();
+  };
+
   const closeIt = async () => {
     const response = await closeRunningMutation({
       variables: { options: { id: id! } },
@@ -257,9 +349,27 @@ const ViewTicket = () => {
     }
   };
 
+  const handleCloseByMiddle = async (arg0: ICloseInput) => {
+    const response = await closedByMiddleMan({
+      variables: { options: { reason: arg0.reason, ticket: id! } },
+    });
+
+    if (response.data?.getTickerClosedByMiddleMan.success) {
+      cogoToast.success("Data updated successfully");
+
+      await refetchAllData();
+    }
+  };
+
   return (
     <LayoutProvider title={"Ticket Information"} isGoBack={true}>
       {isClosed === true && <Alert>Ticket Is Closed</Alert>}
+
+      <RenderMiddleManCloseModal
+        show={isCustModalOpen}
+        toggle={toggleCustModal}
+        manageSubmimt={handleCloseByMiddle}
+      />
 
       <Card>
         <Card.Header className="bg-white">
@@ -352,6 +462,16 @@ const ViewTicket = () => {
               </>
             ) : (
               <Button onClick={closeIt}>Close Ticket</Button>
+            )}
+          </>
+        )}
+
+        {custObje.isMiddleMan && (
+          <>
+            {isClosed === true ? (
+              <>{/* <Button onClick={closeIt}>Re Open Ticket</Button> */}</>
+            ) : (
+              <Button onClick={closeItByMiddle}>Close Ticket</Button>
             )}
           </>
         )}

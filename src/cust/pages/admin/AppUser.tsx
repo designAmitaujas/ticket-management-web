@@ -4,7 +4,7 @@ import { Formik, FormikErrors, FormikHelpers, FormikTouched } from "formik";
 import _ from "lodash";
 import queryString from "query-string";
 import { FC, memo, useEffect, useMemo, useState } from "react";
-import { Badge, Button, Form, Row } from "react-bootstrap";
+import { Badge, Button, Col, Form, Row } from "react-bootstrap";
 import isEqual from "react-fast-compare";
 import { useHistory, useLocation } from "react-router-dom";
 import { Cell } from "react-table";
@@ -124,7 +124,45 @@ const RenderForm: FC<{
             value={values.hash}
           />
 
-          <CustomCheckBox
+          <Col md="4" className="mt-1">
+            <Form.Label>User Role</Form.Label>
+            <Form.Select
+              aria-label="Default select example"
+              isInvalid={
+                (!!touched.isCustomer && !!errors.isCustomer) ||
+                (!!touched.isMiddleMan && !!errors.isMiddleMan) ||
+                (!!touched.isCompany && !!errors.isCompany)
+              }
+              onChange={(e) => {
+                // @ts-ignore
+                if (e.target.value === "1") {
+                  setFieldValue("isCustomer", true);
+                  setFieldValue("isMiddleMan", false);
+                  setFieldValue("isCompany", false);
+                }
+                // @ts-ignore
+                if (e.target.value === "2") {
+                  setFieldValue("isCustomer", false);
+                  setFieldValue("isMiddleMan", true);
+                  setFieldValue("isCompany", false);
+                }
+
+                // @ts-ignore
+                if (e.target.value === "3") {
+                  setFieldValue("isCustomer", false);
+                  setFieldValue("isMiddleMan", false);
+                  setFieldValue("isCompany", true);
+                }
+              }}
+            >
+              <option>Select</option>
+              <option value="1">Customer</option>
+              <option value="2">Contetra Team</option>
+              <option value="3">Tridot Company</option>
+            </Form.Select>
+          </Col>
+
+          {/* <CustomCheckBox
             isInvalid={!!touched.isCustomer && !!errors.isCustomer}
             label="Customer"
             name="isCustomer"
@@ -146,7 +184,7 @@ const RenderForm: FC<{
             name="isCompany"
             setFieldValue={setFieldValue}
             value={values.isCompany}
-          />
+          /> */}
 
           <CustomCheckBox
             isInvalid={!!touched.isActive && !!errors.isActive}
