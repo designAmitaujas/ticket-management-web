@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import cogoToast from "cogo-toast";
 import { Formik, FormikHelpers } from "formik";
+import moment from "moment";
 import { FC } from "preact/compat";
 import { useEffect, useState } from "react";
 import { Alert, Button, Card, Form, Modal, Row } from "react-bootstrap";
@@ -289,51 +290,58 @@ const ViewTicket = () => {
         </Card.Header>
       </Card>
 
-      {allData?.ticketBackAndForth.reverse().map((item) => {
-        return (
-          <>
-            <Card className="worldContainer">
-              <Card.Body style={{ padding: "0.5rem 3rem" }}>
-                <Card.Text style={{ fontSize: "1rem", fontWeight: "bold" }}>
-                  <i className="bi bi-person-circle"></i>
-                  {"   "} {item.createdBy?.name} -{" "}
-                  {item.createdBy?.isCustomer === true
-                    ? "Customer"
-                    : item.createdBy?.isMiddleMan === true
-                    ? "Contetra"
-                    : "Tridot"}
-                </Card.Text>
-                <Card.Text>
-                  {" "}
-                  <b>Reply:-</b> {item.questionReply}
-                </Card.Text>
-                <Card.Subtitle className="mb-2 text-muted">
-                  {item.file ? (
-                    <>
-                      <span
-                        className={css`
-                          &:hover {
-                            cursor: pointer;
-                          }
-                        `}
-                      >
-                        <a
-                          href={`${parsedUrl.origin}/upload/${item.file}`}
-                          target="_blank"
+      {allData?.ticketBackAndForth
+        .sort((a, b) => {
+          return (
+            moment(a.createdAt).toDate().getTime() -
+            moment(b.createdAt).toDate().getTime()
+          );
+        })
+        .map((item) => {
+          return (
+            <>
+              <Card className="worldContainer">
+                <Card.Body style={{ padding: "0.5rem 3rem" }}>
+                  <Card.Text style={{ fontSize: "1rem", fontWeight: "bold" }}>
+                    <i className="bi bi-person-circle"></i>
+                    {"   "} {item.createdBy?.name} -{" "}
+                    {item.createdBy?.isCustomer === true
+                      ? "Customer"
+                      : item.createdBy?.isMiddleMan === true
+                      ? "Contetra"
+                      : "Tridot"}
+                  </Card.Text>
+                  <Card.Text>
+                    {" "}
+                    <b>Reply:-</b> {item.questionReply}
+                  </Card.Text>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    {item.file ? (
+                      <>
+                        <span
+                          className={css`
+                            &:hover {
+                              cursor: pointer;
+                            }
+                          `}
                         >
-                          {"   "} view file
-                        </a>
-                      </span>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </Card.Subtitle>
-              </Card.Body>
-            </Card>
-          </>
-        );
-      })}
+                          <a
+                            href={`${parsedUrl.origin}/upload/${item.file}`}
+                            target="_blank"
+                          >
+                            {"   "} view file
+                          </a>
+                        </span>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </Card.Subtitle>
+                </Card.Body>
+              </Card>
+            </>
+          );
+        })}
 
       <Card className="d-flex flex-row gap-2 p-3">
         {custObje.isCustomer && (

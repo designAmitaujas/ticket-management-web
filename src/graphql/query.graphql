@@ -550,6 +550,7 @@ query GetTicketBackAndForthByTiketId($options: IGetByID!) {
       isLastReopened
       isEdited
       isActive
+      createdAt
       createdBy {
         name
         email

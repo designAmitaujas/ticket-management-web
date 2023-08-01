@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
 };
 
 export type ClosedReason = {
@@ -428,6 +429,7 @@ export type QueryGetUserByIdArgs = {
 export type TicketBackAndForth = {
   __typename?: 'TicketBackAndForth';
   _id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   createdBy?: Maybe<User>;
   file: Scalars['String'];
   isActive: Scalars['Boolean'];
@@ -695,7 +697,7 @@ export type GetTicketBackAndForthByTiketIdQueryVariables = Exact<{
 }>;
 
 
-export type GetTicketBackAndForthByTiketIdQuery = { __typename?: 'Query', getTicketBackAndForthByTiketId: { __typename?: 'CutomTicketResponse', ticket: { __typename?: 'Tickets', _id: string, mobile: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }, ticketBackAndForth: Array<{ __typename?: 'TicketBackAndForth', _id: string, questionReply: string, file: string, isRunningOnCustomer: boolean, isRunningOnMiddleMan: boolean, isRunnningOnCompany: boolean, isNextOnCustomer: boolean, isNextOnMiddleMan: boolean, isNexonCompany: boolean, isLastResolved: boolean, isLastReopened: boolean, isEdited: boolean, isActive: boolean, createdBy?: { __typename?: 'User', name: string, email: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean } | null }> } };
+export type GetTicketBackAndForthByTiketIdQuery = { __typename?: 'Query', getTicketBackAndForthByTiketId: { __typename?: 'CutomTicketResponse', ticket: { __typename?: 'Tickets', _id: string, mobile: string, question: string, description: string, file: string, isResolved: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }, ticketBackAndForth: Array<{ __typename?: 'TicketBackAndForth', _id: string, questionReply: string, file: string, isRunningOnCustomer: boolean, isRunningOnMiddleMan: boolean, isRunnningOnCompany: boolean, isNextOnCustomer: boolean, isNextOnMiddleMan: boolean, isNexonCompany: boolean, isLastResolved: boolean, isLastReopened: boolean, isEdited: boolean, isActive: boolean, createdAt: any, createdBy?: { __typename?: 'User', name: string, email: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean } | null }> } };
 
 export type GetTicketCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2375,6 +2377,7 @@ export const GetTicketBackAndForthByTiketIdDocument = gql`
       isLastReopened
       isEdited
       isActive
+      createdAt
       createdBy {
         name
         email
