@@ -28,7 +28,7 @@ import {
 import LayoutProvider from "../../component/LayoutProvider";
 import { ManageLayout } from "../../component/ManageLayout";
 
-const PAGE_TITLE = "State";
+const PAGE_TITLE = "Department Question";
 
 const initialValues: ICreateDepartmentQuestions = {
   isActive: true,

@@ -249,7 +249,7 @@ const Index = () => {
         accessor: "no",
       },
       {
-        Header: "Name",
+        Header: "Department",
         accessor: "name",
       },
       {

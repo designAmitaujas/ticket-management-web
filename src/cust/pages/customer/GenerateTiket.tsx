@@ -392,8 +392,12 @@ const Index = () => {
         accessor: "no",
       },
       {
-        Header: "Name",
+        Header: "Query",
         accessor: "question",
+      },
+      {
+        Header: "Department",
+        accessor: "department.name",
       },
       {
         Header: "status",
