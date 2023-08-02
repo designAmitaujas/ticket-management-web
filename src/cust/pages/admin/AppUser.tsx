@@ -41,6 +41,7 @@ const initialValues: ICreateUser = {
   isCustomer: false,
   isMiddleMan: false,
   isSuperAdmin: false,
+  isManaging: false,
 };
 
 const validationSchema = Yup.object().shape({
@@ -58,6 +59,7 @@ const validationSchema = Yup.object().shape({
   isCustomer: Yup.boolean().oneOf([true, false]),
   isMiddleMan: Yup.boolean().oneOf([true, false]),
   isSuperAdmin: Yup.boolean().oneOf([true, false]),
+  isManaging: Yup.boolean().oneOf([true, false]),
 });
 
 const RenderForm: FC<{
@@ -128,6 +130,15 @@ const RenderForm: FC<{
             <Form.Label>User Role</Form.Label>
             <Form.Select
               aria-label="Default select example"
+              value={
+                values.isCustomer
+                  ? "1"
+                  : values.isMiddleMan
+                  ? "2"
+                  : values.isCompany
+                  ? "3"
+                  : ""
+              }
               isInvalid={
                 (!!touched.isCustomer && !!errors.isCustomer) ||
                 (!!touched.isMiddleMan && !!errors.isMiddleMan) ||
@@ -185,6 +196,16 @@ const RenderForm: FC<{
             setFieldValue={setFieldValue}
             value={values.isCompany}
           /> */}
+
+          {(values.isCompany === true || values.isMiddleMan === true) && (
+            <CustomCheckBox
+              isInvalid={!!touched.isManaging && !!errors.isManaging}
+              label="is Admin"
+              name="isManaging"
+              setFieldValue={setFieldValue}
+              value={values.isManaging}
+            />
+          )}
 
           <CustomCheckBox
             isInvalid={!!touched.isActive && !!errors.isActive}
@@ -293,6 +314,7 @@ const Update = () => {
           isCustomer: res.getUserById.isCustomer,
           isMiddleMan: res.getUserById.isMiddleMan,
           isSuperAdmin: res.getUserById.isSuperAdmin,
+          isManaging: res.getUserById.isManaging,
         });
       }
     },
@@ -390,6 +412,40 @@ const Index = () => {
       {
         Header: "Name",
         accessor: "name",
+      },
+      {
+        Header: "Departmemnt",
+        accessor: "assignedDepartment.name",
+      },
+      {
+        Header: "Role",
+        accessor: "isCustomer",
+        Cell: (e: Cell<ICreateUser>) => {
+          return (
+            <>
+              {e.row.original.isCustomer
+                ? "Customer"
+                : e.row.original.isCompany
+                ? "Tridot Company"
+                : "Contetra Team"}
+            </>
+          );
+        },
+      },
+      {
+        Header: "is Admin",
+        accessor: "isManaging",
+        Cell: (e: Cell<ICreateUser>) => {
+          return e.value === true ? (
+            <Badge bg="primary">
+              <FetherIcon size="20" icon="check-circle" />
+            </Badge>
+          ) : (
+            <Badge bg="danger">
+              <FetherIcon size="20" icon="x-circle" />
+            </Badge>
+          );
+        },
       },
       {
         Header: "status",

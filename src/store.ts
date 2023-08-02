@@ -21,6 +21,7 @@ interface AppState {
     isMiddleMan: boolean;
     isSuperAdmin: boolean;
     name: string;
+    isManaging: boolean;
   };
   addAuth: (arg0: {
     jwt: string;
@@ -53,6 +54,7 @@ const useAppStore = create<AppState>()(
         isAdmin: false,
         isSuperAdmin: false,
         name: "",
+        isManaging: false,
       },
       addAuth: (payload) =>
         set(() => ({
@@ -85,13 +87,14 @@ const useAppStore = create<AppState>()(
             isAdmin: false,
             isSuperAdmin: false,
             name: "",
+            isManaging: false,
           },
         })),
     }),
     {
       name: "app-state",
       storage: createJSONStorage(() => localStorage),
-      version: 0.03,
+      version: 0.04,
     }
   )
 );
