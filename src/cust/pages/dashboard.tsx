@@ -109,7 +109,7 @@ const dashboard = () => {
       <Container className="pb-5">
         <h4>User Stats</h4>
         <Row>
-          <Col xs="12" sm="12" md="6" lg="4">
+          <Col xs="12" sm="12" md="6" lg="3">
             <Card
               className="d-flex"
               style={{
@@ -128,7 +128,7 @@ const dashboard = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs="12" sm="12" md="6" lg="4">
+          <Col xs="12" sm="12" md="6" lg="3">
             <Card
               className="d-flex"
               style={{
@@ -147,7 +147,7 @@ const dashboard = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs="12" sm="12" md="6" lg="4">
+          <Col xs="12" sm="12" md="6" lg="3">
             <Card
               className="d-flex"
               style={{
