@@ -692,3 +692,12 @@ query GetClosedReasonById($options: IGetByID!) {
     isActive
   }
 }
+
+query GetAdminTicketCount {
+  getAdminTicketCount {
+    totalTiketCount
+    totalRunningCount
+    totalClosedCount
+    notAcceptedCount
+  }
+}

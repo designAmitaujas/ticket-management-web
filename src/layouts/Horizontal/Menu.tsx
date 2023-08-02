@@ -172,7 +172,14 @@ const AppMenu = ({ menuItems }: AppMenuProps) => {
   const [activeMenuItems, setActiveMenuItems] = useState<string[]>([]);
 
   const {
-    custObje: { isAdmin, isSuperAdmin, isCompany, isCustomer, isMiddleMan },
+    custObje: {
+      isAdmin,
+      isSuperAdmin,
+      isCompany,
+      isCustomer,
+      isMiddleMan,
+      isManaging,
+    },
   } = useAppStore();
 
   useEffect(() => {
@@ -183,7 +190,14 @@ const AppMenu = ({ menuItems }: AppMenuProps) => {
     }
 
     if (isCompany === true) {
-      setTopMenuItems(companyArr3);
+      setTopMenuItems(
+        companyArr3.filter((item) => {
+          if (item.url?.includes("tridot-all-ticket")) {
+            return isManaging ? true : false;
+          }
+          return true;
+        })
+      );
 
       return;
     }
@@ -195,7 +209,14 @@ const AppMenu = ({ menuItems }: AppMenuProps) => {
     }
 
     if (isMiddleMan === true) {
-      setTopMenuItems(middlemanArr3);
+      setTopMenuItems(
+        middlemanArr3.filter((item) => {
+          if (item.url?.includes("contetra-all-ticket")) {
+            return isManaging ? true : false;
+          }
+          return true;
+        })
+      );
 
       return;
     }

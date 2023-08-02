@@ -71,9 +71,17 @@ const middlemanArr3: MenuItemTypes[] = [
     url: "/admin",
     parentKey: "dashboards",
   },
+
+  {
+    key: "ds-all-ticket",
+    label: "All Tickets",
+    url: "/admin/contetra-all-ticket",
+    parentKey: "All Tickets",
+  },
+
   {
     key: "ds-getall",
-    label: "All-Tickets",
+    label: "My Tickets",
     url: "/admin/get-tickets",
     parentKey: "All Tickets",
   },
@@ -94,12 +102,21 @@ const companyArr3: MenuItemTypes[] = [
     url: "/admin",
     parentKey: "dashboards",
   },
+
+  {
+    key: "ds-all-ticket",
+    label: "All Tickets",
+    url: "/admin/tridot-all-ticket",
+    parentKey: "All Tickets",
+  },
+
   {
     key: "ds-getall",
-    label: "All-Tickets",
+    label: "My Tickets",
     url: "/admin/getall-tickets",
     parentKey: "All-Tickets",
   },
+
   {
     key: "ds-setup",
     label: "My Accepted Tickets",

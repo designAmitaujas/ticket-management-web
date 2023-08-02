@@ -414,10 +414,6 @@ const Index = () => {
         accessor: "name",
       },
       {
-        Header: "Departmemnt",
-        accessor: "assignedDepartment.name",
-      },
-      {
         Header: "Role",
         accessor: "isCustomer",
         Cell: (e: Cell<ICreateUser>) => {
@@ -431,6 +427,10 @@ const Index = () => {
             </>
           );
         },
+      },
+      {
+        Header: "Departmemnt",
+        accessor: "assignedDepartment.name",
       },
       {
         Header: "is Admin",

@@ -106,6 +106,14 @@ export type ICloseInput = {
   ticket: Scalars['String'];
 };
 
+export type ICountAdminResponse = {
+  __typename?: 'ICountAdminResponse';
+  notAcceptedCount: Scalars['Float'];
+  totalClosedCount: Scalars['Float'];
+  totalRunningCount: Scalars['Float'];
+  totalTiketCount: Scalars['Float'];
+};
+
 export type ICountResponse = {
   __typename?: 'ICountResponse';
   totalClosedCount: Scalars['Float'];
@@ -367,6 +375,7 @@ export type MutationTransferTicketArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getAdminTicketCount: ICountAdminResponse;
   getAllAcceptAcceptByCompany: Array<Tickets>;
   getAllAcceptAcceptByMiddleMan: Array<Tickets>;
   getAllClosedReason: Array<ClosedReason>;
@@ -771,6 +780,11 @@ export type GetClosedReasonByIdQueryVariables = Exact<{
 
 
 export type GetClosedReasonByIdQuery = { __typename?: 'Query', getClosedReasonById: { __typename?: 'ClosedReason', _id: string, name: string, isActive: boolean } };
+
+export type GetAdminTicketCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAdminTicketCountQuery = { __typename?: 'Query', getAdminTicketCount: { __typename?: 'ICountAdminResponse', totalTiketCount: number, totalRunningCount: number, totalClosedCount: number, notAcceptedCount: number } };
 
 
 export const CreateOrUpdateDepartmentDocument = gql`
@@ -2859,3 +2873,40 @@ export function useGetClosedReasonByIdLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type GetClosedReasonByIdQueryHookResult = ReturnType<typeof useGetClosedReasonByIdQuery>;
 export type GetClosedReasonByIdLazyQueryHookResult = ReturnType<typeof useGetClosedReasonByIdLazyQuery>;
 export type GetClosedReasonByIdQueryResult = Apollo.QueryResult<GetClosedReasonByIdQuery, GetClosedReasonByIdQueryVariables>;
+export const GetAdminTicketCountDocument = gql`
+    query GetAdminTicketCount {
+  getAdminTicketCount {
+    totalTiketCount
+    totalRunningCount
+    totalClosedCount
+    notAcceptedCount
+  }
+}
+    `;
+
+/**
+ * __useGetAdminTicketCountQuery__
+ *
+ * To run a query within a React component, call `useGetAdminTicketCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAdminTicketCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAdminTicketCountQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAdminTicketCountQuery(baseOptions?: Apollo.QueryHookOptions<GetAdminTicketCountQuery, GetAdminTicketCountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAdminTicketCountQuery, GetAdminTicketCountQueryVariables>(GetAdminTicketCountDocument, options);
+      }
+export function useGetAdminTicketCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAdminTicketCountQuery, GetAdminTicketCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAdminTicketCountQuery, GetAdminTicketCountQueryVariables>(GetAdminTicketCountDocument, options);
+        }
+export type GetAdminTicketCountQueryHookResult = ReturnType<typeof useGetAdminTicketCountQuery>;
+export type GetAdminTicketCountLazyQueryHookResult = ReturnType<typeof useGetAdminTicketCountLazyQuery>;
+export type GetAdminTicketCountQueryResult = Apollo.QueryResult<GetAdminTicketCountQuery, GetAdminTicketCountQueryVariables>;
