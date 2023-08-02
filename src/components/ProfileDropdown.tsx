@@ -55,7 +55,7 @@ const ProfileDropdown = (props: ProfileDropdownProps) => {
       >
         <img src={profilePic!} className="rounded-circle" alt="" />
         <span className="pro-user-name ms-2">
-          {props.username} <i className="uil uil-angle-down"></i>
+          <b>Hello,</b> {props.username} <i className="uil uil-angle-down"></i>
         </span>
       </Dropdown.Toggle>
       <Dropdown.Menu className="dropdown-menu-end profile-dropdown">
@@ -88,22 +88,11 @@ const ProfileDropdown = (props: ProfileDropdownProps) => {
           <Link
             to={"#"}
             className="dropdown-item notify-item"
-            key={"id" + "-profile-menu"}
             onClick={handleClick}
           >
             <FeatherIcon icon={"log-out"} className="icon-dual icon-xs me-1" />
             <span>Logout</span>
           </Link>
-
-          {/* <Link
-            to={"#"}
-            className="dropdown-item notify-item"
-            key={"id" + "-profile-menu"}
-            onClick={handleChangepass}
-          >
-            <FeatherIcon icon={"lock"} className="icon-dual icon-xs me-1" />
-            <span>Change Password</span>
-          </Link> */}
         </div>
       </Dropdown.Menu>
     </Dropdown>

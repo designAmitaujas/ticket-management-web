@@ -41,6 +41,9 @@ const ClosedReason = React.lazy(
 const ViewAdminTicket = React.lazy(
   () => import("../../cust/pages/customer/ViewAdminTicket")
 );
+const ViewTriAdminTicket = React.lazy(
+  () => import("../../cust/pages/company/ViewAdminTicket")
+);
 
 export interface RoutesProps {
   path: RouteProps["path"];
@@ -176,7 +179,7 @@ const CustAuthRoutes: RoutesProps[] = [
   {
     path: "/admin/tridot-all-ticket",
     name: "tridot-all-ticket",
-    component: ViewAdminTicket,
+    component: ViewTriAdminTicket,
     route: Route,
     exact: true,
   },

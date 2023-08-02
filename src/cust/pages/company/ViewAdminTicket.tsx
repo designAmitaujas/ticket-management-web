@@ -83,17 +83,17 @@ const GetAllTicket = () => {
         Header: "department",
         accessor: "department.name",
       },
+      // {
+      //   Header: "Contetra member",
+      //   accessor: "assignedMiddleMan.name",
+      // },
       {
-        Header: "Contetra member",
-        accessor: "assignedMiddleMan.name",
+        Header: "Tridot member",
+        accessor: "assignedCompany.name",
         Cell: (e: Cell<ICreateTickets>) => {
-          return e.value ? e.value : "Unassigned";
+          return e.value ? e.value : "---";
         },
       },
-      // {
-      //   Header: "Tridot member",
-      //   accessor: "assignedCompany.name",
-      // },
       {
         Header: "status",
         accessor: "isResolved",

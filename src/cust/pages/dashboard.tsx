@@ -5,19 +5,15 @@ import {
 } from "../../generated/graphql";
 import { useAppStore } from "../../store";
 
-import t1 from "../assets/t1.png";
-import t2 from "../assets/t2.png";
-import t3 from "../assets/t3.png";
-
 const AdminDashbord = () => {
   const { data } = useGetAdminTicketCountQuery();
 
   return (
     <>
-      <Container className="py-5 pb-3">
+      <Container className="py-5 ">
         <h4>Admin Stats</h4>
         <Row>
-          <Col xs="12" sm="12" md="6" lg="4">
+          <Col>
             <Card
               className="d-flex"
               style={{
@@ -26,20 +22,17 @@ const AdminDashbord = () => {
                 alignItems: "center",
               }}
             >
-              <div style={{ width: "30%" }}>
-                <img src={t1} style={{ width: "85%", marginLeft: "0.5rem" }} />
-              </div>
-              <Card.Body style={{ width: "50%" }}>
+              <Card.Body>
+                <Card.Text style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+                  Total Tickets
+                </Card.Text>
                 <Card.Text style={{ fontWeight: "bold", fontSize: "2rem" }}>
                   {data?.getAdminTicketCount.totalTiketCount}
                 </Card.Text>
-                <Card.Text style={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Total Tickets
-                </Card.Text>
               </Card.Body>
             </Card>
           </Col>
-          <Col xs="12" sm="12" md="6" lg="4">
+          <Col>
             <Card
               className="d-flex"
               style={{
@@ -48,20 +41,17 @@ const AdminDashbord = () => {
                 alignItems: "center",
               }}
             >
-              <div style={{ width: "30%" }}>
-                <img src={t3} style={{ width: "85%", marginLeft: "0.5rem" }} />
-              </div>
-              <Card.Body style={{ width: "60%" }}>
+              <Card.Body>
+                <Card.Text style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+                  Running Tickets
+                </Card.Text>
                 <Card.Text style={{ fontWeight: "bold", fontSize: "2rem" }}>
                   {data?.getAdminTicketCount.totalRunningCount}
                 </Card.Text>
-                <Card.Text style={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Running Tickets
-                </Card.Text>
               </Card.Body>
             </Card>
           </Col>
-          <Col xs="12" sm="12" md="6" lg="4">
+          <Col>
             <Card
               className="d-flex"
               style={{
@@ -70,20 +60,17 @@ const AdminDashbord = () => {
                 alignItems: "center",
               }}
             >
-              <div style={{ width: "30%" }}>
-                <img src={t2} style={{ width: "85%", marginLeft: "0.5rem" }} />
-              </div>
-              <Card.Body style={{ width: "60%" }}>
+              <Card.Body>
+                <Card.Text style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+                  Closed Tickets
+                </Card.Text>
                 <Card.Text style={{ fontWeight: "bold", fontSize: "2rem" }}>
                   {data?.getAdminTicketCount.totalClosedCount}
                 </Card.Text>
-                <Card.Text style={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Closed Tickets
-                </Card.Text>
               </Card.Body>
             </Card>
           </Col>
-          <Col xs="12" sm="12" md="6" lg="4">
+          <Col>
             <Card
               className="d-flex"
               style={{
@@ -92,15 +79,12 @@ const AdminDashbord = () => {
                 alignItems: "center",
               }}
             >
-              <div style={{ width: "30%" }}>
-                <img src={t2} style={{ width: "85%", marginLeft: "0.5rem" }} />
-              </div>
-              <Card.Body style={{ width: "60%" }}>
+              <Card.Body>
+                <Card.Text style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+                  Pending Tickets
+                </Card.Text>
                 <Card.Text style={{ fontWeight: "bold", fontSize: "2rem" }}>
                   {data?.getAdminTicketCount.notAcceptedCount}
-                </Card.Text>
-                <Card.Text style={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Pending Tickets
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -134,16 +118,13 @@ const dashboard = () => {
                 alignItems: "center",
               }}
             >
-              <div style={{ width: "30%" }}>
-                <img src={t1} style={{ width: "85%", marginLeft: "0.5rem" }} />
-              </div>
-              <Card.Body style={{ width: "50%" }}>
+              <Card.Body>
+                <Card.Text style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+                  Total Tickets
+                </Card.Text>
                 <Card.Text style={{ fontWeight: "bold", fontSize: "2rem" }}>
                   {data?.getTicketCount.totalTiketCount}
                 </Card.Text>
-                <Card.Text style={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Total Tickets
-                </Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -156,16 +137,13 @@ const dashboard = () => {
                 alignItems: "center",
               }}
             >
-              <div style={{ width: "30%" }}>
-                <img src={t3} style={{ width: "85%", marginLeft: "0.5rem" }} />
-              </div>
-              <Card.Body style={{ width: "60%" }}>
+              <Card.Body>
+                <Card.Text style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+                  Running Tickets
+                </Card.Text>
                 <Card.Text style={{ fontWeight: "bold", fontSize: "2rem" }}>
                   {data?.getTicketCount.totalRunningCount}
                 </Card.Text>
-                <Card.Text style={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Running Tickets
-                </Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -178,15 +156,12 @@ const dashboard = () => {
                 alignItems: "center",
               }}
             >
-              <div style={{ width: "30%" }}>
-                <img src={t2} style={{ width: "85%", marginLeft: "0.5rem" }} />
-              </div>
-              <Card.Body style={{ width: "60%" }}>
+              <Card.Body>
+                <Card.Text style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
+                  Closed Tickets
+                </Card.Text>
                 <Card.Text style={{ fontWeight: "bold", fontSize: "2rem" }}>
                   {data?.getTicketCount.totalClosedCount}
-                </Card.Text>
-                <Card.Text style={{ fontWeight: "bold", fontSize: "1rem" }}>
-                  Closed Tickets
                 </Card.Text>
               </Card.Body>
             </Card>
