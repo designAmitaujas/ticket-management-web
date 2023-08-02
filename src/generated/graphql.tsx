@@ -376,6 +376,7 @@ export type MutationTransferTicketArgs = {
 export type Query = {
   __typename?: 'Query';
   getAdminTicketCount: ICountAdminResponse;
+  getAllAcceptAcceptByAdmin: Array<Tickets>;
   getAllAcceptAcceptByCompany: Array<Tickets>;
   getAllAcceptAcceptByMiddleMan: Array<Tickets>;
   getAllClosedReason: Array<ClosedReason>;
@@ -785,6 +786,11 @@ export type GetAdminTicketCountQueryVariables = Exact<{ [key: string]: never; }>
 
 
 export type GetAdminTicketCountQuery = { __typename?: 'Query', getAdminTicketCount: { __typename?: 'ICountAdminResponse', totalTiketCount: number, totalRunningCount: number, totalClosedCount: number, notAcceptedCount: number } };
+
+export type GetAllAcceptAcceptByAdminQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllAcceptAcceptByAdminQuery = { __typename?: 'Query', getAllAcceptAcceptByAdmin: Array<{ __typename?: 'Tickets', _id: string, question: string, mobile: string, description: string, file: string, isResolved: boolean, canCompanyAccept: boolean, isActive: boolean, department?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null, departmentQuestion?: { __typename?: 'DepartmentQuestions', _id: string, name: string, isActive: boolean } | null, closedReason?: { __typename?: 'ClosedReason', _id: string, name: string, isActive: boolean } | null, assignedCustomer?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isManaging: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedMiddleMan?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isManaging: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null, assignedCompany?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isManaging: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null }> };
 
 
 export const CreateOrUpdateDepartmentDocument = gql`
@@ -2910,3 +2916,98 @@ export function useGetAdminTicketCountLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type GetAdminTicketCountQueryHookResult = ReturnType<typeof useGetAdminTicketCountQuery>;
 export type GetAdminTicketCountLazyQueryHookResult = ReturnType<typeof useGetAdminTicketCountLazyQuery>;
 export type GetAdminTicketCountQueryResult = Apollo.QueryResult<GetAdminTicketCountQuery, GetAdminTicketCountQueryVariables>;
+export const GetAllAcceptAcceptByAdminDocument = gql`
+    query GetAllAcceptAcceptByAdmin {
+  getAllAcceptAcceptByAdmin {
+    _id
+    department {
+      _id
+      name
+      isActive
+    }
+    departmentQuestion {
+      _id
+      name
+      isActive
+    }
+    question
+    mobile
+    description
+    file
+    isResolved
+    closedReason {
+      _id
+      name
+      isActive
+    }
+    assignedCustomer {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isManaging
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedMiddleMan {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isManaging
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    assignedCompany {
+      _id
+      name
+      email
+      hash
+      isCustomer
+      isMiddleMan
+      isCompany
+      isManaging
+      isAdmin
+      isSuperAdmin
+      isActive
+    }
+    canCompanyAccept
+    isActive
+  }
+}
+    `;
+
+/**
+ * __useGetAllAcceptAcceptByAdminQuery__
+ *
+ * To run a query within a React component, call `useGetAllAcceptAcceptByAdminQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllAcceptAcceptByAdminQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllAcceptAcceptByAdminQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllAcceptAcceptByAdminQuery(baseOptions?: Apollo.QueryHookOptions<GetAllAcceptAcceptByAdminQuery, GetAllAcceptAcceptByAdminQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllAcceptAcceptByAdminQuery, GetAllAcceptAcceptByAdminQueryVariables>(GetAllAcceptAcceptByAdminDocument, options);
+      }
+export function useGetAllAcceptAcceptByAdminLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllAcceptAcceptByAdminQuery, GetAllAcceptAcceptByAdminQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllAcceptAcceptByAdminQuery, GetAllAcceptAcceptByAdminQueryVariables>(GetAllAcceptAcceptByAdminDocument, options);
+        }
+export type GetAllAcceptAcceptByAdminQueryHookResult = ReturnType<typeof useGetAllAcceptAcceptByAdminQuery>;
+export type GetAllAcceptAcceptByAdminLazyQueryHookResult = ReturnType<typeof useGetAllAcceptAcceptByAdminLazyQuery>;
+export type GetAllAcceptAcceptByAdminQueryResult = Apollo.QueryResult<GetAllAcceptAcceptByAdminQuery, GetAllAcceptAcceptByAdminQueryVariables>;

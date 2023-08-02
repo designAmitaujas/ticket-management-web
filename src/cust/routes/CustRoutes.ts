@@ -38,6 +38,9 @@ const Template = React.lazy(() => import("../../cust/pages/Emails/Template"));
 const ClosedReason = React.lazy(
   () => import("../../cust/pages/admin/ClosedReason")
 );
+const ViewAdminTicket = React.lazy(
+  () => import("../../cust/pages/customer/ViewAdminTicket")
+);
 
 export interface RoutesProps {
   path: RouteProps["path"];
@@ -158,6 +161,22 @@ const CustAuthRoutes: RoutesProps[] = [
     path: "/admin/closed-reason",
     name: "closed-reason",
     component: ClosedReason,
+    route: Route,
+    exact: true,
+  },
+
+  {
+    path: "/admin/contetra-all-ticket",
+    name: "contetra-all-ticket",
+    component: ViewAdminTicket,
+    route: Route,
+    exact: true,
+  },
+
+  {
+    path: "/admin/tridot-all-ticket",
+    name: "tridot-all-ticket",
+    component: ViewAdminTicket,
     route: Route,
     exact: true,
   },
