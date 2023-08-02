@@ -376,6 +376,7 @@ export type MutationTransferTicketArgs = {
 export type Query = {
   __typename?: 'Query';
   getAdminTicketCount: ICountAdminResponse;
+  getAllAcceptAcceptByAdmin: Array<Tickets>;
   getAllAcceptAcceptByCompany: Array<Tickets>;
   getAllAcceptAcceptByMiddleMan: Array<Tickets>;
   getAllClosedReason: Array<ClosedReason>;
