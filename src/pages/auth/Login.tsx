@@ -94,6 +94,7 @@ const Login = () => {
             isSuperAdmin:
               response.data.authResolver.user?.isSuperAdmin || false,
             name: response.data.authResolver.user?.name || "",
+            isManaging: response.data.authResolver.user?.isManaging || false,
           },
         });
 

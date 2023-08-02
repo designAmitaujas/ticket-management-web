@@ -162,6 +162,7 @@ query GetAllUser {
     isCustomer
     isMiddleMan
     isCompany
+    isManaging
     assignedDepartment {
       _id
       name
@@ -182,6 +183,7 @@ query GetUserById($options: IGetByID!) {
     isCustomer
     isMiddleMan
     isCompany
+    isManaging
     assignedDepartment {
       _id
       name

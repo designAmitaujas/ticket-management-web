@@ -200,6 +200,7 @@ export type ICreateUser = {
   isAdmin: Scalars['Boolean'];
   isCompany: Scalars['Boolean'];
   isCustomer: Scalars['Boolean'];
+  isManaging: Scalars['Boolean'];
   isMiddleMan: Scalars['Boolean'];
   isSuperAdmin: Scalars['Boolean'];
   name: Scalars['String'];
@@ -485,6 +486,7 @@ export type User = {
   isAdmin: Scalars['Boolean'];
   isCompany: Scalars['Boolean'];
   isCustomer: Scalars['Boolean'];
+  isManaging: Scalars['Boolean'];
   isMiddleMan: Scalars['Boolean'];
   isSuperAdmin: Scalars['Boolean'];
   name: Scalars['String'];
@@ -537,7 +539,7 @@ export type AuthResolverMutationVariables = Exact<{
 }>;
 
 
-export type AuthResolverMutation = { __typename?: 'Mutation', authResolver: { __typename?: 'IAuthResoverResponse', success: boolean, msg: string, jwt: string, email: string, name: string, user?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean } | null } };
+export type AuthResolverMutation = { __typename?: 'Mutation', authResolver: { __typename?: 'IAuthResoverResponse', success: boolean, msg: string, jwt: string, email: string, name: string, user?: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, isManaging: boolean } | null } };
 
 export type CreateOrUpdateUserMutationVariables = Exact<{
   options: ICreateUser;
@@ -681,14 +683,14 @@ export type GetAllDepartmentQuestionsQuery = { __typename?: 'Query', getAllDepar
 export type GetAllUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllUserQuery = { __typename?: 'Query', getAllUser: Array<{ __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, assignedDepartment?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null }> };
+export type GetAllUserQuery = { __typename?: 'Query', getAllUser: Array<{ __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isManaging: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, assignedDepartment?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null }> };
 
 export type GetUserByIdQueryVariables = Exact<{
   options: IGetById;
 }>;
 
 
-export type GetUserByIdQuery = { __typename?: 'Query', getUserById: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, assignedDepartment?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null } };
+export type GetUserByIdQuery = { __typename?: 'Query', getUserById: { __typename?: 'User', _id: string, name: string, email: string, hash: string, isCustomer: boolean, isMiddleMan: boolean, isCompany: boolean, isManaging: boolean, isAdmin: boolean, isSuperAdmin: boolean, isActive: boolean, assignedDepartment?: { __typename?: 'Department', _id: string, name: string, isActive: boolean } | null } };
 
 export type GetAllTicketsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1000,6 +1002,7 @@ export const AuthResolverDocument = gql`
       isAdmin
       isSuperAdmin
       isActive
+      isManaging
     }
   }
 }
@@ -1891,6 +1894,7 @@ export const GetAllUserDocument = gql`
     isCustomer
     isMiddleMan
     isCompany
+    isManaging
     assignedDepartment {
       _id
       name
@@ -1939,6 +1943,7 @@ export const GetUserByIdDocument = gql`
     isCustomer
     isMiddleMan
     isCompany
+    isManaging
     assignedDepartment {
       _id
       name
