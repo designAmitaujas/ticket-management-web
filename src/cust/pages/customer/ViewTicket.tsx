@@ -188,7 +188,10 @@ const RenderMiddleManCloseModal: FC<{
                       name="reason"
                       placeholder="Enter reason"
                       value={values.reason}
+                      lg="12"
+                      md="12"
                     />
+                    <div className="mb-2"></div>
                     <CustomButton isSubmitting={isSubmitting} />
                   </Row>
                 </Form>
